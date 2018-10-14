@@ -1,0 +1,22 @@
+{
+  "wp_endpoint": "https://weisslink.dmbk.io/wp-json/api/v1/data/",
+  "meta_defaults": {
+    "title": "Jeff Weiss",
+    "description": "Weisslink",
+    "site_url": "https://weisslink.com",
+    "bgcolor": "#ffffff"
+  },
+  "mail_scrape": {
+    "cta": "Sign up for our enewsletter",
+    "mailchimp_url": ""
+  },
+  "styling": {
+    "header_style": "sidebar"
+  },
+  "fonts": [
+    "FFF Regular",
+    "FFF Regular Italic",
+    "Sabon Regular",
+    "Sabon Italic"
+  ]
+}

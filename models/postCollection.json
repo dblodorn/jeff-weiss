@@ -1,0 +1,124 @@
+{
+  "posts": [
+    {
+        "id": 128,
+        "slug": "figurines",
+        "title": "Figurines",
+        "description": "",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_figurines-00009.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_figurines-00009-660x510.jpg",
+            "id": 110
+        },
+        "project_type": [
+            "Art"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 101,
+        "slug": "uh-oh-zine",
+        "title": "Uh Oh Zine",
+        "description": "<p>Lorem Ipsum</p>\n",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_uh-oh-zine-2-00001-1280x989.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_uh-oh-zine-2-00001-660x510.jpg",
+            "id": 135
+        },
+        "project_type": [
+            "Art"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 64,
+        "slug": "liars",
+        "title": "Liars",
+        "description": "",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-liars.png",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-liars.png",
+            "id": 86
+        },
+        "project_type": [
+            "Design"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 63,
+        "slug": "florence-and-the-machine",
+        "title": "Florence and the Machine",
+        "description": "",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-florence-and-the-machine.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-florence-and-the-machine.jpg",
+            "id": 85
+        },
+        "project_type": [
+            "Design"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 62,
+        "slug": "autolux",
+        "title": "Autolux",
+        "description": "",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-autolux.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-autolux.jpg",
+            "id": 84
+        },
+        "project_type": [
+            "Design"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 61,
+        "slug": "altamont-clothing",
+        "title": "Altamont Clothing",
+        "description": "",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-altamont.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-altamont.jpg",
+            "id": 83
+        },
+        "project_type": [
+            "Design"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 60,
+        "slug": "moses-sumney",
+        "title": "Moses Sumney",
+        "description": "<p>Moses Sumney Lorem Ipsum.</p>\n",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-sumney.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-sumney.jpg",
+            "id": 87
+        },
+        "project_type": [
+            "Design"
+        ],
+        "project_content": null
+    },
+    {
+        "id": 10,
+        "slug": "yeah-yeah-yeahs",
+        "title": "Yeah Yeah Yeahs",
+        "description": "<p>Packaging design for the Yeah Yeah Yeahs.</p>\n",
+        "thumbnail": {
+            "large": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-yeah-yeah-yeahs.jpg",
+            "small": "https://dmbk-io.sfo2.cdn.digitaloceanspaces.com/wp-content/uploads/sites/4/2018/07/julian-gross_thumb-yeah-yeah-yeahs.jpg",
+            "id": 88
+        },
+        "project_type": [
+            "Design"
+        ],
+        "project_content": null
+    }
+  ]
+}

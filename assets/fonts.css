@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "FFF Regular";
+  src: url("/assets/fonts/fff-regular.woff");
+}
+@font-face {
+  font-family: "FFF Regular Italic";
+  src: url("/assets/fonts/fff-regular-italic.woff");
+}
+@font-face {
+  font-family: "Sabon Regular";
+  src: url("/assets/fonts/sabon-regular.woff");
+}
+@font-face {
+  font-family: "Sabon Italic";
+  src: url("/assets/fonts/sabon-italic.woff");
+}

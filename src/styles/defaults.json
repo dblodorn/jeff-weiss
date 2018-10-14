@@ -1,0 +1,79 @@
+{
+  "breakpoints": {
+    "small": 340,
+    "medium": 780,
+    "desktop_navigation": 1200,
+    "large": 1440,
+    "jumbo": 1650
+  },
+  "heights": {
+    "header": "7rem",
+    "mobile_header": "6rem",
+    "footer": "7rem",
+    "footer_mobile": "6rem"
+  },
+  "spacing": {
+    "single_pad": "1.5rem",
+    "double_pad": "3rem",
+    "big_pad": "6rem",
+    "micro_pad": ".75rem"
+  },
+  "fonts": {
+    "display_font_a": "David Regular",
+    "display_font_b": "Platform Bold",
+    "body_copy_font_a": "Knif Mono",
+    "body_copy_font_b": "FFF Regular"
+  },
+  "font_sizes": {
+    "giant": "7.5rem",
+    "giant_mobile": "5.5rem",
+    "large": "4rem",
+    "large_mobile": "3.5rem",
+    "medium": "3rem",
+    "medium_mobile": "2.75rem",
+    "regular": "2rem",
+    "regular_mobile": "1.75rem",
+    "small": "1.25rem",
+    "small_mobile": "1rem",
+    "micro": ".75rem",
+    "micro_mobile": ".7rem"
+  },
+  "theme_a": {
+    "font_tag_sizes": {
+        "h1_a": "giant",
+        "h2_a": "giant",
+        "h3_a": "medium",
+        "h4_a": "regular",
+        "h5_a": "small",
+        "h6_a": "micro",
+        "p_a": "regular",
+        "menu_link_a": "regular",
+        "button_link_a": "micro"
+    },
+    "color_assignment": {
+        "headline_color_a": "#eeee22",
+        "text_color_a": "#81d742",
+        "background_color_a": "#8224e3",
+        "page_background_color_a": "#d8d8d8"
+    }
+  },
+  "theme_b": {
+    "font_tag_sizes": {
+        "h1_b": "giant",
+        "h2_b": "giant",
+        "h3_b": "medium",
+        "h4_b": "regular",
+        "h5_b": "small",
+        "h6_b": "micro",
+        "p_b": "regular",
+        "menu_link_b": "regular",
+        "button_link_b": "micro"
+    },
+    "color_assignment": {
+        "headline_color_b": "#1e73be",
+        "text_color_b": "#212121",
+        "background_color_b": "#eeee22",
+        "page_background_color_b": "#ffffff"
+    }
+  }
+}
