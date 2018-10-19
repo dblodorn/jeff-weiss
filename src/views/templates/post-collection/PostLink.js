@@ -1,34 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
-import { themeA, themes } from './../../../styles/theme'
-import LazyLoad from 'react-lazyload'
-import { FitImage } from './../../../components'
-import { P, PadWrapper, ButtonLink, ProportionWrapper } from './../../../styles/components'
-import { bigType, flexColumn, media, flexRowWrap } from './../../../styles/mixins'
-import { spacing, shared, widths } from './../../../styles/theme.json'
-import Taxonomies from './Taxonomies'
+import React from "react";
+import { Link } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import { themeA, themes } from "./../../../styles/theme";
+import LazyLoad from "react-lazyload";
+import { FitImage } from "./../../../components";
+import {
+  P,
+  PadWrapper,
+  ButtonLink,
+  ProportionWrapper
+} from "./../../../styles/components";
+import {
+  bigType,
+  flexColumn,
+  media,
+  flexRowWrap
+} from "./../../../styles/mixins";
+import { spacing, shared, widths } from "./../../../styles/theme.json";
 
-export default (props) =>
+export default props => (
   <CardWrapper className={`${props.columns} ${props.style}`}>
-    <CardLink to={(props.cardData.post_type === 'page') ? `/${props.cardData.slug}` : `/${props.cardData.post_type}/${props.cardData.slug}`}>
+    <CardLink
+      to={
+        props.cardData.post_type === "page"
+          ? `/${props.cardData.slug}`
+          : `/${props.slug}/${props.cardData.slug}`
+      }
+    >
       <ThemeProvider theme={themes[props.theme] || themeA}>
         <ProjectTitle>{props.cardData.title}</ProjectTitle>
       </ThemeProvider>
-      {(props.cardData.thumbnail && props.showThumbnail) && 
-        <ThumbnailWrapper
-          className={`${props.columns} ${props.style}`}
-          Desktop={props.proportion.thumbnail_proportion}
-          Mobile={props.proportion.thumbnail_proportion_mobile}
-          Max={props.proportion.thumbnail_proportion_max}
-        >
-          <LazyLoad height='100%'>
-            <FitImage src={props.cardData.thumbnail} fit={'cover'}/>
-          </LazyLoad>
-        </ThumbnailWrapper>
-      }    
+      {props.cardData.thumbnail &&
+        props.showThumbnail && (
+          <ThumbnailWrapper
+            className={`${props.columns} ${props.style}`}
+            Desktop={props.proportion.thumbnail_proportion}
+            Mobile={props.proportion.thumbnail_proportion_mobile}
+            Max={props.proportion.thumbnail_proportion_max}
+          >
+            <LazyLoad height="100%">
+              <FitImage src={props.cardData.thumbnail} fit={"cover"} />
+            </LazyLoad>
+          </ThumbnailWrapper>
+        )}
     </CardLink>
   </CardWrapper>
+);
 
 // STYLES
 const CardWrapper = styled.li`
@@ -45,27 +62,27 @@ const CardWrapper = styled.li`
     &:last-child {
         border-bottom: 0;
       }
-    `}
+    `};
   }
-`
+`;
 
 const CardLink = styled(Link)`
-  text-decoration: none!important;
+  text-decoration: none !important;
   * {
-    text-decoration: none!important;
+    text-decoration: none !important;
   }
-`
+`;
 
 const ThumbnailWrapper = styled(ProportionWrapper)`
   &.border {
     border-bottom: ${shared.border_thin};
   }
-`
+`;
 
 const ExcerptWrapper = styled.div`
   padding: ${spacing.double_pad};
   background-color: ${props => props.theme.top_bg_color};
-`
+`;
 
 const ProjectTitle = styled.h3`
   ${bigType};
@@ -77,7 +94,7 @@ const ProjectTitle = styled.h3`
   display: block;
   width: 100%;
   margin-bottom: 0;
-`
+`;
 
 const LinkWrapper = styled(PadWrapper)`
   display: flex;
@@ -88,19 +105,18 @@ const LinkWrapper = styled(PadWrapper)`
       height: 100%;
       align-items: center;
     }
-  `}
-  &.two_col,
+  `} &.two_col,
   &.three_col,
   &.four_col {
     justify-content: flex-end;
   }
-`
+`;
 
 const CardP = styled(P)`
   color: ${props => props.theme.display_font_color}!important;
   font-family: ${props => props.theme.body_copy_font};
   max-width: ${widths.max_small};
-`
+`;
 
 const CardInfo = styled.div`
   width: 100%;
@@ -109,10 +125,9 @@ const CardInfo = styled.div`
   ${media.desktopNav`
     ${flexRowWrap};
     justify-content: space-between;
-  `}
-  &.two_col,
+  `} &.two_col,
   &.three_col,
   &.four_col {
     ${flexColumn};
   }
-`
+`;

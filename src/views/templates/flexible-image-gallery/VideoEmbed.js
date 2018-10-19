@@ -1,25 +1,39 @@
-import React from 'react'
-import { SimpleVideo, FitImage } from './../../../components'
-import styled from 'styled-components'
-import { heights, spacing, widths } from './../../../styles/theme.json'
-import { fixedHero, halfFixed } from './../../../styles/mixins'
-import TextOverlay from './TextOverlay'
+import React from "react";
+import { SimpleVideo, FitImage } from "./../../../components";
+import styled from "styled-components";
+import { heights, spacing, widths } from "./../../../styles/theme.json";
+import { fixedHero, halfFixed } from "./../../../styles/mixins";
+import TextOverlay from "./TextOverlay";
 
-export default (props) => {
+export default props => {
   return (
-    <VideoWrapper className={(props.data.is_hero) && `fixed-hero ${props.style} ${(props.data.width === 'fixed_left' || 'fixed_right') && props.data.width}`}>
-      {(props.data.has_text_overlay) &&
-        <TextOverlay content={props.data} theme={(props.theme === null) ? 'a' : props.theme}/>
+    <VideoWrapper
+      className={
+        props.data.is_hero &&
+        `fixed-hero ${props.style} ${(props.data.width === "fixed_left" ||
+          "fixed_right") &&
+          props.data.width}`
       }
-      {(props.data.media_type !== 'photo')
-        ? <SimpleVideo src={props.data.video_file}/> : 
-        (props.data.video_cover_image.large !== null)
-        ? <FitImage src={props.data.video_cover_image.large} fit={'contain'}/>
-        : null
-      }
+    >
+      {props.data.has_text_overlay && (
+        <TextOverlay
+          content={props.data}
+          theme={props.theme === null ? "a" : props.theme}
+        />
+      )}
+      {props.data.media_type !== "photo"
+        ? props.data.video_file && <SimpleVideo src={props.data.video_file} />
+        : props.data.video_cover_image.large !== null
+          ? props.data.video_cover_image.large && (
+              <FitImage
+                src={props.data.video_cover_image.large}
+                fit={"contain"}
+              />
+            )
+          : null}
     </VideoWrapper>
-  )
-}
+  );
+};
 
 // STYLES
 const VideoWrapper = styled.div`
@@ -35,4 +49,4 @@ const VideoWrapper = styled.div`
     width: calc(100vw - ${widths.sidebar_desktop});
     right: 0;
   }
-`
+`;
