@@ -88,6 +88,4 @@ const SlideWrapper = styled.div`
   ${flexCenteredAll};
   z-index: 50;
   pointer-events: none;
-  border-right: ${shared.border_thin};
-  border-left: ${shared.border_thin};
 `

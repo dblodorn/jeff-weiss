@@ -13,9 +13,9 @@ export default (props) => {
     <Fragment>
       {(props.data.content.layout) && props.data.content.layout.map((item, i) =>
         <LayoutSection className={(item.is_hero) && `hero ${props.style}`} key={`${i}-${item.module}`}>
-          { (item.module === 'simple_slideshow')
+          { (item.module === 'simple_slideshow' && item.slides)
             ? <SlideShow data={item} style={props.style}/> :
-            (item.module === 'slideshow')
+            (item.module === 'slideshow' && item.slides)
             ? <SlideShow data={item} style={props.style}/> :
             (item.module === 'image_grid_popup')
             ? <PopupGridWrapper>

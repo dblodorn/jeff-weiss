@@ -10,7 +10,7 @@ export default pageData((props) => {
     <Fragment>
       <PostBasics data={props.project} style={props.style}/>
       {
-        (props.project.template === 'flexible-image-gallery')
+        (props.project.template === 'flexible-image-gallery' || 'default')
         ? <FlexibleImageGallery data={props.project} style={props.style}/> :
         (props.project.template === 'post-collection')
         ? <PostCollectionTemplate data={props.project} style={props.style}/>
