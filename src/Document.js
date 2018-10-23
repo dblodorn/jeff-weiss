@@ -47,7 +47,6 @@ const Main = styled.main`
   &.top-horizontal {
     ${media.desktopNav`
       padding-top: ${heights.header};
-      padding-bottom: ${heights.footer};
     `}
   }
 `

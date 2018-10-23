@@ -60,18 +60,17 @@ export default class extends Component {
 
   render() {
     return (
-      <VideoWrapper onClick={() => this._playPause()}>
+      <VideoWrapper>
         <ReactPlayer
           ref={node => {
             if (node) this.player = node.player;
           }}
           url={this.props.src}
           className="hero-player"
-          width={"100%"}
-          height={"100%"}
-          muted={true}
+          muted={false}
           loop={true}
           playsinline={true}
+          controls={true}
           playing={this.state.playing}
         />
         <Waypoint
@@ -86,15 +85,26 @@ export default class extends Component {
 
 // STYLES
 const VideoWrapper = styled.div`
+  overflow: hidden;
+  margin: auto;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .hero-player {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }
   video {
     width: 100%;
     height: 100%;
+    max-width: 76rem;
+    margin: auto;
     object-fit: contain;
   }
 `;

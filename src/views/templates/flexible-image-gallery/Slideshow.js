@@ -5,7 +5,7 @@ import { fixedHero } from './../../../styles/mixins'
 import { widths } from './../../../styles/theme.json'
 
 export default (props) =>
-  <CarouselWrapper className={(props.data.is_hero) && `fixed-hero ${props.style}`}>
+  <CarouselWrapper>
     <Carousel 
       slides={props.data.slides}
       navigation={props.data.controls}
