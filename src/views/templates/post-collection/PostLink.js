@@ -5,16 +5,15 @@ import { themeA, themes } from "./../../../styles/theme";
 import {
   bigType,
   flexColumn,
-  media,
   opacityTransition
 } from "./../../../styles/mixins";
-import { spacing, shared, widths } from "./../../../styles/theme.json";
+import { spacing } from "./../../../styles/theme.json";
 
 export default props => (
   <CardWrapper className={`${props.columns} ${props.style}`}>
     <CardLink to={props.cardData.post_type === "page" ? `/${props.cardData.slug}` : `/${props.slug}/${props.cardData.slug}`}>
       <ThemeProvider theme={themes[props.theme] || themeA}>
-        <ProjectTitle>{props.cardData.title}</ProjectTitle>
+        <ProjectTitle dangerouslySetInnerHTML={{ __html: props.cardData.title }}/>
       </ThemeProvider>
     </CardLink>
   </CardWrapper>
