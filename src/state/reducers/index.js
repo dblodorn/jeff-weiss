@@ -10,7 +10,8 @@ import {
   headerState,
   footerState,
   scrollDirectionState,
-  currentPixelState
+  currentPixelState,
+  randomColorState
 } from './r_window_data'
 import { 
   pageState,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   resize_state: resizeState,
   scroll_direction: scrollDirectionState,
   current_pixel: currentPixelState,
+  color: randomColorState,
   fonts_loaded: fontState,
   touch_state: touchState,
   modal: modalState,

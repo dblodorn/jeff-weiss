@@ -4,7 +4,7 @@ import { CloseButton } from './../../styles/components'
 import { colors } from './../../styles/theme.json'
 
 const Close = (props) =>
-  <CloseButton onClick={props.clickFunction || null} size={props.size || '5rem'}>
+  <CloseButton onClick={props.clickFunction || null} size={props.size || '5rem'} top={props.top || `1rem`} position={props.position || `fixed`}>
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 64 64" width="100%" height="100%">
       <g fill={props.color || colors.black}>
         <line fill="none" stroke={props.color} strokeWidth={`${props.stroke}` || '2'} strokeLinecap="square" strokeMiterlimit="10" x1="54" y1="10" x2="10" y2="54" strokeLinejoin="miter"></line>

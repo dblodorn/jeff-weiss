@@ -155,7 +155,6 @@ const StyledMarkup = styled.div`
 // UI
 const StyledLink = styled(Link)`
   ${_.defaultLink};
-  color: ${props => props.theme.display_font_color};
 `
 
 const NavItem = styled.li`
@@ -245,9 +244,9 @@ const CloseButton = styled.button`
   ${_.buttonInit};
   width: ${props => props.size};
   height: ${props => props.size};
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  position: ${props => props.position};
+  top: ${props => props.top};
+  right: ${props => props.top};
   padding: 0;
   z-index: 11000;
   cursor: pointer;

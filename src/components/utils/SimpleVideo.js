@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-
+import { heights } from './../../styles/theme.json'
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -79,6 +79,7 @@ const VideoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: ${heights.header};
   .hero-player {
     display: flex;
     align-items: center;
@@ -87,8 +88,9 @@ const VideoWrapper = styled.div`
   video {
     width: 100%;
     height: 100%;
-    max-width: 76rem;
+    max-width: 96rem;
+    max-height: 80vh;
     margin: auto;
-    object-fit: contain;
+    object-fit: cover;
   }
 `;

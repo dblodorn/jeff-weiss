@@ -69,12 +69,26 @@ const setCurrentPixel = (string) => {
   };
 }
 
+const randomColor = (string) => {
+  return {
+    type: 'RANDOM_COLOR',
+    string
+  }
+}
+
 const setResizeState = () => {
   return (dispatch) => {
     dispatch(resizeData({
       window_width: window.innerWidth,
       window_height: window.innerHeight
     }))
+  }
+}
+
+const setRandomColor = () => {
+  const newColor = `#${Math.random().toString(16).substr(2, 6)}`
+  return (dispatch) => {
+    dispatch(randomColor(newColor))
   }
 }
 
@@ -89,5 +103,6 @@ export {
   setFooterState,
   setHeaderStyle,
   setScrollDirection,
-  setCurrentPixel
+  setCurrentPixel,
+  setRandomColor
 }

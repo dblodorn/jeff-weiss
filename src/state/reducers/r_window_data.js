@@ -90,6 +90,15 @@ const currentPixelState = (state = false, action) => {
   }
 }
 
+const randomColorState = (state = `#ffffff`, action) => {
+  switch (action.type) {
+    case 'RANDOM_COLOR':
+      return action.string;
+    default:
+      return state;
+  }
+}
+
 export {
   resizeState,
   menuState,
@@ -100,5 +109,6 @@ export {
   headerState,
   footerState,
   scrollDirectionState,
-  currentPixelState
+  currentPixelState,
+  randomColorState
 }

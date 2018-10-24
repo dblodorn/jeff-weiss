@@ -9,7 +9,8 @@ import {
   setFooterState,
   setHeaderStyle,
   setCurrentPixel,
-  setScrollDirection
+  setScrollDirection,
+  setRandomColor
 } from './a_window_data'
 
 import { 
@@ -32,5 +33,6 @@ export {
   setFooterState,
   setHeaderStyle,
   setCurrentPixel,
-  setScrollDirection
+  setScrollDirection,
+  setRandomColor
 }

@@ -1,20 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
-import { themeA, themes } from "./../../../styles/theme";
-import {
-  bigType,
-  flexColumn,
-  opacityTransition
-} from "./../../../styles/mixins";
-import { spacing } from "./../../../styles/theme.json";
+import styled from "styled-components";
+import { bigType, flexColumn, opacityTransition } from "./../../../styles/mixins";
+import { spacing, colors, fonts } from "./../../../styles/theme.json";
 
 export default props => (
   <CardWrapper className={`${props.columns} ${props.style}`}>
     <CardLink to={props.cardData.post_type === "page" ? `/${props.cardData.slug}` : `/${props.slug}/${props.cardData.slug}`}>
-      <ThemeProvider theme={themes[props.theme] || themeA}>
-        <ProjectTitle dangerouslySetInnerHTML={{ __html: props.cardData.title }}/>
-      </ThemeProvider>
+      <ProjectTitle dangerouslySetInnerHTML={{ __html: props.cardData.title }}/>
     </CardLink>
   </CardWrapper>
 );
@@ -35,10 +28,9 @@ const CardLink = styled(Link)`
 const ProjectTitle = styled.h3`
   ${bigType};
   ${opacityTransition};
-  color: ${props => props.theme.display_font_color}!important;
-  font-family: ${props => props.theme.display_font};
-  text-transform: ${props => props.theme.display_case};
-  background-color: ${props => props.theme.top_bg_color};
+  color: ${colors.white};
+  font-family: ${fonts.display_font_b};
+  text-transform: uppercase;
   padding: ${spacing.double_pad} ${spacing.double_pad} 0;
   display: block;
   width: 100%;

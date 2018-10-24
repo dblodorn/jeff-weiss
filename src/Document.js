@@ -12,7 +12,7 @@ const Document = (props) => {
     return (
       <Fragment>
         <Header/>
-        <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style}>
+        <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style} bgcolor={props.color}>
           {props.children}
         </Main>
       </Fragment>
@@ -26,7 +26,8 @@ export default connect(
   state => ({
     api_data: state.api_data,
     header_style: state.header_style,
-    router: state.router
+    router: state.router,
+    color: state.color
   })
 )(Document)
 
@@ -37,6 +38,9 @@ const Main = styled.main`
   width: 100vw;
   position: relative;
   min-height: 100vh;
+  background-color: ${props => props.bgcolor};
+  transition: background-color 3000ms ease-in-out;
+  will-change: background-color;
   &.sidebar {
     ${media.desktopNav`
       padding-left: ${widths.sidebar_desktop};

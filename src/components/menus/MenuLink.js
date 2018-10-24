@@ -38,7 +38,6 @@ export default connect(
 // STYLES
 const NavLink = styled(StyledLink)`
   ${microType}
-  * {
-    text-align: right!important;
-  }
+  text-align: right!important;
+  display: block;
 `

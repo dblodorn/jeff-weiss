@@ -24,7 +24,7 @@ export default class extends Component {
     return (
       <Wrapper>
         <ImgWrapper Opacity={(this.state.loaded) ? 1 : 0} onClick={this.props.clickFunction} className={(this.props.clickFunction) && 'hover'}>
-          <ImgFit src={this.props.src} onLoad={this.handleImageLoaded.bind(this)} Fit={this.props.fit}/>
+          <ImgFit src={this.props.src} onLoad={this.handleImageLoaded.bind(this)} className={this.props.fit || `contain`}/>
         </ImgWrapper>
         {(!this.state.loaded) && <Spinner size={'4rem'} color={colors.blue} stroke={1} /> }
       </Wrapper>
@@ -53,8 +53,15 @@ const ImgWrapper = styled.div`
 
 const ImgFit = styled.img`
   ${absoluteCentered};
-  width: 100%;
-  height: 100%;
-  object-fit: ${props => props.Fit};
+  &.contain {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  &.cover {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 `
 

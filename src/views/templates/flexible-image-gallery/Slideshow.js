@@ -1,6 +1,7 @@
 import React from 'react'
 import { Carousel } from './../../../components'
 import styled from 'styled-components'
+import { heights } from './../../../styles/theme.json'
 
 export default (props) =>
   <CarouselWrapper>
@@ -20,4 +21,5 @@ const CarouselWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
+  padding: ${heights.header};
 `

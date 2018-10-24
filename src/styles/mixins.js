@@ -121,20 +121,22 @@ const microType = css`
 const defaultLink = css`
   ${sansFont};
   ${bodyType};
+  ${opacityTransition};
   -webkit-tap-highlight-color: rgba(255,255,255,0);
   text-decoration: none;
   color: ${colors.black};
   cursor: pointer;
+  opacity: .7;
   span {
     position: relative;
     z-index: 10;
     display: block;
   }
   &.active {
-    text-decoration: underline;
+    opacity: 1;
   }
   &:hover {
-    text-decoration: underline;
+    opacity: 1;
     color: ${colors.hover_color};
   }
 `
@@ -142,6 +144,13 @@ const defaultLink = css`
 const opacityTransition = css`
   transition: opacity 150ms ease-in-out;
   will-change: opacity;
+`
+
+const menuTransition = css`
+  transform: translateY(0);
+  opacity: 1;
+  will-change: transform, opacity;
+  transition: transform 300ms ease, opacity 300ms ease;
 `
 
 // STYLE UTILS
@@ -521,5 +530,6 @@ export {
   textShadow,
   fixedHero,
   halfFixed,
-  fixedWindow
+  fixedWindow,
+  menuTransition
 }
