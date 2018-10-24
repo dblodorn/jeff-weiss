@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { heights, spacing, shared, colors, widths } from './theme.json'
+import { heights, spacing, shared, colors, widths, fonts } from './theme.json'
 import * as _ from './mixins'
 
 // DOM NODES
@@ -127,18 +127,15 @@ const StyledMarkup = styled.div`
   }
   h5 {
     ${_.bodyType};
-    color: ${props => props.theme.body_copy_color};
-    font-family: ${props => props.theme.body_copy_font};
+    font-family: ${fonts.body_copy_font_a};
   }
   h6 {
     ${_.bodyType};
-    color: ${props => props.theme.body_copy_color};
-    font-family: ${props => props.theme.body_copy_font};
+    font-family: ${fonts.body_copy_font_a};
   }
   p {
     ${_.bodyType};
-    color: ${props => props.theme.body_copy_color};
-    font-family: ${props => props.theme.body_copy_font};
+    font-family: ${fonts.body_copy_font_a};
     margin-bottom: ${spacing.single_pad};
     max-width: ${widths.max_medium};
     &:last-child {

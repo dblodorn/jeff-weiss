@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import Spinner from './Spinner'
 import { absoluteCentered, opacityTransition, absoluteTopFull } from './../../styles/mixins'
-import { colors } from './../../styles/theme.json'
+import { colors, heights } from './../../styles/theme.json'
 
 export default class extends Component {
   constructor(props) {
@@ -62,6 +62,7 @@ const ImgFit = styled.img`
     object-fit: cover;
     width: 100%;
     height: 100%;
+    padding: ${heights.header};
   }
 `
 

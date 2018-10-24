@@ -1,19 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import styled, { ThemeProvider } from 'styled-components'
-import { ThemeA, themes } from './../../../styles/theme'
+import styled from 'styled-components'
 import { StyledMarkup } from './../../../styles/components'
-import { fullWindow, positionClasses, opacityTransition, fancyScroll } from './../../../styles/mixins'
-import { heights, shared, spacing } from './../../../styles/theme.json'
+import { fullWindow, flexCenteredAll, opacityTransition } from './../../../styles/mixins'
+import { heights, shared, spacing, colors } from './../../../styles/theme.json'
 
 const TextOverlay = (props) =>
-  <ThemeProvider theme={themes[props.theme] || ThemeA}>
-    <Overlay className={props.content.text_overlay_postion}>
-      <OverlayWrapper bgcolor={props.color}>
-        <StyledMarkup className={'text'} dangerouslySetInnerHTML={{__html: props.content.text_overlay_content }}/>
-      </OverlayWrapper>
-    </Overlay>
-  </ThemeProvider>
+  <Overlay>
+    <OverlayWrapper bgcolor={props.color}>
+      <StyledMarkup className={'text'} dangerouslySetInnerHTML={{__html: props.content }}/>
+    </OverlayWrapper>
+  </Overlay>
 
 export default connect(
   state => ({
@@ -24,10 +21,13 @@ export default connect(
 // STYLES
 const Overlay = styled.div`
   ${fullWindow};
-  ${positionClasses};
+  ${flexCenteredAll};
   height: 100%;
   padding: ${heights.header};
   z-index: 1000;
+  * {
+    color: ${colors.white};
+  }
 `
 
 const OverlayWrapper = styled.div`
@@ -36,10 +36,11 @@ const OverlayWrapper = styled.div`
   -webkit-overflow-scrolling: touch;
   width: 100%;
   max-width: ${shared.max_width};
+  min-height: 50vh;
   max-height: calc(80vh - ${heights.header});
   opacity: 0;
   cursor: pointer;
-  padding: 0 ${spacing.double_pad};
+  padding: ${spacing.double_pad};
   &:hover {
     opacity: 1;
   }

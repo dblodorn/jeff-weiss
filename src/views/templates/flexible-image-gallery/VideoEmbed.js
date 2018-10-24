@@ -1,18 +1,13 @@
 import React from "react";
 import { SimpleVideo, FitImage } from "./../../../components";
 import styled from "styled-components";
-import { heights, spacing, widths } from "./../../../styles/theme.json";
-import { fixedHero, halfFixed } from "./../../../styles/mixins";
 import TextOverlay from "./TextOverlay";
 
 export default props => {
   return (
     <VideoWrapper>
       {props.data.has_text_overlay && (
-        <TextOverlay
-          content={props.data}
-          theme={props.theme === null ? "a" : props.theme}
-        />
+        <TextOverlay content={props.data.text_overlay_content}/>
       )}
       {props.data.media_type !== "photo"
         ? props.data.video_file && <SimpleVideo src={props.data.video_file} />

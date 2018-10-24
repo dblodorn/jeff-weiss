@@ -6,7 +6,7 @@ import Swiper from 'react-id-swiper/lib/custom'
 import Waypoint from 'react-waypoint'
 import { setFooterState } from './../../state/actions'
 import CarouselSlide from './CarouselSlide'
-import { spacing, heights } from './../../styles/theme.json'
+import { colors, fonts } from './../../styles/theme.json'
 import { buttonInit, absoluteTopFull, absoluteCentered } from './../../styles/mixins'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 
@@ -29,20 +29,7 @@ class Carousel extends Component {
       autoplay: autoplay(),
       transitionTime: this.props.transition_time || 1500
     }
-    this._wayPointEnter = this._wayPointEnter.bind(this)
-    this._wayPointLeft = this._wayPointLeft.bind(this)
     this._slideChange = this._slideChange.bind(this)
-  }
-
-  _wayPointEnter() {
-    if (this.props.autoplay) {
-      this.swiper.autoplay.start()
-    }
-  }
-
-  _wayPointLeft() {
-    this.swiper.autoplay.stop()
-    this._stop()
   }
 
   _slideChange() {
@@ -79,7 +66,6 @@ class Carousel extends Component {
     } else {
       this.swiper.autoplay.stop()
     }
-    // this.props.footer_state(false)
   }
 
   componentWillUnmount() {
@@ -89,7 +75,6 @@ class Carousel extends Component {
       })
       this.player.seekTo(0)
     }
-    // this.props.footer_state(true)
   }
 
   render() {
@@ -102,7 +87,7 @@ class Carousel extends Component {
       autoplay: this.state.autoplay,
       pagination: {
         el: (this.props.pagination) ? '.swiper-pagination' : null,
-        type: 'bullets',
+        type: 'fraction',
         clickable: true
       },
       navigation: {
@@ -142,11 +127,6 @@ class Carousel extends Component {
         <Swiper {...swiperParams} ref={node => { if (node) this.swiper = node.swiper }}>
           {HeroSlides}
         </Swiper>
-        <Waypoint
-          onEnter={this._wayPointEnter}
-          onLeave={this._wayPointLeft}
-          topOffset='50%'
-        />
       </HeroSlider>
     )
   }
@@ -165,8 +145,8 @@ export default connect(
 const buttonWrap = css`
   ${buttonInit};
   padding: 0;
-  width: 4rem;
-  height: 6rem;
+  width: 3rem;
+  height: 3rem;
 `
 
 const HeroSlide = styled.div`
@@ -188,12 +168,12 @@ const HeroSlider = styled.div`
   .swiper-button-prev,
   .swiper-container-rtl .swiper-button-next {
     ${buttonWrap};
-    left: ${spacing.micro_pad};
+    left: .5rem;
   }
   .swiper-button-next,
   .swiper-container-rtl .swiper-button-prev {
     ${buttonWrap};
-    right: ${spacing.micro_pad};
+    right: .5rem;
   }
   .hero-player {
     ${absoluteTopFull};
@@ -203,6 +183,9 @@ const HeroSlider = styled.div`
     bottom: 1rem;
     padding: 0 1rem;
     text-align: right;
+    color: ${colors.white};
+    font-family: ${fonts.body_copy_font_a};
+    font-size: ${fonts.sizes.micro};
   }
   video {
     ${absoluteCentered};
