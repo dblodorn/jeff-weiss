@@ -5,7 +5,6 @@ import FlexibleImageGallery from "./flexible-image-gallery/FlexibleImageGallery"
 import NotFound from "./../NotFound";
 
 export default pageData(props => {
-  console.log(props);
   return (
     <Fragment>
       <PostBasics data={props.project} style={props.style} />

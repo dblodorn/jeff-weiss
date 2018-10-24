@@ -16,7 +16,7 @@
     "sidebar_desktop": "24rem"
   },
   "heights": {
-    "header": "6rem",
+    "header": "4rem",
     "mobile_header": "6rem",
     "footer": "0",
     "player_icons": "2.5rem"
@@ -24,7 +24,7 @@
   "spacing": {
     "micro_pad": ".5rem",
     "single_pad": "1rem",
-    "double_pad": "2rem",
+    "double_pad": "1.5rem",
     "big_pad": "6rem"
   },
   "colors": {
@@ -46,8 +46,8 @@
     "body_font_b_color": "#fff",
     "footer_bg_color": "#fff",
     "footer_type_color": "#111111",
-    "header_bg_color": "#fff",
-    "header_type_color": "#111111",
+    "header_bg_color": "#aeaeae",
+    "header_type_color": "#fff",
     "button_color": "#111111",
     "button_typs_color": "#fff",
     "popup_bg_color_a": "#ffffff",
@@ -72,8 +72,9 @@
       "body_sm": "1.75rem",
       "small": "1.75rem",
       "small_sm": "1.75rem",
-      "micro": "1rem",
-      "micro_sm": "1rem"
+      "micro": "1.35rem",
+      "micro_sm": "1.35rem",
+      "header": "1.25rem"
     }
   },
   "global": {

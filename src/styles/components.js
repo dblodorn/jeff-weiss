@@ -173,7 +173,6 @@ const NavItem = styled.li`
   &.active {
     pointer-events: none!important;
     text-decoration: underline;
-    * { color: ${colors.black}!important; }
   }
   &.sidebar {
     ${_.media.desktopNav`

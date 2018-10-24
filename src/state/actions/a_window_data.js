@@ -55,6 +55,20 @@ function setModalState (bool) {
   }
 }
 
+const setScrollDirection = (string) => {
+  return {
+    type: 'SCROLL_DIRECTION',
+    string
+  };
+}
+
+const setCurrentPixel = (string) => {
+  return {
+    type: 'SCROLL_PIXEL',
+    string
+  };
+}
+
 const setResizeState = () => {
   return (dispatch) => {
     dispatch(resizeData({
@@ -73,5 +87,7 @@ export {
   setModalState,
   setHeaderState,
   setFooterState,
-  setHeaderStyle
+  setHeaderStyle,
+  setScrollDirection,
+  setCurrentPixel
 }

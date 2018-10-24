@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import MenuLink from './MenuLink'
-import { flexRow, flexColumn, flexCenteredAll, media, defaultLink, smallType } from './../../styles/mixins'
+import { flexRow, flexColumn, flexCenteredAll, media, defaultLink, microType } from './../../styles/mixins'
 import { NavItem } from './../../styles/components'
 import { spacing } from './../../styles/theme.json'
 
@@ -77,13 +77,16 @@ const NavList = styled.ul`
   &.top-horizontal {
     ${media.desktopNav`
       ${flexRow};
-      margin-left: auto;
-      transform: translateY(4px);
+      align-items: center;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      padding-inline-start: 0;
     `}
   }
 `
 
 const ExternalLink = styled.a`
   ${defaultLink};
-  ${smallType};
+  ${microType};
 `

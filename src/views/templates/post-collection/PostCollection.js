@@ -1,33 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Section, GridWrapper } from "./../../../styles/components";
-import { PopupGrid } from "./../../../components";
-import PostLink from "./PostLink";
-import Taxonomies from "./Taxonomies";
-import { parseTaxonomies } from "./../../../scripts";
-
-const returnTaxonomies = props => {
-  return {
-    category: parseTaxonomies(props.post_collection, "taxonomies", "category"),
-    capabilities: parseTaxonomies(
-      props.post_collection,
-      "taxonomies",
-      "capabilities"
-    ),
-    client: parseTaxonomies(props.post_collection, "taxonomies", "client"),
-    industry: parseTaxonomies(props.post_collection, "taxonomies", "industry")
-  };
-};
+import React from "react"
+import { connect } from "react-redux"
+import styled from 'styled-components'
+import { Section, GridWrapper } from "./../../../styles/components"
+import { heights, spacing } from './../../../styles/theme.json'
+import { PopupGrid } from "./../../../components"
+import PostLink from "./PostLink"
 
 const PostCollection = props => (
-  <Section>
-    {props.data.content.show_taxonomies && (
-      <Taxonomies
-        class={"top"}
-        title={"All Taxonomies"}
-        taxonomies={returnTaxonomies(props.data.content)}
-      />
-    )}
+  <CollectionSection>
     {props.data.content.popup_grid ? (
       <PopupGrid
         images={props.data.content.post_collection}
@@ -76,9 +56,14 @@ const PostCollection = props => (
             ))}
       </GridWrapper>
     )}
-  </Section>
-);
+  </CollectionSection>
+)
 
 export default connect(state => ({
   api_data: state.api_data
-}))(PostCollection);
+}))(PostCollection)
+
+const CollectionSection = styled(Section)`
+  padding-top: ${heights.header};
+  padding-bottom: ${spacing.big_pad};
+`

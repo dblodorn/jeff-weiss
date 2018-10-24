@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { themeA, themes } from './../../styles/theme'
-import { bodyType, flexRowCenteredVert } from './../../styles/mixins'
+import { bodyType, flexRowCenteredVert, smallType } from './../../styles/mixins'
 import { spacing, shared, colors } from './../../styles/theme.json'
 import { StyledLink, H2 } from './../../styles/components'
 import { meta_defaults } from './../../config.json'
@@ -20,7 +20,6 @@ export default (props) =>
     padding: ${spacing.single_pad} 0;
     width: 16rem;
     height: 100%;
-    background-color: ${colors.white};
     &.sidebar {
       height: auto;
       width: 100%;
@@ -31,5 +30,8 @@ export default (props) =>
 `
 
 const LogoType = styled(H2)`
+  ${smallType};
+  text-transform: uppercase;
+  letter-spacing: 1px;
   color: ${colors.black}!important;
 `

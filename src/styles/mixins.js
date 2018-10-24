@@ -140,7 +140,7 @@ const defaultLink = css`
 `
 
 const opacityTransition = css`
-  transition: opacity 450ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
   will-change: opacity;
 `
 

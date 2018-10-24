@@ -7,7 +7,9 @@ import {
   setModalState,
   setHeaderState,
   setFooterState,
-  setHeaderStyle
+  setHeaderStyle,
+  setCurrentPixel,
+  setScrollDirection
 } from './a_window_data'
 
 import { 
@@ -15,14 +17,6 @@ import {
   setVideoPlaying,
   setVideoState
 } from './a_content-state'
-
-import {
-  updateQuantityInCart,
-  removeLineItemInCart,
-  handleCartClose,
-  handleCartOpen,
-  addVariantToCart
-} from './a_cart'
 
 export {
   fetchApiData,
@@ -37,9 +31,6 @@ export {
   setVideoState,
   setFooterState,
   setHeaderStyle,
-  updateQuantityInCart,
-  removeLineItemInCart,
-  handleCartClose,
-  handleCartOpen,
-  addVariantToCart
+  setCurrentPixel,
+  setScrollDirection
 }

@@ -72,6 +72,24 @@ const touchState = (state = false, action) => {
   }
 }
 
+const scrollDirectionState = (state = 'top', action) => {
+  switch (action.type) {
+    case 'SCROLL_DIRECTION':
+      return action.string;
+    default:
+      return state;
+  }
+}
+
+const currentPixelState = (state = false, action) => {
+  switch (action.type) {
+    case 'SCROLL_PIXEL':
+      return action.string;
+    default:
+      return state;
+  }
+}
+
 export {
   resizeState,
   menuState,
@@ -80,5 +98,7 @@ export {
   modalState,
   headerStyle,
   headerState,
-  footerState
+  footerState,
+  scrollDirectionState,
+  currentPixelState
 }

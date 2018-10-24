@@ -1,6 +1,6 @@
 const setPage = (slug) => {
   return {
-    type: 'SET_PAGE',
+    type: 'PAGE_TYPE',
     slug
   }
 }

@@ -4,7 +4,7 @@ import { themeA, themes } from './../../styles/theme'
 import { connect } from 'react-redux'
 import { StyledLink, NavItem } from './../../styles/components'
 import { setMenuState } from './../../state/actions'
-import { smallType } from './../../styles/mixins'
+import { microType } from './../../styles/mixins'
 
 const returnLink = (slug, subroute) => {
   if (subroute) {
@@ -37,7 +37,7 @@ export default connect(
 
 // STYLES
 const NavLink = styled(StyledLink)`
-  ${smallType}
+  ${microType}
   * {
     text-align: right!important;
   }

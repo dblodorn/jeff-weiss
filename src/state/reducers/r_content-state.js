@@ -1,6 +1,6 @@
 const pageState = (state =  null, action) => {
   switch (action.type) {
-    case 'SET_PAGE':
+    case 'PAGE_TYPE':
       return action.slug
     default:
       return state

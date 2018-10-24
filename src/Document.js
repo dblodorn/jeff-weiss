@@ -4,7 +4,7 @@ import styled, { injectGlobal } from 'styled-components'
 import { animationFadeIn, flexColumn, media } from './styles/mixins'
 import { colors, fonts, heights, widths, spacing } from './styles/theme.json'
 import { routeName } from './scripts'
-import { Footer, Header } from './components'
+import { Header } from './components'
 import { LoadingPage } from './views'
 
 const Document = (props) => {
@@ -15,7 +15,6 @@ const Document = (props) => {
         <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style}>
           {props.children}
         </Main>
-        {/*<Footer orientation={props.header_style}/>*/}
       </Fragment>
     )
   } else {
@@ -37,16 +36,11 @@ const Main = styled.main`
   ${flexColumn};
   width: 100vw;
   position: relative;
-  min-height: calc(100vh - ${heights.footer});
+  min-height: 100vh;
   &.sidebar {
     ${media.desktopNav`
       padding-left: ${widths.sidebar_desktop};
       padding-bottom: ${heights.footer};
-    `}
-  }
-  &.top-horizontal {
-    ${media.desktopNav`
-      padding-top: ${heights.header};
     `}
   }
 `

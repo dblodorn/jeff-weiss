@@ -49,7 +49,6 @@ const CardWrapper = styled.li`
   ${flexColumn};
   position: relative;
   &.border {
-    border-bottom: ${shared.border_thin};
     ${media.desktopNav`
     &.two_col {
       &:nth-child(odd) {

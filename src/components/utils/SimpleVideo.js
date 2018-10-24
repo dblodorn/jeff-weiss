@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import Waypoint from "react-waypoint";
 
 export default class extends Component {
   constructor(props) {
@@ -9,19 +8,9 @@ export default class extends Component {
     this.state = {
       playing: false
     };
-    this._wayPointEnter = this._wayPointEnter.bind(this);
-    this._wayPointLeft = this._wayPointLeft.bind(this);
     this._onPlay = this._onPlay.bind(this);
     this._stop = this._stop.bind(this);
     this._pause = this._pause.bind(this);
-  }
-
-  _wayPointEnter() {
-    this._onPlay();
-  }
-
-  _wayPointLeft() {
-    this._pause();
   }
 
   _onPlay() {
@@ -72,11 +61,6 @@ export default class extends Component {
           playsinline={true}
           controls={true}
           playing={this.state.playing}
-        />
-        <Waypoint
-          onEnter={this._wayPointEnter}
-          onLeave={this._wayPointLeft}
-          topOffset="50%"
         />
       </VideoWrapper>
     );

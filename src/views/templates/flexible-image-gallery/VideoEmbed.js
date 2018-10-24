@@ -32,7 +32,6 @@ export default props => {
 const VideoWrapper = styled.div`
   display: block;
   width: 100%;
-  height: 56.25vw;
+  height: 100vh;
   position: relative;
-  max-height: calc(100vh - ${heights.header});
 `;
