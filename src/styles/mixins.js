@@ -94,7 +94,7 @@ const mediumType = css`
 const bodyType = css`
   ${sansFont};
   font-size: ${fonts.sizes.body_sm};
-  line-height: 1.35;
+  line-height: 1.45;
   ${media.medium`
     font-size: ${fonts.sizes.body};
   `}
@@ -126,7 +126,9 @@ const defaultLink = css`
   text-decoration: none;
   color: ${colors.black};
   cursor: pointer;
-  opacity: .7;
+  ${media.desktopNav`
+    opacity: .7;
+  `}
   span {
     position: relative;
     z-index: 10;
@@ -216,8 +218,6 @@ const flexRowSpaceBetween = css`
   ${flexRow};
   justify-content: space-between;
 `
-
-//
 
 const buttonStyle = css`
   ${buttonInit};
@@ -416,21 +416,18 @@ const grid = css`
 `
 
 const fancyScroll = css`
-  ::-webkit-scrollbar {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  &:-webkit-scrollbar {
     width: 2px;
   }
-  ::-webkit-scrollbar-track {
+  &:-webkit-scrollbar-track {
     background: ${colors.white};
     border: 0;
     width: 2px;
   }
-  ::-webkit-scrollbar-thumb {
-    background: ${colors.blue};
-    width: 2px;
-    border: 0;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${colors.grey};
+  &:-webkit-scrollbar-thumb {
+    background: ${colors.black};
     width: 2px;
     border: 0;
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { setHeaderState } from './../../state/actions'
-import { flexCenteredAll, opacityTransition, buttonInit, menuTransition } from './../../styles/mixins'
+import { flexCenteredAll, opacityTransition, buttonInit, menuTransition, media } from './../../styles/mixins'
 
 const Dots = (props) =>
   <svg height={props.height || '32px'} width={props.width || '32px'} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -37,11 +37,15 @@ const SidebarNav = styled.button`
   ${opacityTransition};
   ${menuTransition};
   position: fixed;
-  top: 0;
+  top: .5rem;
   right: 0;
   width: 4rem;
   height: 4.5rem;
-  opacity: .65;
+  opacity: 1;
+  ${media.desktopNav`
+    top: 0;
+    opacity: .7;
+  `}
   cursor: pointer;
   z-index: 8000;
   &.hide {

@@ -68,12 +68,12 @@
       "giant_sm": "4.5rem",
       "medium": "2.5rem",
       "medium_sm": "2.25rem",
-      "body": "2rem",
+      "body": "2.5rem",
       "body_sm": "1.75rem",
       "small": "1.75rem",
       "small_sm": "1.75rem",
       "micro": "1.35rem",
-      "micro_sm": "1.35rem",
+      "micro_sm": "1.5rem",
       "header": "1.25rem"
     }
   },
@@ -94,7 +94,7 @@
     "border_weight": "5px",
     "logo_size_desk": "8rem",
     "article_width": "70rem",
-    "max_width": "92rem",
+    "max_width": "85rem",
     "super_wide": "124rem",
     "column_width": "40rem",
     "menu_width": "6.5rem",

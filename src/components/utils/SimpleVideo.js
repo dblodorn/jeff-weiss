@@ -59,7 +59,7 @@ export default class extends Component {
           muted={false}
           loop={true}
           playsinline={true}
-          controls={true}
+          controls={false}
           playing={this.state.playing}
         />
       </VideoWrapper>

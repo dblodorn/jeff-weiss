@@ -11,11 +11,11 @@ const Menu = (props) => {
     return data.map((item, i) => {
       if (!item.is_home && !item.external_link) {
         return (
-          <MenuLink page={item.title} path={item.slug} sub_route={item.sub_route} key={`${i}-${item.id}`} classes={`${props.orientation} ${props.navLocation}`}/>
+          <MenuLink page={item.title} path={item.slug} sub_route={item.sub_route} key={`${i}-${item.id}`}/>
         )
       } else if (item.external_link) {
         return (
-          <NavItem key={`${i}-${item.id}`} className={`${props.orientation} ${props.navLocation}`}>
+          <NavItem key={`${i}-${item.id}`}>
             <ExternalLink href={item.url} target='_blank'><span>{item.title}</span></ExternalLink>
           </NavItem>
         )
@@ -42,7 +42,6 @@ export default connect(
 const MenuWrapper = styled.menu`
   height: 100%;
   padding-bottom: .5rem;
-  ${flexCenteredAll};
   &.sidebar {
     ${media.desktopNav`
       flex-shrink: 0;
@@ -61,7 +60,6 @@ const MenuWrapper = styled.menu`
 const NavList = styled.ul`
   ${flexColumn};
   position: relative;
-  text-align: center;
   &.sidebar {
     ${media.desktopNav`
       ${flexColumn};
@@ -75,6 +73,7 @@ const NavList = styled.ul`
     `}
   }
   &.top-horizontal {
+    text-align: left;
     ${media.desktopNav`
       ${flexRow};
       align-items: center;

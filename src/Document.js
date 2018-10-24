@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled, { injectGlobal } from 'styled-components'
 import { animationFadeIn, flexColumn, media } from './styles/mixins'
-import { colors, fonts, heights, widths, spacing } from './styles/theme.json'
+import { colors, fonts, heights, widths } from './styles/theme.json'
 import { routeName } from './scripts'
 import { Header } from './components'
 import { LoadingPage } from './views'
@@ -76,6 +76,22 @@ injectGlobal`
     font-weight: 300;
     font-style: normal;
     text-decoration: none;
+  }
+  ::-webkit-scrollbar {
+    width: 2px;
+    opacity: .5;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: rgba(255,255,255,.35);
+    border: 0;
+    width: 2px;
+    opacity: .5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${colors.white};
+    width: 2px;
+    border: 0;
+    opacity: .5;
   }
   ::-webkit-input-placeholder,
   ::-moz-placeholder {

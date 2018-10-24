@@ -18,8 +18,7 @@ export default (props) =>
 // STYLES
 const CarouselWrapper = styled.div`
   display: block;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: relative;
-  padding: ${heights.header};
 `

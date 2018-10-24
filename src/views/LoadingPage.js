@@ -13,4 +13,5 @@ export default () =>
 const LoadingWrapper = styled.div`
   ${fullWindow};
   background-color: ${colors.black};
+  overflow: hidden;
 `

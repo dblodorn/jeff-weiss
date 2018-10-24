@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { bigType, flexColumn, opacityTransition } from "./../../../styles/mixins";
+import { bigType, flexColumn, opacityTransition, media } from "./../../../styles/mixins";
 import { spacing, colors, fonts } from "./../../../styles/theme.json";
 
 export default props => (
@@ -35,8 +35,10 @@ const ProjectTitle = styled.h3`
   display: block;
   width: 100%;
   margin-bottom: 0;
-  opacity: .5;
-  &:hover {
-    opacity: 1;
-  }
+  ${media.desktopNav`
+    opacity: .5;
+    &:hover {
+      opacity: 1;
+    }
+  `}
 `;

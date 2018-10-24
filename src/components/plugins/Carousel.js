@@ -172,9 +172,6 @@ const buttonWrap = css`
 const HeroSlide = styled.div`
   width: 100%;
   height: 100%;
-  &.nav {
-    padding: 0 5.25rem;
-  }
 `
 
 const HeroSlider = styled.div`
@@ -203,8 +200,8 @@ const HeroSlider = styled.div`
     z-index: 100;
   }
   .swiper-pagination {
-    bottom: 7rem;
-    padding: 0 7rem;
+    bottom: 1rem;
+    padding: 0 1rem;
     text-align: right;
   }
   video {

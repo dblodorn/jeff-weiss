@@ -2,9 +2,18 @@ import React from "react"
 import { connect } from "react-redux"
 import styled from 'styled-components'
 import { Section, GridWrapper } from "./../../../styles/components"
+import { media } from "./../../../styles/mixins"
 import { heights, spacing } from './../../../styles/theme.json'
 import { PopupGrid } from "./../../../components"
 import PostLink from "./PostLink"
+
+import shuffle from 'lodash/shuffle';
+import mixin from 'lodash/mixin';
+import _ from 'lodash/wrapperLodash';
+
+mixin(_, {
+  shuffle: shuffle
+});
 
 const PostCollection = props => (
   <CollectionSection>
@@ -38,8 +47,7 @@ const PostCollection = props => (
                 key={`${item.ID}-post-${i}`}
               />
             ))
-          : props.api_data &&
-            props.api_data.posts.project.map((item, i) => (
+          : props.api_data && _.shuffle(props.api_data.posts.project).map((item, i) => (
               <PostLink
                 theme={props.data.theme}
                 style={props.data.content.style}
@@ -64,6 +72,9 @@ export default connect(state => ({
 }))(PostCollection)
 
 const CollectionSection = styled(Section)`
-  padding-top: ${heights.header};
+  padding-top: ${spacing.big_pad};
   padding-bottom: ${spacing.big_pad};
+  ${media.desktopNav`
+    padding-top: ${heights.header};
+  `}
 `

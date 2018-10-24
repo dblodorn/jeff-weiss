@@ -3,8 +3,9 @@ import styled, { ThemeProvider } from 'styled-components'
 import { themeA, themes } from './../../styles/theme'
 import { connect } from 'react-redux'
 import { StyledLink, NavItem } from './../../styles/components'
-import { setMenuState } from './../../state/actions'
-import { microType } from './../../styles/mixins'
+import { setHeaderState } from './../../state/actions'
+import { microType, media, bodyType } from './../../styles/mixins'
+import { breakpoints } from './../../styles/theme.json'
 
 const returnLink = (slug, subroute) => {
   if (subroute) {
@@ -15,10 +16,15 @@ const returnLink = (slug, subroute) => {
 }
 
 const Menulink = (props) => {
+  const menuToggle = () => {
+    if (props.resize_state.window_width < breakpoints.desktop) {
+      props.menu_toggle(false)
+    }
+  }
   return (
     <ThemeProvider theme={themes[props.theme] || themeA}>
       <NavItem className={(`/${props.path}` == `${props.route}`) ? `active ${props.classes}` : props.classes}>
-        <NavLink to={returnLink(props.path, props.sub_route)} onClick={() => props.menu_toggle(false)}>
+        <NavLink to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()}>
           <span dangerouslySetInnerHTML={{__html: props.page }}/>
         </NavLink>
       </NavItem>
@@ -28,16 +34,19 @@ const Menulink = (props) => {
 
 export default connect(
   state => ({
-    route: state.router.location.pathname
+    route: state.router.location.pathname,
+    resize_state: state.resize_state
   }),
   dispatch => ({
-    menu_toggle: (bool) => dispatch(setMenuState(bool))
+    menu_toggle: (bool) => dispatch(setHeaderState(bool))
   })
 )(Menulink)
 
 // STYLES
 const NavLink = styled(StyledLink)`
-  ${microType}
-  text-align: right!important;
+  ${bodyType}
   display: block;
+  ${media.desktopNav`
+    ${microType}
+  `}
 `

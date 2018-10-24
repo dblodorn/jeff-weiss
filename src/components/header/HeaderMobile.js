@@ -4,12 +4,16 @@ import { connect } from 'react-redux'
 import Menu from './../menus/Menu'
 import MenuLink from './../menus/MenuLink'
 import { Transition } from 'react-spring'
-import { setMenuState } from './../../state/actions'
-import { flexColumn, defaultLink, buttonInit, scrollPanel, microType, shadow, borderRadius, flexRowCenteredAll } from './../../styles/mixins'
-import { heights, spacing, colors } from './../../styles/theme.json'
+import { setHeaderState } from './../../state/actions'
+import { flexColumn, scrollPanel, flexRowCenteredVert,  } from './../../styles/mixins'
+import { spacing, colors, heights } from './../../styles/theme.json'
+import Close from './../utils/Close'
 
 const MenuWrapper = (props) =>
   <InnerHeader style={props.style} className="nav-wrapper__content">
+    <CloseWrapper>
+      <Close clickFunction={props.clickFunction} color={colors.white} size={`4rem`} stroke={3} top={`auto`} position={`relative`} />
+    </CloseWrapper>
     <Menu location={0}>
       <MenuLink page={'Home'} path={''}/>
     </Menu>
@@ -18,12 +22,8 @@ const MenuWrapper = (props) =>
 const HeaderMobile = (props) => {
   return (
     <HeaderWrapper>
-      {(props.menu)
-        ? <MobileButton onClick={() => props.menu_toggle(false)}><span>Close</span></MobileButton>
-        : <MobileButton onClick={() => props.menu_toggle(true)}><span>Menu</span></MobileButton>
-      }
       <Transition from={{ opacity: 0, transform: 'scale(1.025)' }} enter={{ opacity: 1, transform: 'scale(1)' }} leave={{ opacity: 0, transform: 'scale(1.05)', pointerEvents: 'none' }}>
-        {props.menu && (styles => <MenuWrapper style={styles}/>)}
+        {props.header_state && (styles => <MenuWrapper style={styles} clickFunction={() => props.menu_toggle(false)}/>)}
       </Transition>
     </HeaderWrapper>
   )
@@ -31,17 +31,17 @@ const HeaderMobile = (props) => {
 
 export default connect(
   state => ({
-    menu: state.menu
+    header_state: state.header_state
   }),
   dispatch => ({
-    menu_toggle: (bool) => dispatch(setMenuState(bool))
+    menu_toggle: (bool) => dispatch(setHeaderState(bool))
   })
 )(HeaderMobile)
 
 /* STYLES */
 const HeaderWrapper = styled.header`
   width: 100vw;
-  height: ${heights.mobile_header};
+  height: 0;
   padding: 0 ${spacing.double_pad} ${spacing.double_pad};
   position: fixed;
   top: 0;
@@ -59,33 +59,26 @@ const InnerHeader = styled.div`
   ${flexColumn};
   ${scrollPanel};
   background-color: ${colors.white};
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  padding: ${spacing.double_pad};
+  padding: calc(${spacing.double_pad} * 4) calc(${spacing.double_pad} * 2);
   background-color: ${colors.header_bg_color};
   will-change: opacity, transform;
   zoom: 0;
 `
 
-const MobileButton = styled.button`
-  ${defaultLink};
-  ${buttonInit};
-  ${microType};
-  ${shadow};
-  ${flexRowCenteredAll};
-  ${borderRadius(`50%`)};
-  width: 6rem;
-  height: 6rem;
-  padding-top: .2rem;
-  text-transform: uppercase;
+const CloseWrapper = styled.div`
+  ${flexRowCenteredVert};
+  justify-content: flex-end;
+  width: calc(${heights.header} - .5rem);
+  height: ${heights.header};
+  opacity: 1;
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10000;
-  background-color: ${colors.yellow};
+  top: .75rem;
+  right: .5rem;
 `
