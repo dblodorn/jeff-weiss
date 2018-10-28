@@ -33,5 +33,5 @@ const LogoType = styled(H2)`
   ${smallType};
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: ${colors.black}!important;
+  color: ${colors.white}!important;
 `

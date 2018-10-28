@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import { themeA, themes } from './../../styles/theme'
 import { connect } from 'react-redux'
 import { StyledLink, NavItem } from './../../styles/components'
+import { navStyle } from './../../styles/mixins'
 import { setHeaderState } from './../../state/actions'
 import { microType, media, bodyType } from './../../styles/mixins'
 import { breakpoints } from './../../styles/theme.json'
@@ -44,9 +45,5 @@ export default connect(
 
 // STYLES
 const NavLink = styled(StyledLink)`
-  ${bodyType}
-  display: block;
-  ${media.desktopNav`
-    ${microType}
-  `}
+  ${navStyle};
 `

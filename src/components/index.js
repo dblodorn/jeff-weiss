@@ -15,6 +15,7 @@ import Spinner from './utils/Spinner'
 import PlayButton from './utils/PlayButton'
 import Close from './utils/Close'
 import BackClose from './utils/BackClose'
+import Info from './utils/Info'
 
 // Modals
 import SingleImageModal from './modals/SingleImageModal'
@@ -41,6 +42,6 @@ export {
   PlayButton,
   Close,
   BackClose,
-  // MailScrape,
+  Info,
   Carousel
 }

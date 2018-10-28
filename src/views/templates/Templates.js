@@ -7,7 +7,7 @@ import NotFound from "./../NotFound";
 export default pageData(props => {
   return (
     <Fragment>
-      <PostBasics data={props.project} style={props.style} />
+      <PostBasics data={props.project} style={props.style}/>
       {props.project.template === "flexible-image-gallery" ? (
         <FlexibleImageGallery data={props.project} style={props.style} />
       ) : props.project.template === "default" ? (

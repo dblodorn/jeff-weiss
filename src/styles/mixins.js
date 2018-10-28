@@ -488,6 +488,31 @@ const halfFixed = css`
   }
 `
 
+const navWrapperHorizontal = css`
+  width: 100vw;
+  ${flexRowCenteredVert};
+  ${menuTransition};
+  height: ${heights.header};
+  padding-left: ${spacing.double_pad};
+  padding-right: ${spacing.single_pad};
+  position: fixed;
+  z-index: 9000;
+  background-color: ${colors.header_bg_color};
+  * {
+    color: ${colors.header_type_color}!important;
+  }
+  justify-content: space-between;
+`
+
+const navStyle = css`
+  ${bodyType};
+  letter-spacing: 1px;
+  display: block;
+  ${media.desktopNav`
+    ${microType}
+  `}
+`
+
 export {
   media,
   maxWidth,
@@ -528,5 +553,7 @@ export {
   fixedHero,
   halfFixed,
   fixedWindow,
-  menuTransition
+  menuTransition,
+  navWrapperHorizontal,
+  navStyle
 }

@@ -27,7 +27,8 @@ class Carousel extends Component {
     this.state = {
       playing: false,
       autoplay: autoplay(),
-      transitionTime: this.props.transition_time || 1500
+      transitionTime: this.props.transition_time || 1500,
+      count_state: (this.props.count !== 0) && `has-count`
     }
     this._slideChange = this._slideChange.bind(this)
   }
@@ -86,7 +87,7 @@ class Carousel extends Component {
       },
       autoplay: this.state.autoplay,
       pagination: {
-        el: (this.props.pagination) ? '.swiper-pagination' : null,
+        el: (this.props.pagination) ? `.swiper-pagination` : null,
         type: 'fraction',
         clickable: true
       },
@@ -123,7 +124,7 @@ class Carousel extends Component {
       </HeroSlide>
     )
     return (
-      <HeroSlider>
+      <HeroSlider className={this.state.count_state}>
         <Swiper {...swiperParams} ref={node => { if (node) this.swiper = node.swiper }}>
           {HeroSlides}
         </Swiper>
@@ -158,6 +159,11 @@ const HeroSlider = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  &.has-count {
+    .swiper-pagination {
+      padding-right: 5rem;
+    }
+  }
   .swiper-container {
     height: 100%;
     width: 100%;
@@ -180,7 +186,7 @@ const HeroSlider = styled.div`
     z-index: 100;
   }
   .swiper-pagination {
-    bottom: 1rem;
+    bottom: 1.25rem;
     padding: 0 1rem;
     text-align: right;
     color: ${colors.white};

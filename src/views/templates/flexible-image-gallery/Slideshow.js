@@ -1,7 +1,6 @@
 import React from 'react'
 import { Carousel } from './../../../components'
 import styled from 'styled-components'
-import { heights } from './../../../styles/theme.json'
 
 export default (props) =>
   <CarouselWrapper>
@@ -12,6 +11,7 @@ export default (props) =>
       captions={props.data.captions}
       autoplay={props.data.autoplay}
       transition_time={props.data.transition_time}
+      count={props.count}
     />
   </CarouselWrapper>
 

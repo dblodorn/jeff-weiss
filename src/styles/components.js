@@ -253,6 +253,19 @@ const CloseButton = styled.button`
   }
 `
 
+const CloseWrapper = styled.div`
+  ${_.flexRowCenteredVert};
+  justify-content: flex-end;
+  width: calc(${heights.header} - .5rem);
+  height: ${heights.header};
+  margin-left: ${spacing.single_pad};
+  ${_.opacityTransition};
+  opacity: .5;
+  &:hover {
+    opacity: 1;
+  }
+`
+
 export {
   Section,
   Article,
@@ -277,5 +290,6 @@ export {
   ProportionWrapper,
   ModalWrapper,
   ModalContentWrapper,
-  CloseButton
+  CloseButton,
+  CloseWrapper
 }
