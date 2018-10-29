@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { absoluteCentered, absoluteTopFull, buttonInit } from './../../styles/mixins'
-import { colors } from './../../styles/theme.json'
 
 export default (props) =>
   <PlayButton onClick={props.clickFunction}>

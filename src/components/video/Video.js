@@ -3,10 +3,8 @@ import { connect } from 'react-redux'
 import styled, { css } from 'styled-components'
 import ReactPlayer from 'react-player'
 import { setVideoPlaying, setVideoState } from './../../state/actions'
-import { absoluteTopFull, opacityTransition } from './../../styles/mixins'
+import { buttonInit, opacityTransition } from './../../styles/mixins'
 import { colors, heights, fonts } from './../../styles/theme.json'
-import ErrorBoundary from './../utils/ErrorBoundary'
-import Spinner from './../utils/Spinner'
 
 const fmtMSS = (s) => { 
   const fs = (s) => {
@@ -171,6 +169,7 @@ class Video extends Component {
             }
           }}
         />
+        <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
         <VideoInfo>
           <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
         </VideoInfo>
@@ -218,9 +217,30 @@ const VideoWrapper = styled.div`
   }
 `;
 
+const PlayPause = styled.button`
+  ${buttonInit};
+  ${opacityTransition};
+  position: fixed;
+  bottom: 1rem;
+  left: 1.25rem;
+  width: 2rem;
+  height: 2rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .5;
+  &:hover {
+    opacity: 1;
+  }
+  &.playing {
+	  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAADFBMVEUAAAD///////////84wDuoAAAAA3RSTlMAz9Awx92LAAAAHUlEQVQI12NgAAH9C9xfGOw/8P8hl9B/wP0DbBIAw7YeyS7eO3sAAAAASUVORK5CYII=);    
+  }
+  &.paused {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAp0lEQVQ4T6WTQRUCMQxE5zsCJ+AAHICDXQfgAAngABwsDpAACsobXsODwy5tmVMv8zNpEpSVUhokJUlrwO8i8QGwOdQBfQlhDGDvOae5TYGmAPbdJW2BwxjkFyB8x5zGwC+VAiLNEnBrb9UAwrST1AOvNC0A+wZg/g/gCsxaAXtJ3pPqFh6SFq2feJK0iqo1U3DVTesiXXLVplX2nLvaY4oTdq/F5/wEjkFbER1WOmYAAAAASUVORK5CYII=);
+  }
+`
+
 const VideoInfo = styled.div`
   position: fixed;
-  bottom: 0;
   right: 0;
   bottom: 1.25rem;
   padding: 0 1rem;

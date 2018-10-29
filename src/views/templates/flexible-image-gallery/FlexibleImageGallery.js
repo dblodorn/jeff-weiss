@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Section, StyledMarkup, Article, CloseWrapper } from './../../../styles/components'
-import { flexRowCenteredVert, buttonInit, navWrapperHorizontal, navStyle, flexCenteredAll } from './../../../styles/mixins'
+import { flexRowCenteredVert, buttonInit, navWrapperHorizontal, navStyle, flexCenteredAll, opacityTransition } from './../../../styles/mixins'
 import { Close, Info, BackArrow } from './../../../components'
 import SlideShow from './Slideshow'
 import VideoEmbed from './VideoEmbed'
@@ -84,7 +84,7 @@ class FlexibleImageGallery extends Component {
       <Fragment>
         <BackArrow/>
         {(this.state.layout_count > 1) &&
-          <LayoutNav className={!this.state.info_bar && `hide`}>
+          <LayoutNav className={!this.state.info_bar && `hide`} bgcolor={this.props.color.dark}>
             <GalleryTitle>
               <span>{this.state.title}</span>
             </GalleryTitle>
@@ -93,7 +93,7 @@ class FlexibleImageGallery extends Component {
                 <span>Gallery</span>
               </Title>
               {this.props.data.content.layout.map((item, i) =>
-                <IndexB onClick={() => this._showLayout(i)} key={`${i}-button-${item.module}`}>
+                <IndexB className={(i === this.state.layout) && `active`} onClick={() => this._showLayout(i)} key={`${i}-button-${item.module}`}>
                   <span>{i + 1}</span>
                 </IndexB>
               )}
@@ -119,7 +119,8 @@ class FlexibleImageGallery extends Component {
 
 export default connect(
   state => ({
-    header_state: state.header_state
+    header_state: state.header_state,
+    color: state.color
   })
 )(FlexibleImageGallery)
 
@@ -153,6 +154,12 @@ const LayoutNav = styled.footer`
   ${flexRowCenteredVert};
   bottom: 0;
   left: 0;
+  span,
+  a,
+  label {
+    ${opacityTransition};
+    opacity: .5;
+  }
   &.hide {
     opacity: 0;
     transform: translateY(${heights.header});
@@ -161,6 +168,7 @@ const LayoutNav = styled.footer`
     opacity: 1!important;
     transform: translateY(0)!important;
   }
+  background-color: ${props => props.bgcolor};
 `
 
 const ProjectNav = styled.nav`
@@ -173,6 +181,16 @@ const IndexB = styled.button`
   ${navStyle};
   ${buttonInit};
   padding: 0 0 0 ${spacing.single_pad};
+  &:hover {
+    span {
+      opacity: 1!important;
+    }
+  }
+  &.active {
+    span {
+      opacity: 1!important;
+    }
+  }
 `
 
 const Title = styled.label`
@@ -197,7 +215,7 @@ const InfoWrapper = styled.div`
   opacity: 1;
   will-change: transform, opacity;
   transition: transform 300ms ease, opacity 300ms ease;
-  opacity: .5;
+  opacity: .7;
   &:hover {
     opacity: 1;
   }

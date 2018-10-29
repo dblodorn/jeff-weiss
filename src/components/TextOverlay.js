@@ -26,7 +26,7 @@ const Overlay = styled.div`
   top: ${heights.header};
   left: ${heights.header};
   position: fixed;
-  z-index: 1000;
+  z-index: 12000;
   * {
     color: ${colors.white};
   }

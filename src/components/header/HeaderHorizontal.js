@@ -11,7 +11,10 @@ import Logo from './Logo'
 import Close from './../utils/Close'
 
 const HeaderHorizontal = (props) =>
-  <HeaderWrapper className={!props.header_state && 'hide'}>
+  <HeaderWrapper className={[
+      !props.header_state ? `hide` : ``,
+      (props.direction === 'down') ? `scrolling` : ``
+    ].join(' ')} bgcolor={props.color.dark}>
     <Logo theme={'a'} title={meta_defaults.title}/>
     <RightArea>
       <Menu location={0} orientation={props.orientation} navLocation={'header'}/>
@@ -25,7 +28,8 @@ export default connect(
   state => ({
     header_state: state.header_state,
     direction: state.scroll_direction,
-    page: state.page
+    page: state.page,
+    color: state.color
   }),
   dispatch => ({
     menu_toggle: (bool) => dispatch(setHeaderState(bool))
@@ -38,6 +42,13 @@ const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
   &.hide {
+    opacity: 0;
+    transform: translateY(-${heights.header});
+  }
+  transition: background-color 1000ms ease-in-out, transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  will-change: background-color, transform, opacity;
+  background-color: ${props => props.bgcolor};
+  &.scrolling {
     opacity: 0;
     transform: translateY(-${heights.header});
   }

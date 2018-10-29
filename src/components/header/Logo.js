@@ -1,17 +1,14 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import { themeA, themes } from './../../styles/theme'
+import styled from 'styled-components'
 import { bodyType, flexRowCenteredVert, smallType } from './../../styles/mixins'
-import { spacing, shared, colors } from './../../styles/theme.json'
+import { spacing, shared, colors, heights } from './../../styles/theme.json'
 import { StyledLink, H2 } from './../../styles/components'
 import { meta_defaults } from './../../config.json'
 
 export default (props) =>
-  <ThemeProvider theme={themes[props.theme] || themeA}>
-    <Logo to={'/'} className={props.orientation}>
-      <LogoType>{meta_defaults.title}</LogoType>
-    </Logo>
-  </ThemeProvider>
+  <Logo to={'/'} className={props.orientation}>
+    <LogoType>{meta_defaults.title}</LogoType>
+  </Logo>
 
   const Logo = styled(StyledLink)`
     ${bodyType};
@@ -19,7 +16,7 @@ export default (props) =>
     object-fit: contain;
     padding: ${spacing.single_pad} 0;
     width: 16rem;
-    height: 100%;
+    height: ${heights.header};
     &.sidebar {
       height: auto;
       width: 100%;
