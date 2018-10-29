@@ -30,13 +30,24 @@ export default function(path) {
       break
   }
 
+  const returnTitle = (route) => {
+    const data = route.split('/')
+    if (data.length === 2) {
+      const title = data[1]
+      return title.replace(/\//g, '').replace(/-/g, ' ')
+    } else if (data.length === 3) {
+      const title = data[2]
+      return title.replace(/\//g, '').replace(/-/g, ' ')
+    }
+  }
+
   // Format PageTitle
   switch (path) {
     case '/':
       title = 'home'
       break
     default:
-      title = path.replace(/\//g,'').replace(/-/g, ' ')
+      title = returnTitle(path)
   }
 
   return {

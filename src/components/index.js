@@ -4,6 +4,7 @@ import pageData from './HOC/pageData'
 
 // Layout Components
 import Header from './header/Header'
+import Head from './utils/Head'
 import Footer from './footer/Footer'
 import PostBasics from './PostBasics'
 
@@ -15,6 +16,7 @@ import Spinner from './utils/Spinner'
 import PlayButton from './utils/PlayButton'
 import Close from './utils/Close'
 import BackClose from './utils/BackClose'
+import BackArrow from './utils/BackArrow'
 import Info from './utils/Info'
 
 // Modals
@@ -22,9 +24,9 @@ import SingleImageModal from './modals/SingleImageModal'
 import VideoModal from './modals/VideoModal'
 
 // Plugin Compnents - most have external dependencies
-//import MailScrape from './plugins/MailScrape'
 import Carousel from './plugins/Carousel'
 import Video from './video/Video'
+import TextOverlay from './TextOverlay'
 
 export {
   withStore,
@@ -43,5 +45,8 @@ export {
   Close,
   BackClose,
   Info,
-  Carousel
+  Carousel,
+  TextOverlay,
+  BackArrow,
+  Head
 }

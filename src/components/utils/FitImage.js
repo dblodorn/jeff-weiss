@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Spinner from './Spinner'
 import { absoluteCentered, opacityTransition, absoluteTopFull } from './../../styles/mixins'
-import { colors, heights } from './../../styles/theme.json'
+import { heights } from './../../styles/theme.json'
 
-export default class extends Component {
+class FitImage extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -26,11 +27,17 @@ export default class extends Component {
         <ImgWrapper Opacity={(this.state.loaded) ? 1 : 0} onClick={this.props.clickFunction} className={(this.props.clickFunction) && 'hover'}>
           <ImgFit src={this.props.src} onLoad={this.handleImageLoaded.bind(this)} className={this.props.fit || `contain`}/>
         </ImgWrapper>
-        {(!this.state.loaded) && <Spinner size={'4rem'} color={colors.blue} stroke={1} /> }
+        {(!this.state.loaded) && <Spinner size={'4rem'} color={this.props.color.dark} stroke={1} /> }
       </Wrapper>
     )
   }
 }
+
+export default connect(
+  state => ({
+    color: state.color
+  })
+)(FitImage)
 
 // STYLE
 const Wrapper = styled.div`

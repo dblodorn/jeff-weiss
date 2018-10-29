@@ -1,9 +1,13 @@
 import React from 'react'
-import { Carousel } from './../../../components'
+import { Carousel, TextOverlay } from './../../../components'
 import styled from 'styled-components'
+import { returnTextOverlay } from './../../../scripts'
 
 export default (props) =>
   <CarouselWrapper>
+    {(!props.data.captions) &&
+      <TextOverlay content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2>${returnTextOverlay(props)}`}/>
+    }
     <Carousel 
       slides={props.data.slides}
       navigation={props.data.controls}

@@ -28,7 +28,7 @@ class Carousel extends Component {
       playing: false,
       autoplay: autoplay(),
       transitionTime: this.props.transition_time || 1500,
-      count_state: (this.props.count !== 0) && `has-count`
+      count_state: (this.props.count > 1) && `has-count`
     }
     this._slideChange = this._slideChange.bind(this)
   }

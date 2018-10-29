@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { StyledMarkup } from './../../../styles/components'
-import { fullWindow, flexCenteredAll, opacityTransition } from './../../../styles/mixins'
-import { heights, shared, spacing, colors } from './../../../styles/theme.json'
+import { StyledMarkup } from './../styles/components'
+import { flexCenteredAll, opacityTransition } from './../styles/mixins'
+import { heights, shared, spacing, colors } from './../styles/theme.json'
 
 const TextOverlay = (props) =>
   <Overlay>
-    <OverlayWrapper bgcolor={props.color}>
+    <OverlayWrapper bgcolor={props.color.dark}>
       <StyledMarkup className={'text'} dangerouslySetInnerHTML={{__html: props.content }}/>
     </OverlayWrapper>
   </Overlay>
@@ -20,10 +20,12 @@ export default connect(
 
 // STYLES
 const Overlay = styled.div`
-  ${fullWindow};
+  width: calc(100vw - (${heights.header} * 2));
+  height: calc(100vh - (${heights.header} * 2));
   ${flexCenteredAll};
-  height: 100%;
-  padding: ${heights.header};
+  top: ${heights.header};
+  left: ${heights.header};
+  position: fixed;
   z-index: 1000;
   * {
     color: ${colors.white};

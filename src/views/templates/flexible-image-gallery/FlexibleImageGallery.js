@@ -2,11 +2,11 @@ import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Section, StyledMarkup, Article, CloseWrapper } from './../../../styles/components'
-import { flexRowCenteredVert, buttonInit, navWrapperHorizontal, navStyle, flexCenteredAll, opacityTransition, menuTransition } from './../../../styles/mixins'
-import { PopupGrid, Close, Info } from './../../../components'
+import { flexRowCenteredVert, buttonInit, navWrapperHorizontal, navStyle, flexCenteredAll } from './../../../styles/mixins'
+import { Close, Info, BackArrow } from './../../../components'
 import SlideShow from './Slideshow'
 import VideoEmbed from './VideoEmbed'
-import VideoGrid from './video-grid/VideoGrid'
+import NotFound from './../../NotFound'
 import { spacing, widths, colors, heights } from './../../../styles/theme.json'
 
 const LayoutItem = (props) =>
@@ -14,26 +14,13 @@ const LayoutItem = (props) =>
     {(props.show) &&
       <LayoutSection>
         {(props.item.module === 'simple_slideshow' && props.item.slides)
-        ? <SlideShow data={props.item} count={props.count}/> :
-        (props.item.module === 'slideshow' && props.item.slides)
-        ? <SlideShow data={props.item} count={props.count}/> :
-        (props.item.module === 'image_grid_popup')
-          ? <PopupGridWrapper>
-            <PopupGrid
-              images={props.item.images}
-              width={props.item.ig_width}
-              columns={props.item.ig_columns}
-              proportion={props.item.thumbnail_proportion}
-              collectionType={null}
-            />
-          </PopupGridWrapper> :
-          (props.item.module === 'wysiwig_content')
-          ? <WsyWrapper className={props.item.wysiwig_width}><StyledMarkup dangerouslySetInnerHTML={{ __html: props.item.wysiwig }} /></WsyWrapper> :
-          (props.item.module === 'single_video_photo')
-          ? <VideoEmbed data={props.item}/> :
-          (props.item.module === 'video_grid')
-          ? <VideoGrid data={props.item}/>
-          : null
+        ? <SlideShow data={props.item} page_title={props.title} count={props.count}/> :
+        (props.item.module === 'wysiwig_content')
+        ? <WsyWrapper className={props.item.wysiwig_width}>
+            <StyledMarkup dangerouslySetInnerHTML={{ __html: props.item.wysiwig }} />
+          </WsyWrapper> :
+        (props.item.module === 'single_video_photo')
+        ? <VideoEmbed data={props.item} page_title={props.title}/> : null
         }
       </LayoutSection>
     }
@@ -55,11 +42,7 @@ class FlexibleImageGallery extends Component {
   }
 
   _returnTitle = (i) => {
-    if (this.props.data.content.layout[i].has_text_overlay) {
-      return this.props.data.content.layout[i].text_overlay_content
-    } else {
-      return false
-    }
+    return this.props.data.content.layout[i].title
   }
 
   _showLayout = (i) => {
@@ -67,6 +50,9 @@ class FlexibleImageGallery extends Component {
       layout: i,
       title: this._returnTitle(i)
     })
+    setTimeout(() => {
+      this._hideInfo()
+    }, 1500)
   }
 
   _showInfo = () => {
@@ -82,17 +68,21 @@ class FlexibleImageGallery extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      title: this._returnTitle(this.state.layout)
-    })
-    setTimeout(() => {
-      this._hideInfo()
-    }, 3000)
+    if (this.state.layout_count > 1) {
+      this.setState({
+        title: this._returnTitle(this.state.layout)
+      })
+      setTimeout(() => {
+        this._hideInfo()
+      }, 3000)
+    }
   }
 
   render() {
+    console.log(this.props)
     return (
       <Fragment>
+        <BackArrow/>
         {(this.state.layout_count > 1) &&
           <LayoutNav className={!this.state.info_bar && `hide`}>
             <GalleryTitle>
@@ -118,9 +108,10 @@ class FlexibleImageGallery extends Component {
             <Info clickFunction={() => this._showInfo()} color={colors.white} size={`2rem`} stroke={3} top={`auto`} position={`relative`} />
           </InfoWrapper>
         }
-        {(this.props.data.content.layout) && this.props.data.content.layout.map((item, i) =>
-          <LayoutItem item={item} count={this.state.layout_count} show={(i === this.state.layout) && true} key={`${i}-${item.module}`}/>
-        )}
+        {(this.props.data.content.layout)
+          ? this.props.data.content.layout.map((item, i) => <LayoutItem item={item} title={this.props.data.title} count={this.state.layout_count} show={(i === this.state.layout) && true} key={`${i}-${item.module}`}/>)
+          : <NotFound/>
+        }
       </Fragment>
     )
   }

@@ -4,21 +4,22 @@ import styled, { injectGlobal } from 'styled-components'
 import { animationFadeIn, flexColumn, media } from './styles/mixins'
 import { colors, fonts, heights, widths } from './styles/theme.json'
 import { routeName } from './scripts'
-import { Header } from './components'
+import { Header, Head } from './components'
 import { LoadingPage } from './views'
 
 const Document = (props) => {
   if (props.api_data) {
     return (
       <Fragment>
+        <Head title={routeName(props.router.location.pathname).routeTitle} description={routeName(props.router.location.pathname).routeTitle}/>
         <Header/>
-        <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style} bgcolor={props.color}>
+        <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style} bgcolor={props.color.regular}>
           {props.children}
         </Main>
       </Fragment>
     )
   } else {
-    return <LoadingPage/>
+    return <LoadingPage bgcolor={props.color}/>
   }
 }
 
@@ -39,7 +40,7 @@ const Main = styled.main`
   position: relative;
   min-height: 100vh;
   background-color: ${props => props.bgcolor};
-  transition: background-color 3000ms ease-in-out;
+  transition: background-color 1000ms ease-in-out;
   will-change: background-color;
   &.sidebar {
     ${media.desktopNav`

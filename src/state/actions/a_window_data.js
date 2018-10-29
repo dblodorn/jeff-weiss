@@ -1,3 +1,5 @@
+import Color from 'color'
+
 // RESIZE DATA
 const resizeData = (resize_state) => {
   return {
@@ -87,8 +89,14 @@ const setResizeState = () => {
 
 const setRandomColor = () => {
   const newColor = `#${Math.random().toString(16).substr(2, 6)}`
+  const newColorDark = Color(newColor).darken(0.25).hex()
+  const newColorLight = Color(newColor).lighten(0.25).hex()
   return (dispatch) => {
-    dispatch(randomColor(newColor))
+    dispatch(randomColor({
+      regular: newColor,
+      dark: newColorDark,
+      light: newColorLight
+    }))
   }
 }
 

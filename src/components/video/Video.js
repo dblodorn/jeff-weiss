@@ -2,13 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components'
 import ReactPlayer from 'react-player'
-import { setVideoPlaying, setVideoState, setFooterState, setHeaderState } from './../../state/actions'
+import { setVideoPlaying, setVideoState } from './../../state/actions'
 import { absoluteTopFull, opacityTransition } from './../../styles/mixins'
-import { colors } from './../../styles/theme.json'
+import { colors, heights, fonts } from './../../styles/theme.json'
 import ErrorBoundary from './../utils/ErrorBoundary'
-import FitImage from './../utils/FitImage'
-import PlayButton from './../utils/PlayButton'
 import Spinner from './../utils/Spinner'
+
+const fmtMSS = (s) => { 
+  const fs = (s) => {
+    if (isNaN(s)) {
+      return 0
+    } else {
+      return Math.round(s)
+    }
+  }
+  let ms = fs(s)
+  return (ms - (ms %= 60)) / 60 + (9 < ms ? ':' : ':0') + ms
+}
 
 class Video extends Component {
   state = {
@@ -22,17 +32,14 @@ class Video extends Component {
     playbackRate: 1.0,
     loop: false,
     started: false,
-    buffering: false
+    buffering: false,
+    progress: false
   }
 
   // LIFECYCLE
   componentWillMount() {
     if (this.props.autoplay) {
       this.onPlay()
-    }
-    if ( this.props.single ) {
-      this.props.hide_footer(false)
-      this.props.hide_header(false)
     }
   }
 
@@ -43,10 +50,6 @@ class Video extends Component {
     })
     this.props.video_playing(null)
     this.props.video_state('stopped')
-    if (this.props.single) {
-      this.props.hide_footer(true)
-      this.props.hide_header(true)
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,6 +91,18 @@ class Video extends Component {
       this.props.video_state('playing')
     }, 1)
   }
+
+  onProgress = state => {
+    this.setState({ progress: state })
+    if (!this.state.seeking) {
+      this.setState(state)
+    }
+  }
+
+  onDuration = (duration) => {
+    this.setState({ duration })
+  }
+
   onPause = () => {
     this.setState({
       playing: false
@@ -97,6 +112,7 @@ class Video extends Component {
   onEnded = () => {
     this.stop()
   }
+
   onStart = () => {
     this.setState({
       started: true,
@@ -104,68 +120,61 @@ class Video extends Component {
       buffering: false,
       loaded: true
     })
-    console.log('play')
     this.props.video_state('start')
   }
+  
   onBuffer = () => {
     this.setState({
       buffering: true
     })
     this.props.video_state('buffering')
   }
+  
   ref = player => {
     this.player = player
   }
+  
   render () {
     return (
-      <VideoContainer>
-        <ErrorBoundary>
-          <VideoWrapper>
-            {(!this.props.autoplay) &&
-              <VideoThumbnail Opacity={(this.state.started) ? 0 : 1} className={(this.state.started) && 'playing'}>
-                {(!this.state.started) &&
-                  <PlayButton clickFunction={() => this.onPlay()} color={colors.white}/>
-                }
-                {(this.state.started && !this.state.loaded) && <LoadingWrapper><Spinner size={'4rem'} color={colors.white} stroke={1} /></LoadingWrapper>}
-                {(this.props.coverUrl != null) && <FitImage src={this.props.coverUrl} fit={'cover'}/>}
-              </VideoThumbnail>
+      <VideoWrapper>
+        <ReactPlayer
+          url={this.props.videoUrl}
+          className='hero-player'
+          ref={this.ref}
+          width={'100%'}
+          height={'auto'}
+          playsinline={true}
+          volume={this.state.volume}
+          playing={this.state.playing}
+          onStart={this.onStart}
+          onPlay={this.onPlay}
+          onBuffer={this.onBuffer}
+          onPause={this.onPause}
+          onEnded={this.onEnded}
+          onProgress={this.onProgress}
+          onDuration={this.onDuration}
+          config={{
+            youtube: {
+              playerVars: {
+                showinfo: 0,
+                controls: 1,
+                modestbranding: 1,
+                rel: 0,
+                playsinline: 1
+              }
+            },
+            vimeo: {
+              playerVars: {
+                showinfo: 0,
+                controls: 1
+              }
             }
-            <VideoHolder Opacity={(this.state.started) ? 1 : 0}>
-              <ReactPlayer
-                url={this.props.videoUrl}
-                className='player'
-                width={'100%'}
-                height={'100%'}
-                ref={this.ref}
-                volume={this.state.volume}
-                playing={this.state.playing}
-                onStart={this.onStart}
-                onPlay={this.onPlay}
-                onBuffer={this.onBuffer}
-                onPause={this.onPause}
-                onEnded={this.onEnded}
-                config={{
-                  youtube: {
-                    playerVars: {
-                      showinfo: 0,
-                      controls: 1,
-                      modestbranding: 1,
-                      rel: 0,
-                      playsinline: 1
-                    }
-                  },
-                  vimeo: {
-                    playerVars: {
-                      showinfo: 0,
-                      controls: 1
-                    }
-                  }
-                }}
-              />
-            </VideoHolder>
-          </VideoWrapper>
-        </ErrorBoundary>
-      </VideoContainer>
+          }}
+        />
+        <VideoInfo>
+          <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
+        </VideoInfo>
+      </VideoWrapper>
     )
   }
 }
@@ -177,46 +186,48 @@ export default connect(
   }),
   dispatch => ({
     video_playing: (url) => dispatch(setVideoPlaying(url)),
-    video_state: (url) => dispatch(setVideoState(url)),
-    hide_footer: (bool) => dispatch(setFooterState(bool)),
-    hide_header: (bool) => dispatch(setHeaderState(bool))
+    video_state: (url) => dispatch(setVideoState(url))
   })
 )(Video)
 
 // STYLES
-const VideoContainer = styled.div`
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  overflow-y: visible;
-  position: relative;
-`
-
 const VideoWrapper = styled.div`
-  ${absoluteTopFull};
-  .player {
-    ${absoluteTopFull};
-    z-index: 100;
+  overflow: hidden;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${heights.header};
+  .hero-player {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
   }
-`
-
-const VideoThumbnail = styled.div`
-  ${absoluteTopFull};
-  ${opacityTransition};
-  z-index: 1000;
-  opacity: ${props => props.Opacity};
-  &.playing {
-    pointer-events: none;
+  video {
+    width: 100%;
+    height: 100%;
+    max-width: 96rem;
+    max-height: 70vh;
+    margin: auto;
+    object-fit: contain;
   }
-`
+`;
 
-const VideoHolder = styled.div`
-  ${absoluteTopFull};
-  ${opacityTransition};
-  opacity: ${props => props.Opacity};
-`
-
-const LoadingWrapper = styled.div`
-  ${absoluteTopFull};
-  z-index: 100;
+const VideoInfo = styled.div`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  bottom: 1.25rem;
+  padding: 0 1rem;
+  * {
+    text-align: right;
+    color: ${colors.white};
+    font-family: ${fonts.body_copy_font_a};
+    font-size: ${fonts.sizes.micro};
+  }
 `

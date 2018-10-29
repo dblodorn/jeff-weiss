@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import { heights } from './../../styles/theme.json'
+import { heights, colors, fonts } from './../../styles/theme.json'
+
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false
+      playing: false,
+      duration: ``
     };
     this._onPlay = this._onPlay.bind(this);
     this._stop = this._stop.bind(this);
@@ -15,8 +17,10 @@ export default class extends Component {
 
   _onPlay() {
     this.player.seekTo(0);
+    console.log(this.player.getDuration())
     this.setState({
-      playing: true
+      playing: true,
+      duration: this.player.getDuration()
     });
   }
 
@@ -40,7 +44,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    this._onPlay();
+    this._onPlay()
   }
 
   componentWillUnmount() {
@@ -62,6 +66,9 @@ export default class extends Component {
           controls={false}
           playing={this.state.playing}
         />
+        <VideoInfo>
+          <p>{this.state.duration}</p>
+        </VideoInfo>
       </VideoWrapper>
     );
   }
@@ -94,3 +101,15 @@ const VideoWrapper = styled.div`
     object-fit: cover;
   }
 `;
+
+const VideoInfo = styled.div`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  bottom: 1.25rem;
+  padding: 0 1rem;
+  text-align: right;
+  color: ${colors.white};
+  font-family: ${fonts.body_copy_font_a};
+  font-size: ${fonts.sizes.micro};
+`

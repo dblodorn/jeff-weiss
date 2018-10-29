@@ -1,75 +1,87 @@
-import React from "react"
-import { connect } from "react-redux"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { setHeaderState } from './../../../state/actions'
 import styled from 'styled-components'
-import { Section, GridWrapper } from "./../../../styles/components"
-import { media } from "./../../../styles/mixins"
+import { Section, GridWrapper } from './../../../styles/components'
+import { media } from './../../../styles/mixins'
 import { heights, spacing } from './../../../styles/theme.json'
-import { PopupGrid } from "./../../../components"
-import PostLink from "./PostLink"
-
-import shuffle from 'lodash/shuffle';
-import mixin from 'lodash/mixin';
-import _ from 'lodash/wrapperLodash';
+import { PopupGrid } from './../../../components'
+import PostLink from './PostLink'
+import shuffle from 'lodash/shuffle'
+import mixin from 'lodash/mixin'
+import _ from 'lodash/wrapperLodash'
 
 mixin(_, {
   shuffle: shuffle
-});
+})
 
-const PostCollection = props => (
-  <CollectionSection>
-    {props.data.content.popup_grid ? (
-      <PopupGrid
-        images={props.data.content.post_collection}
-        width={props.data.content.container_width}
-        columns={props.data.content.columns}
-        proportion={props.data.content.thumbnail_proportion}
-        collectionType={"post-collection"}
-      />
-    ) : (
-      <GridWrapper
-        className={`${props.data.content.container_width} ${
-          props.data.content.columns
-        }`}
-      >
-        {props.data.content.insert_type === "curated"
-          ? props.data.content.post_collection.map((item, i) => (
-              <PostLink
-                theme={props.data.theme}
-                style={props.data.content.style}
-                slug={item.post_type}
-                showTitle={props.data.content.show_title}
-                linkButton={props.data.content.link_button}
-                columns={props.data.content.columns}
-                proportion={props.data.content}
-                showTaxonomies={props.data.content.show_post_taxonomies}
-                showThumbnail={props.data.content.show_thumbnail}
-                cardData={item}
-                key={`${item.ID}-post-${i}`}
-              />
-            ))
-          : props.api_data && _.shuffle(props.api_data.posts.project).map((item, i) => (
-              <PostLink
-                theme={props.data.theme}
-                style={props.data.content.style}
-                slug={"project"}
-                showTitle={props.data.content.show_title}
-                linkButton={props.data.content.link_button}
-                columns={props.data.content.columns}
-                proportion={props.data.content}
-                showTaxonomies={props.data.content.show_post_taxonomies}
-                showThumbnail={props.data.content.show_thumbnail}
-                cardData={item}
-                key={`${item.ID}-post-${i}`}
-              />
-            ))}
-      </GridWrapper>
-    )}
-  </CollectionSection>
-)
+class PostCollection extends Component {
+  componentWillMount() {
+    this.props.menu_toggle(true)
+  }
+  render() {
+    return (
+      <CollectionSection>
+        {this.props.data.content.popup_grid ? (
+          <PopupGrid
+            images={this.props.data.content.post_collection}
+            width={this.props.data.content.container_width}
+            columns={this.props.data.content.columns}
+            proportion={this.props.data.content.thumbnail_proportion}
+            collectionType={'post-collection'}
+          />
+        ) : (
+          <GridWrapper
+            className={`${this.props.data.content.container_width} ${
+              this.props.data.content.columns
+            }`}
+          >
+            {this.props.data.content.insert_type === 'curated'
+              ? this.props.data.content.post_collection.map((item, i) => (
+                  <PostLink
+                    theme={this.props.data.theme}
+                    style={this.props.data.content.style}
+                    slug={item.post_type}
+                    showTitle={this.props.data.content.show_title}
+                    linkButton={this.props.data.content.link_button}
+                    columns={this.props.data.content.columns}
+                    proportion={this.props.data.content}
+                    showTaxonomies={this.props.data.content.show_post_taxonomies}
+                    showThumbnail={this.props.data.content.show_thumbnail}
+                    cardData={item}
+                    key={`${item.ID}-post-${i}`}
+                  />
+                ))
+              : this.props.api_data && _.shuffle(this.props.api_data.posts.project).map((item, i) => (
+                  <PostLink
+                    theme={this.props.data.theme}
+                    style={this.props.data.content.style}
+                    slug={'project'}
+                    showTitle={this.props.data.content.show_title}
+                    linkButton={this.props.data.content.link_button}
+                    columns={this.props.data.content.columns}
+                    proportion={this.props.data.content}
+                    showTaxonomies={this.props.data.content.show_post_taxonomies}
+                    showThumbnail={this.props.data.content.show_thumbnail}
+                    cardData={item}
+                    key={`${item.ID}-post-${i}`}
+                  />
+                ))}
+          </GridWrapper>
+        )}
+      </CollectionSection>
+    )
+  }
+}
 
-export default connect(state => ({
-  api_data: state.api_data
-}))(PostCollection)
+export default connect(
+  state => ({
+    api_data: state.api_data
+  }),
+  dispatch => ({
+    menu_toggle: (bool) => dispatch(setHeaderState(bool))
+  })
+)(PostCollection)
 
 const CollectionSection = styled(Section)`
   padding-top: ${spacing.big_pad};
