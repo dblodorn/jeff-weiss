@@ -1,0 +1,6 @@
+{
+  "sftp_host": "192.241.233.118",
+  "sftp_user": "root",
+  "sftp_directory": "/var/www/html/wp-content/themes/jeff-weiss-api",
+  "passphrase": "tazman12"
+}

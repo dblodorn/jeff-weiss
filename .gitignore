@@ -14,3 +14,4 @@ yarn-error.log*
 *.sln
 _comps/assets-templates.sketch
 _comps
+deploy.json
