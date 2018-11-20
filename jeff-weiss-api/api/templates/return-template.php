@@ -1,4 +1,3 @@
-
 <?php
   require_once( 'post-collection-template.php');
   require_once( 'flexible-image-gallery-template.php');

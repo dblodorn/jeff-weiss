@@ -1,6 +1,6 @@
 {
-  "sftp_host": "192.241.233.118",
-  "sftp_user": "root",
-  "sftp_directory": "/var/www/html/wp-content/themes/jeff-weiss-api",
-  "passphrase": "tazman12"
+  "sftp_host": "natian.dreamhost.com",
+  "sftp_user": "wl_cms",
+  "sftp_password": "#Santamonster99!",
+  "sftp_directory": "/home/wl_cms/cms.weisslink.com/wp-content/themes/jeff-weiss-api"
 }

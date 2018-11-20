@@ -14,7 +14,7 @@ gulp.task('api', function() {
       host: config.sftp_host,
       user: config.sftp_user,
       remotePath: config.sftp_directory,
-      passphrase: config.passphrase
+      pass: config.sftp_password
     }));
 });
 

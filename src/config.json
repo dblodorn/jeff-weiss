@@ -1,5 +1,5 @@
 {
-  "wp_endpoint": "https://weisslink.dmbk.io/wp-json/api/v1/data/",
+  "wp_endpoint": "https://cms.weisslink.com/wp-json/api/v1/data/",
   "meta_defaults": {
     "title": "Jeff Weiss",
     "description": "Weisslink",

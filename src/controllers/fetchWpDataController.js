@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+// import fetch from 'isomorphic-fetch'
 import { wp_endpoint } from './../config.json'
 
 export default () => {
