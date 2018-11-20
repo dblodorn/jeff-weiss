@@ -18,10 +18,9 @@ export function taxonomyData(payload) {
 export default () => {
   return (dispatch) => {
     const _dataHandler = (payload) => {
-      const taxonomies = {
-        categories: parseTaxonomies(payload.posts.project, 'taxonomies', 'category')
-      }
-      dispatch(taxonomyData(taxonomies))
+      
+      // dispatch(taxonomyData(taxonomies))
+      console.log(payload)
       dispatch(apiData(payload))
     }
     fetchWpDataController()

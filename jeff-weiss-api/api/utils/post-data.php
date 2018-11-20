@@ -32,7 +32,7 @@
       'container_width' => return_null_false(get_field('top_style', $post->ID)),
       'link_list' => return_link_list($post),
       'content' => template_data($template_name, $post),
-      'taxonomies' => taxonomy_data($post),
+      // 'taxonomies' => taxonomy_data($post),
     );
   }
 ?>

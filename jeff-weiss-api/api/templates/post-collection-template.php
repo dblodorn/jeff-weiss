@@ -1,4 +1,5 @@
 <?php
+  $data = array();
   function get_project_list($field, $p) {
     $posts = get_field($field, $p->ID);
     if($posts):
@@ -12,9 +13,6 @@
           'post_type' => $p_data->post_type,
           'thumbnail' => get_the_post_thumbnail_url($p->ID),
           'short_description' => get_field('short_description', $p->ID),
-          'taxonomies' => array(
-            'category' => return_taxonomy_array($p, 'category'),
-          )
         );
       endforeach;
     endif;

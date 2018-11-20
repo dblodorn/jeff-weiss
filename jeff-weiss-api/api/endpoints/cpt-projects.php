@@ -1,6 +1,7 @@
 <?php
   // ALL PROJECTS CPT
   function cpt_project(){
+    $data = array();
     $args = array(
       'post_type' => 'project',
       'posts_per_page' => -1
@@ -19,6 +20,7 @@
   // SINGLE
   function get_single_project(WP_REST_Request $request){
     $slug = $request['name'];
+    $post_data = array();
     if ($slug) {
       $args = array(
         'name' => $slug,

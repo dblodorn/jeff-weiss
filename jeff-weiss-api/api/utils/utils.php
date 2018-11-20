@@ -28,8 +28,8 @@
   }
 
   function return_taxonomy_array($p, $taxonomy) {
-    $taxonomy_return = get_the_terms($p->ID, $taxonomy);
-    return wp_list_pluck($taxonomy_return, 'name');
+    // $taxonomy_return = get_the_terms($p->ID, $taxonomy);
+    // return wp_list_pluck($taxonomy_return, 'name');
   };
 
   function return_taxonomy_array_with_slug($p, $taxonomy) {
