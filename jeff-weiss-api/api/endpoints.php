@@ -1,15 +1,11 @@
 <?php
   function main_data(){
     $data = array();
-    $data['site_basics'] = site_basics_data();
     $data['menus'] = menu_data();
     $data['posts'] = array(
       'pages' => page_data(),
       'project' => cpt_project(),
-      'video' => cpt_videos(),
-      'instagram' => cpt_instagram(),
     );
-    $data['options'] = options_data();
     return $data;
   }
   function api_setup_endpoints() {

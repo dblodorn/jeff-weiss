@@ -25,7 +25,6 @@ function my_remove_menu_pages() {
 
 function my_theme_setup() {
   require_once( 'library/custom-post-type.php' );
-  require_once( 'library/custom-taxonomies.php' );
   require_once( 'api/api.php');
   add_theme_support( 'post-thumbnails' );
 }
@@ -36,7 +35,6 @@ add_action( 'after_setup_theme', 'my_theme_setup' );
 
 function register_my_menu() {
   register_nav_menu('main-menu',__( 'Main Menu' ));
-  register_nav_menu('footer-menu',__( 'Footer Menu' ));
 }
 
 add_action( 'init', 'register_my_menu' );

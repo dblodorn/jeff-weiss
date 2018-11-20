@@ -14,9 +14,6 @@
           'short_description' => get_field('short_description', $p->ID),
           'taxonomies' => array(
             'category' => return_taxonomy_array($p, 'category'),
-            'capabilities' => return_taxonomy_array($p, 'capability'),
-            'client' => return_taxonomy_array($p, 'client'),
-            'industry' => return_taxonomy_array($p, 'industry'),
           )
         );
       endforeach;
