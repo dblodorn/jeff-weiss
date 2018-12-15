@@ -65,7 +65,7 @@
     "nav_font_b": "FFF Regular, system-ui, sans-serif",
     "sizes": {
       "giant": "6.75rem",
-      "giant_sm": "4.5rem",
+      "giant_sm": "3.5rem",
       "medium": "2.5rem",
       "medium_sm": "2.25rem",
       "body": "2.5rem",

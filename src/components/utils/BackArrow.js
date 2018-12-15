@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
-import { buttonInit, opacityTransition } from './../../styles/mixins'
+import { buttonInit, opacityTransition, media } from './../../styles/mixins'
 
 class BackArrow extends Component {
   render() {
@@ -30,17 +30,22 @@ const BackButton = styled.button`
   width: ${props => props.size};
   height: ${props => props.size};
   position: fixed;
-  top: 1rem;
+  top: 1.65rem;
   left: 1rem;
   padding: 0;
   z-index: 11000;
   cursor: pointer;
-  opacity: .5;
-  &:hover {
-    opacity: 1;
-  }
+  opacity: 1;
   svg {
     width: 100%;
     height: 100%;
   }
+  ${media.desktopNav`
+    opacity: .5;
+    top: 1rem;
+    left: 1rem;
+    &:hover {
+      opacity: 1;
+    }
+  `}
 `

@@ -42,47 +42,24 @@ export default connect(
 const MenuWrapper = styled.menu`
   height: 100%;
   padding-bottom: .5rem;
-  &.sidebar {
-    ${media.desktopNav`
-      flex-shrink: 0;
-      height: auto;
-      padding: ${spacing.double_pad};
-    `}
-  }
-  &.top-horizontal {
-    ${media.desktopNav`
-      margin-left: auto;
-      padding-bottom: 0;
-    `}
-  }
+  ${media.desktopNav`
+    margin-left: auto;
+    padding-bottom: 0;
+  `}
 `
 
 const NavList = styled.ul`
   ${flexColumn};
   position: relative;
-  &.sidebar {
-    ${media.desktopNav`
-      ${flexColumn};
-      margin-right: auto;
-      text-align: center;
-      width: 100%;
-      &.footer {
-        ${flexRow};
-        text-align: right;
-      }
-    `}
-  }
-  &.top-horizontal {
-    text-align: left;
-    ${media.desktopNav`
-      ${flexRow};
-      align-items: center;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      padding-inline-start: 0;
-    `}
-  }
+  text-align: left;
+  ${media.desktopNav`
+    ${flexRow};
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    padding-inline-start: 0;
+  `}
 `
 
 const ExternalLink = styled.a`

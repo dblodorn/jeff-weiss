@@ -266,6 +266,34 @@ const CloseWrapper = styled.div`
   }
 `
 
+const SidebarNav = styled.button`
+  ${_.buttonInit};
+  ${_.flexCenteredAll};
+  ${_.opacityTransition};
+  ${_.menuTransition};
+  position: fixed;
+  top: .25rem;
+  right: 0;
+  width: 4.25rem;
+  height: 5rem;
+  opacity: .9;
+  cursor: pointer;
+  z-index: 8000;
+  ${_.media.desktopNav`
+    top: 0;
+    right: 0;
+    height: 4.5rem;
+    opacity: .7;
+    &:hover {
+      opacity: 1;
+    }
+  `}
+  &.hide {
+    opacity: 0;
+    transform: translateX(4rem);
+  }
+`
+
 export {
   Section,
   Article,
@@ -291,5 +319,6 @@ export {
   ModalWrapper,
   ModalContentWrapper,
   CloseButton,
-  CloseWrapper
+  CloseWrapper,
+  SidebarNav
 }

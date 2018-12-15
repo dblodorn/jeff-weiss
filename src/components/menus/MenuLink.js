@@ -4,8 +4,7 @@ import { themeA, themes } from './../../styles/theme'
 import { connect } from 'react-redux'
 import { StyledLink, NavItem } from './../../styles/components'
 import { navStyle } from './../../styles/mixins'
-import { setHeaderState } from './../../state/actions'
-import { microType, media, bodyType } from './../../styles/mixins'
+import { setMenuState } from './../../state/actions'
 import { breakpoints } from './../../styles/theme.json'
 
 const returnLink = (slug, subroute) => {
@@ -39,7 +38,7 @@ export default connect(
     resize_state: state.resize_state
   }),
   dispatch => ({
-    menu_toggle: (bool) => dispatch(setHeaderState(bool))
+    menu_toggle: (bool) => dispatch(setMenuState(bool))
   })
 )(Menulink)
 
