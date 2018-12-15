@@ -45,13 +45,23 @@ const HeaderWrapper = styled.header`
   ${navWrapperHorizontal};
   top: 0;
   left: 0;
-  &.hide {
-    opacity: 0;
-    transform: translateY(-${heights.header});
+  &:before {
+    content: '';
+    width: 100vw;
+    height: 10rem;
+    left: 0;
+    background-color: ${props => props.bgcolor};
+    transform: translateY(-10rem);
+    position: absolute;
+    top: 0;
   }
   transition: background-color 1000ms ease-in-out, transform 300ms ease-in-out, opacity 300ms ease-in-out;
   will-change: background-color, transform, opacity;
   background-color: ${props => props.bgcolor};
+  &.hide {
+    opacity: 0;
+    transform: translateY(-${heights.header});
+  }
   &.scrolling {
     opacity: 0;
     transform: translateY(-${heights.header});

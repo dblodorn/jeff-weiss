@@ -187,6 +187,7 @@ const IndexB = styled.button`
     }
   }
   &.active {
+    pointer-events: none!important;
     span {
       opacity: 1!important;
     }

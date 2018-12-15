@@ -1,17 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { bodyType, flexRowCenteredVert, smallType, media } from './../../styles/mixins'
-import { spacing, colors, heights } from './../../styles/theme.json'
-import { StyledLink, H2 } from './../../styles/components'
+import { flexRowCenteredVert, media } from './../../styles/mixins'
+import { spacing, heights } from './../../styles/theme.json'
+import { StyledLink, LogoType } from './../../styles/components'
 import { meta_defaults } from './../../config.json'
 
-export default () =>
-  <Logo to={'/'}>
+const Logo = props =>
+  <LogoButton to={'/'} className={(props.route === '/') && `active`}>
     <LogoType>{meta_defaults.title}</LogoType>
-  </Logo>
+  </LogoButton>
 
-const Logo = styled(StyledLink)`
-  ${bodyType};
+export default connect(
+  state => ({
+    route: state.router.location.pathname,
+  })
+)(Logo)
+
+const LogoButton = styled(StyledLink)`
   ${flexRowCenteredVert};
   padding: ${spacing.single_pad} 0;
   width: 16rem;
@@ -21,13 +27,7 @@ const Logo = styled(StyledLink)`
   top: 1rem;
   ${media.desktopNav`
     top: 0;
+    left: 0;
     position: relative;
   `}
-`
-
-const LogoType = styled(H2)`
-  ${smallType};
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: ${colors.white}!important;
 `

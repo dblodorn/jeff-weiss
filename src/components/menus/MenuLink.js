@@ -23,8 +23,8 @@ const Menulink = (props) => {
   }
   return (
     <ThemeProvider theme={themes[props.theme] || themeA}>
-      <NavItem className={(`/${props.path}` == `${props.route}`) ? `active ${props.classes}` : props.classes}>
-        <NavLink to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()}>
+      <NavItem className={props.classes}>
+        <NavLink to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()} className={(`/${props.path}` == `${props.route}`) && `active`}>
           <span dangerouslySetInnerHTML={{__html: props.page }}/>
         </NavLink>
       </NavItem>

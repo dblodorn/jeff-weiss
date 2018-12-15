@@ -136,6 +136,7 @@ const defaultLink = css`
   }
   &.active {
     opacity: 1;
+    pointer-events: none!important;
   }
   &:hover {
     opacity: 1;
@@ -255,6 +256,7 @@ const buttonStyle = css`
     }
     &.active {
       background-color: ${Color(colors.button_color).darken(1.5)};
+      pointer-events: none!important;
     }
   `}
 `

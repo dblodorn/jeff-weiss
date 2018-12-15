@@ -26,7 +26,12 @@ const HeaderMobile = (props) => {
   return (
     <Fragment>
       <HeaderWrapper>
-        <LogoWrapper className={!props.header_state && `hide` }>
+        <LogoWrapper 
+          className={[
+            !props.header_state ? `hide` : ``,
+            (props.direction === 'down') ? `scrolling` : ``
+          ].join(' ')}
+        >
           <Logo/>
         </LogoWrapper>
         <Transition from={{ opacity: 0, transform: 'scale(1.025)' }} enter={{ opacity: 1, transform: 'scale(1)' }} leave={{ opacity: 0, transform: 'scale(1.05)', pointerEvents: 'none' }}>
@@ -58,6 +63,10 @@ const LogoWrapper = styled.div`
   display: block;
   opacity: 1;
   &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  &.scrolling {
     opacity: 0;
     pointer-events: none;
   }

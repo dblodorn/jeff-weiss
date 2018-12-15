@@ -1,30 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { fullWindow, navWrapperHorizontal } from './../styles/mixins'
-import { Spinner } from './../components'
-import Logo from './../components/header/Logo'
+import { fullWindow, flexCenteredAll, bodyType } from './../styles/mixins'
+import { LogoType } from './../styles/components'
 
 export default (props) =>
   <LoadingWrapper bgcolor={props.bgcolor.regular}>
-    <LogoWrap>
-      <Logo/>
-    </LogoWrap>
-    <Spinner size={'40vmin'} color={props.bgcolor.dark} stroke={1} />
+    <LogoType>Jeff Weiss</LogoType>
   </LoadingWrapper>
 
 // STYLES
 const LoadingWrapper = styled.div`
   ${fullWindow};
+  ${flexCenteredAll};
   background-color: ${props => props.bgcolor};
   overflow: hidden;
-`
-
-const LogoWrap = styled.div`
-  ${navWrapperHorizontal};
-  top: 0;
-  left: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0);
 `

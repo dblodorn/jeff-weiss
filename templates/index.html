@@ -54,15 +54,31 @@
         width: 100vw;
         min-height: 100vh;
         margin: 0;
+        background-color: transparent;
       }
       * {
         box-sizing: border-box;
         outline: 0;
       }
+      #nprogress {
+        pointer-events: none;
+      }
+      #nprogress .bar {
+        background: #000000;
+        position: fixed;
+        z-index: 10000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+      }
+      #nprogress .spinner {
+        display: none;
+      }
     </style>
     <link rel="stylesheet" href="/assets/swiper.css">
   </head>
-  <body bgcolor="<%= htmlWebpackPlugin.options.bgcolor %>">
+  <body>
     <div id="modal"></div>
     <div id="root"></div>
   </body>

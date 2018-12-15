@@ -1,5 +1,5 @@
 import fetchWpDataController from './../../controllers/fetchWpDataController'
-import { parseTaxonomies } from './../../scripts'
+import NProgress from 'nprogress';
 
 export function apiData(payload) {
   return {
@@ -8,20 +8,13 @@ export function apiData(payload) {
   }
 }
 
-export function taxonomyData(payload) {
-  return {
-    type: 'TAXONOMY_DATA',
-    payload
-  }
-}
-
 export default () => {
   return (dispatch) => {
+    NProgress.configure({ easing: 'ease', speed: 500 });
+    NProgress.start();
     const _dataHandler = (payload) => {
-      
-      // dispatch(taxonomyData(taxonomies))
-      console.log(payload)
       dispatch(apiData(payload))
+      NProgress.done();
     }
     fetchWpDataController()
       .then(response => response.json())

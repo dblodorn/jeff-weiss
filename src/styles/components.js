@@ -208,6 +208,13 @@ const LogoWrapperFixedTopRight = styled.div`
   `}
 `
 
+const LogoType = styled(H2)`
+  ${_.smallType};
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: ${colors.white}!important;
+`
+
 const FullPageBgWrapper = styled.aside`
   ${_.fixedTopLeft};
   width: 100%;
@@ -320,5 +327,6 @@ export {
   ModalContentWrapper,
   CloseButton,
   CloseWrapper,
-  SidebarNav
+  SidebarNav,
+  LogoType
 }
