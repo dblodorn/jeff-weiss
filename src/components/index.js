@@ -1,12 +1,10 @@
 // Higher Order Co./utils/Headts
-import withStore from './HOC/withStore'
 import pageData from './HOC/pageData'
 
 // Layout Components
 import Header from './header/Header'
 import Head from './utils/Head'
 import Footer from './footer/Footer'
-import PostBasics from './PostBasics'
 
 // Utility Components
 import FitImage from './utils/FitImage'
@@ -29,13 +27,11 @@ import Video from './video/Video'
 import TextOverlay from './TextOverlay'
 
 export {
-  withStore,
   pageData,
   FitImage,
   SimpleVideo,
   Header,
   Footer,
-  PostBasics,
   SingleImageModal,
   VideoModal,
   Video,

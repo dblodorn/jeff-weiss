@@ -15,3 +15,5 @@ yarn-error.log*
 _comps/assets-templates.sketch
 _comps
 deploy.json
+api/deploy.json
+api/node_modules

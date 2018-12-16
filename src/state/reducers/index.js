@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import { apiData, taxonomyData, themeData } from './apiData'
 import { 
   resizeState, 
   menuState, 
@@ -13,15 +12,20 @@ import {
   currentPixelState,
   randomColorState
 } from './r_window_data'
-import { 
-  pageState,
-  setVideoState,
-  videoPlayingState
-} from './r_content-state'
+
+import { pageState, setVideoState, videoPlayingState } from './r_content-state'
+
+const apiData = (state = false, action) => {
+  switch (action.type) {
+    case 'API_DATA':
+      return action.payload
+    default:
+      return state
+  }
+}
 
 const rootReducer = combineReducers({
   api_data: apiData,
-  taxonomy_data: taxonomyData,
   resize_state: resizeState,
   scroll_direction: scrollDirectionState,
   current_pixel: currentPixelState,

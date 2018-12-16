@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "jeff weiss api",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dblodorn/jeff-weiss.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dblodorn/jeff-weiss/issues"
+  },
+  "homepage": "https://github.com/dblodorn/jeff-weiss#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "gulp": "^4.0.0",
+    "gulp-sftp": "^0.1.5",
+    "gulp-util": "^3.0.8",
+    "gulp-watch": "^5.0.1"
+  }
+}

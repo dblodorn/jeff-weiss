@@ -12,8 +12,8 @@ const Document = props =>
       <GlobalStyles bgcolor={props.color.regular} barcolor={props.color.bright}/>
       {(props.api_data) 
         ? <Fragment>
-            <Head title={routeName(props.router.location.pathname).routeTitle} description={routeName(props.router.location.pathname).routeTitle} />
-            <Header />
+            
+            <Header/>
             <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style}>
               {props.children}
             </Main>

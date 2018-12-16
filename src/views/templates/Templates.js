@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { pageData, PostBasics } from './../../components'
+import { pageData } from './../../components'
 import PostCollectionTemplate from './post-collection/PostCollection'
 import FlexibleImageGallery from './flexible-image-gallery/FlexibleImageGallery'
 import NotFound from './../NotFound'

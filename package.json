@@ -8,17 +8,21 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --mode development --env.NODE_ENV --open",
-    "build": "webpack --mode production --env.NODE_ENV"
+    "dev": "webpack-dev-server --config=webpack/webpack.dev.js --mode development --env.NODE_ENV --open",
+    "stage": "webpack --progress --config=webpack/webpack.stage.js --mode development --env.NODE_ENV",
+    "build": "webpack --progress --config=webpack/webpack.prod.js --mode production --env.NODE_ENV",
+    "watch": "npm-watch"
   },
   "babel": {
     "presets": [
-      "env",
-      "react",
-      "stage-2"
+      "@babel/env",
+      "@babel/react"
     ],
     "plugins": [
-      "babel-plugin-styled-components"
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-styled-components",
+      "lodash"
     ]
   },
   "dependencies": {
@@ -31,7 +35,6 @@
     "react-helmet": "^5.2.0",
     "react-id-swiper": "^1.6.8",
     "react-lazyload": "^2.3.0",
-    "react-mailchimp-subscribe": "^2.0.2",
     "react-player": "^1.6.6",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
@@ -42,28 +45,41 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
-    "shopify-buy": "^1.8.0",
     "styled-components": "^4.1.2",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-styled-components": "^1.5.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-2": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-styled-components": "^1.9.2",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.1",
+    "dotenv": "^6.1.0",
+    "dotenv-webpack": "^1.5.7",
+    "fetch-json-webpack-plugin": "^1.0.3",
+    "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^3.2.0",
-    "react-hot-loader": "^4.3.4",
+    "lodash-webpack-plugin": "^0.11.5",
+    "npm-watch": "^0.4.0",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "react-hot-loader": "^4.3.12",
+    "ssh2-sftp-client": "^2.4.2",
+    "style-loader": "^0.23.1",
+    "sw-precache-webpack-plugin": "^0.11.5",
     "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.5",
-    "fs": "^0.0.1-security",
-    "gulp": "^3.9.1",
-    "gulp-sftp": "^0.1.5",
-    "gulp-util": "^3.0.8",
-    "gulp-watch": "^5.0.1"
+    "webpack-manifest-plugin": "^2.0.4",
+    "webpack-merge": "^4.1.4",
+    "webpack-shell-plugin": "^0.5.0"
   }
 }
