@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
-import ReactPlayer from 'react-player'
-import Swiper from 'react-id-swiper/lib/custom'
-import Waypoint from 'react-waypoint'
+import Swiper from 'react-id-swiper'
 import { setFooterState } from './../../state/actions'
 import CarouselSlide from './CarouselSlide'
 import { colors, fonts } from './../../styles/theme.json'
@@ -24,66 +22,15 @@ class Carousel extends Component {
       }
     }
     this.state = {
-      playing: false,
       autoplay: autoplay(),
       transitionTime: this.props.transition_time || 1500,
       count_state: (this.props.count > 1) && `has-count`
-    }
-    this._slideChange = this._slideChange.bind(this)
-  }
-
-  _slideChange() {
-    const slideIndex = this.swiper.realIndex
-    const slideType = this.swiper.slides[slideIndex].dataset.slidetype
-    if (slideType === 'video' && (this.player != undefined)) {
-      this._onPlay()
-    } else {
-      this._stop()
-    }
-  }
-
-  _onPlay() {
-    this.player.seekTo(0)
-    this.setState({
-      playing: true
-    })
-  }
-
-  _stop() {
-    if (this.state.playing) {
-      setTimeout(() => {
-        this.player.seekTo(0)
-        this.setState({
-          playing: false
-        })
-      }, 3000)
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.autoplay) {
-      this._slideChange()
-    } else {
-      this.swiper.autoplay.stop()
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.state.playing) {
-      this.setState({
-        playing: false
-      })
-      this.player.seekTo(0)
     }
   }
 
   render() {
     const swiperParams = {
-      on: {
-        slideChange: () => {
-          this._slideChange()
-        }
-      },
+      lazy: true,
       autoplay: this.state.autoplay,
       pagination: {
         el: (this.props.pagination) ? `.swiper-pagination` : null,
@@ -103,29 +50,17 @@ class Carousel extends Component {
       renderNextButton: () => <button className="swiper-button-next"><NextButton/></button>,
     }
 
-    const HeroSlides = this.props.slides.map((slide, i) =>
-      <HeroSlide key={i} data-slidetype={slide.slide_type} className={(this.props.navigation) && 'nav'}>
-        <CarouselSlide slideData={slide} caption={this.props.captions}>
-          {(slide.slide_type === 'video') &&
-            <ReactPlayer
-              ref={node => { if (node) this.player = node.player }}
-              url={slide.video}
-              className='hero-player'
-              width={'100%'}
-              height={'100%'}
-              muted={true}
-              loop={true}
-              playsinline={true}
-              playing={this.state.playing}
-            />
-          }
-        </CarouselSlide>
-      </HeroSlide>
-    )
     return (
       <HeroSlider className={this.state.count_state}>
-        <Swiper {...swiperParams} ref={node => { if (node) this.swiper = node.swiper }}>
-          {HeroSlides}
+        <Swiper {...swiperParams}>
+          {this.props.slides.map((slide, i) =>
+            <HeroSlide key={i} data-slidetype={slide.slide_type} className={(this.props.navigation) && 'nav'}>
+              <CarouselSlide slideData={slide} caption={this.props.captions}>
+                <ImgFit data-src={slide.image.large} className="swiper-lazy"/>
+                <div className="swiper-lazy-preloader"/>
+              </CarouselSlide>
+            </HeroSlide>
+          )}
         </Swiper>
       </HeroSlider>
     )
@@ -147,6 +82,14 @@ const buttonWrap = css`
   padding: 0;
   width: 3rem;
   height: 3rem;
+`
+
+const ImgFit = styled.img`
+  ${absoluteCentered};
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 5%;
 `
 
 const HeroSlide = styled.div`
