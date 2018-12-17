@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
-import Swiper from 'react-id-swiper/lib/custom'
+import Swiper from 'react-id-swiper'
 import { setFooterState } from './../../state/actions'
 import CarouselSlide from './CarouselSlide'
 import { colors, fonts } from './../../styles/theme.json'
@@ -30,8 +30,8 @@ class Carousel extends Component {
 
   render() {
     const swiperParams = {
-      autoplay: this.state.autoplay,
       lazy: true,
+      autoplay: this.state.autoplay,
       pagination: {
         el: (this.props.pagination) ? `.swiper-pagination` : null,
         type: 'fraction',
@@ -50,17 +50,17 @@ class Carousel extends Component {
       renderNextButton: () => <button className="swiper-button-next"><NextButton/></button>,
     }
 
-    const HeroSlides = this.props.slides.map((slide, i) =>
-      <HeroSlide key={i} data-slidetype={slide.slide_type} className={(this.props.navigation) && 'nav'}>
-        <CarouselSlide slideData={slide} caption={this.props.captions}>
-          <ImgFit src={slide.image.large}/>
-        </CarouselSlide>
-      </HeroSlide>
-    )
     return (
       <HeroSlider className={this.state.count_state}>
-        <Swiper {...swiperParams} ref={node => { if (node) this.swiper = node.swiper }}>
-          {HeroSlides}
+        <Swiper {...swiperParams}>
+          {this.props.slides.map((slide, i) =>
+            <HeroSlide key={i} data-slidetype={slide.slide_type} className={(this.props.navigation) && 'nav'}>
+              <CarouselSlide slideData={slide} caption={this.props.captions}>
+                <ImgFit data-src={slide.image.large} className="swiper-lazy"/>
+                <div className="swiper-lazy-preloader"/>
+              </CarouselSlide>
+            </HeroSlide>
+          )}
         </Swiper>
       </HeroSlider>
     )
