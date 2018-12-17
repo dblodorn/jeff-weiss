@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { returnTextOverlay } from './../../../scripts'
 
 export default props => {
-  console.log(props)
   return (
     <VideoWrapper>
       <TextOverlay content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2>${returnTextOverlay(props)}`}/>

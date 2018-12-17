@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setPage, setHeaderState } from './../../state/actions'
+import { setPage, setHeaderState } from './../state/actions'
 import find from 'lodash/find'
 import mixin from 'lodash/mixin'
 import _ from 'lodash/wrapperLodash'
@@ -20,7 +20,6 @@ export default (InnerComponent) => {
       this._postFilter = this._postFilter.bind(this);
     }
     _postFilter = (data, route) => {
-      console.log(route)
       let postType = 'pages'
       let pageData = {}
       if (route !== '/') {

@@ -13,7 +13,6 @@ import { PrevButton, NextButton } from './../utils/PrevNextButton'
 class Carousel extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     const autoplay = () => {
       if (!this.props.autoplay) {
         return false

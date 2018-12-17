@@ -16,8 +16,7 @@ export default class extends Component {
   }
 
   _onPlay() {
-    this.player.seekTo(0);
-    console.log(this.player.getDuration())
+    this.player.seekTo(0)
     this.setState({
       playing: true,
       duration: this.player.getDuration()

@@ -46,7 +46,6 @@ export default () => {
     const docHeight = documentHeight();
     if (scrollPixel === 0 && (store.getState().scroll_direction !== 'at-top')) {
       if (!top) {
-        console.log('top')
         directionHandler('at-top');
         top = true
       }

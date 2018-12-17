@@ -24,7 +24,7 @@ class FitImage extends Component {
   render() {
     return (
       <Wrapper>
-        <ImgWrapper Opacity={(this.state.loaded) ? 1 : 0} onClick={this.props.clickFunction} className={(this.props.clickFunction) && 'hover'}>
+        <ImgWrapper opacity={(this.state.loaded) ? 1 : 0} onClick={this.props.clickFunction} className={(this.props.clickFunction) && 'hover'}>
           <ImgFit src={this.props.src} onLoad={this.handleImageLoaded.bind(this)} className={this.props.fit || `contain`}/>
         </ImgWrapper>
         {(!this.state.loaded) && <Spinner size={'4rem'} color={this.props.color.dark} stroke={1} /> }
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 const ImgWrapper = styled.div`
   ${absoluteTopFull};
   ${opacityTransition};
-  opacity: ${props => props.Opacity};
+  opacity: ${props => props.opacity};
   &.hover {
     cursor: pointer;
     &:hover {

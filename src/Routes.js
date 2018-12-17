@@ -13,10 +13,6 @@ class Routes extends Component {
     this._buildRoutes = this._buildRoutes.bind(this)
   }
 
-  componentDidMount() {
-    console.log('app Mounted')
-  }
-
   _buildRoutes = (routes) => {
     if(!this.routes) {
       return routes.map((page, i) => {
