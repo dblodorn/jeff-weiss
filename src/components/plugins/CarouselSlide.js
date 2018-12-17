@@ -1,38 +1,28 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { flexRowCenteredAll, mainPadding, absoluteTopFull, flexCenteredAll } from './../../styles/mixins'
 import { H1 } from './../../styles/components'
-import FitImage from '../utils/FitImage'
-import { breakpoints, heights } from './../../styles/theme.json'
+import FitImageSimple from '../utils/FitImageSimple'
+import { heights } from './../../styles/theme.json'
 import TextOverlay from './../TextOverlay'
 
-const CarouselSlide = (props) => {
-  return (
-    <InnerSlide className={`${props.slideData.slide_type}-slide`}>
-      {(props.caption) &&
-        <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`}/>
+export default props =>
+  <InnerSlide className={`${props.slideData.slide_type}-slide`}>
+    {(props.caption) &&
+      <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`}/>
+    }
+    <SlideWrapper>
+      {(props.slideData.slide_type == 'image')
+        ? <FitImageSimple src={props.slideData.image.large}/> :
+        (props.slideData.slide_type == 'text')
+        ? <TextCard bg_color={props.slideData.bg_color} text_color={props.slideData.text_color}>
+            <H1>{props.slideData.text}</H1>
+          </TextCard>
+        : null
       }
-      <SlideWrapper>
-        {(props.slideData.slide_type == 'image')
-          ? <FitImage src={(props.window_width >= breakpoints.medium) ? props.slideData.image.large : props.slideData.image.medium} fit={props.slideData.image_style}/> :
-          (props.slideData.slide_type == 'text')
-          ? <TextCard bg_color={props.slideData.bg_color} text_color={props.slideData.text_color}>
-              <H1>{props.slideData.text}</H1>
-            </TextCard>
-          : null
-        }
-        {props.children}
-      </SlideWrapper>
-    </InnerSlide>
-  )
-}
-
-export default connect(
-  state => ({
-    window_width: state.resize_state.window_width
-  })
-)(CarouselSlide)
+      {props.children}
+    </SlideWrapper>
+  </InnerSlide>
 
 // STYLES
 const TextCard = styled.div`
