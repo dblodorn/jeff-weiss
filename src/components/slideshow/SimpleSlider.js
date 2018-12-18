@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import styled, { css } from 'styled-components'
-
+import posed from 'react-pose'
 import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit } from './../../styles/mixins'
 import { colors, fonts } from './../../styles/theme.json'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 import TextOverlay from './../TextOverlay'
+
+const Box = posed.div({
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
+});
+
+const Slide = props =>
+  <SlideWrap className={props.active && 'active'}>
+    {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
+    <SlideWrapper>
+      <ImgFit src={props.slideData.image.large} />
+    </SlideWrapper>
+  </SlideWrap>
 
 export default props => {
   const [index, setIndex] = useState(0)
@@ -15,17 +28,26 @@ export default props => {
 
   const next = () =>
     (index === (slide_length - 1)) ? setIndex(0) : setIndex(index + 1)
-  
+
+  const prevSlide = () =>
+    (index === 0) ? slide_length - 1 : index - 1
+
+  const nextSlide = () =>
+    (index === (slide_length - 1)) ? 0 : index + 1
+
+  console.log(index, slide_length)
+  console.log('prev:: ', prevSlide())
+  console.log('next:: ', nextSlide())
+
   return (
     <SliderWrapper>
       <ButtonLeft onClick={() => prev()}><PrevButton/></ButtonLeft>
       <ButtonRight onClick={() => next()}><NextButton/></ButtonRight>
-      <Pagination>{`${index + 1} / ${slide_length + 1}`}</Pagination>
+      <Pagination>{`${index + 1} / ${slide_length}`}</Pagination>
       <InnerSlide>
-        {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} />}
-        <SlideWrapper>
-          <ImgFit src={props.slides[index].image.large} />
-        </SlideWrapper>
+        <Slide slideData={props.slides[prevSlide()]} caption={props.caption} active={false}/>
+        <Slide slideData={props.slides[index]} caption={props.caption} active={true}/>
+        <Slide slideData={props.slides[nextSlide()]} caption={props.caption} active={false}/>
       </InnerSlide>
     </SliderWrapper>
   )
@@ -64,6 +86,13 @@ const SliderWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+`
+
+const SlideWrap = styled.div`
+  opacity: 0;
+  &.active {
+    opacity: 1;
+  }
 `
 
 const Pagination = styled.div`
