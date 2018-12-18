@@ -16,6 +16,7 @@ import VideoModal from './modals/VideoModal'
 import Carousel from './plugins/Carousel'
 import Video from './video/Video'
 import TextOverlay from './TextOverlay'
+import SimpleSlider from './SimpleSlider'
 
 export {
   pageData,
@@ -35,5 +36,6 @@ export {
   Carousel,
   TextOverlay,
   BackArrow,
-  Head
+  Head,
+  SimpleSlider
 }
