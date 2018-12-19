@@ -1,18 +1,22 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
-import posed from 'react-pose'
-import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit } from './../../styles/mixins'
+import debounce from 'lodash/debounce'
+import mixin from 'lodash/mixin'
+import _ from 'lodash/wrapperLodash'
+import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn } from './../../styles/mixins'
 import { colors, fonts } from './../../styles/theme.json'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 import TextOverlay from './../TextOverlay'
+import FitImage from './../utils/FitImage'
 
-const Box = posed.div({
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 }
-});
+mixin(_, {
+  debounce: debounce
+})
+
+const transition = 1500
 
 const Slide = props =>
-  <SlideWrap className={props.active && 'active'}>
+  <SlideWrap className={props.class}>
     {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
     <SlideWrapper>
       <ImgFit src={props.slideData.image.large} />
@@ -21,34 +25,42 @@ const Slide = props =>
 
 export default props => {
   const [index, setIndex] = useState(0)
+  const [active, setActive] = useState(0)
   const slide_length = props.slides.length
+  
+  const nextHandler = () => {
+    setActive(1)
+    setTimeout(() => {
+      setActive(0)
+    }, transition)
+    if (index === (slide_length - 1)) {
+      setIndex(0)
+    } else {
+      setIndex(index + 1)
+    }
+  }
 
-  const prev = () =>
+  const prevHandler = () => {
     (index === 0) ? setIndex(slide_length - 1) : setIndex(index - 1)
+  }
 
-  const next = () =>
-    (index === (slide_length - 1)) ? setIndex(0) : setIndex(index + 1)
-
-  const prevSlide = () =>
-    (index === 0) ? slide_length - 1 : index - 1
-
-  const nextSlide = () =>
-    (index === (slide_length - 1)) ? 0 : index + 1
-
-  console.log(index, slide_length)
-  console.log('prev:: ', prevSlide())
-  console.log('next:: ', nextSlide())
+  const prevSlide = () => (index === 0) ? slide_length - 1 : index - 1
+  const nextSlide = () => (index === (slide_length - 1)) ? 0 : index + 1
 
   return (
     <SliderWrapper>
-      <ButtonLeft onClick={() => prev()}><PrevButton/></ButtonLeft>
-      <ButtonRight onClick={() => next()}><NextButton/></ButtonRight>
-      <Pagination>{`${index + 1} / ${slide_length}`}</Pagination>
+      <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
+      <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
       <InnerSlide>
-        <Slide slideData={props.slides[prevSlide()]} caption={props.caption} active={false}/>
-        <Slide slideData={props.slides[index]} caption={props.caption} active={true}/>
-        <Slide slideData={props.slides[nextSlide()]} caption={props.caption} active={false}/>
+        {(active === 1) && <Slide slideData={props.slides[prevSlide()]} caption={props.caption} class={`next`} />}
+        {(active === 1) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
+        {(active === 0) && <Slide slideData={props.slides[index]} caption={props.caption} />}
       </InnerSlide>
+      <Preload>
+        <img src={props.slides[prevSlide()].image.large}/>
+        <img src={props.slides[nextSlide()].image.large}/>
+      </Preload>
+      <Pagination>{`${index + 1} / ${slide_length}`}</Pagination>
     </SliderWrapper>
   )
 }
@@ -73,6 +85,16 @@ const ButtonLeft = styled.button`
   left: .5rem;
 `
 
+const Preload = styled.div`
+  display: none;
+  position: fixed;
+  top: -500;
+  left: -500;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+`
+
 const ButtonRight = styled.button`
   ${buttonWrap};
   ${flexCenteredAll};
@@ -88,13 +110,6 @@ const SliderWrapper = styled.div`
   left: 0;
 `
 
-const SlideWrap = styled.div`
-  opacity: 0;
-  &.active {
-    opacity: 1;
-  }
-`
-
 const Pagination = styled.div`
   bottom: 1.25rem;
   width: 100%;
@@ -108,6 +123,29 @@ const Pagination = styled.div`
   font-size: ${fonts.sizes.micro};
 `
 
+const InnerSlide = styled.div`
+  ${absoluteTopFull};
+  width: 100vw;
+  height: 100vw;
+  position: relative;
+`
+
+// SLIDE
+const SlideWrap = styled.div`
+  ${absoluteTopFull};
+  width: 100vw;
+  height: 100vw;
+  z-index: 0;
+  &.current {
+    ${animationFadeIn(transition, 0)};
+    z-index: 90;
+  }
+  &.next {
+    ${animationFadeOut(transition)};
+    z-index: 100;
+  }
+`
+
 const ImgFit = styled.img`
   ${absoluteCentered};
   object-fit: contain;
@@ -116,21 +154,9 @@ const ImgFit = styled.img`
   padding: 5%;
 `
 
-const InnerSlide = styled.div`
-  ${absoluteTopFull};
-  width: 100vw;
-  height: 100vw;
-  position: relative;
-`
-
 const SlideWrapper = styled.div`
   ${absoluteTopFull};
   ${flexCenteredAll};
   z-index: 50;
   pointer-events: none;
-  .slide {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
 `
