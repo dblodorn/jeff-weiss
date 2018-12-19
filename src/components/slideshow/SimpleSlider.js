@@ -41,7 +41,15 @@ export default props => {
   }
 
   const prevHandler = () => {
-    (index === 0) ? setIndex(slide_length - 1) : setIndex(index - 1)
+    setActive(2)
+    setTimeout(() => {
+      setActive(0)
+    }, transition)
+    if (index === 0) {
+      setIndex(slide_length - 1)
+    } else {
+      setIndex(index - 1)
+    }
   }
 
   const prevSlide = () => (index === 0) ? slide_length - 1 : index - 1
@@ -52,6 +60,8 @@ export default props => {
       <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
       <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
       <InnerSlide>
+        {(active === 2) && <Slide slideData={props.slides[nextSlide()]} caption={props.caption} class={`next`} />}
+        {(active === 2) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
         {(active === 1) && <Slide slideData={props.slides[prevSlide()]} caption={props.caption} class={`next`} />}
         {(active === 1) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
         {(active === 0) && <Slide slideData={props.slides[index]} caption={props.caption} />}
