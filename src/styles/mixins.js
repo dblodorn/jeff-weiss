@@ -297,6 +297,15 @@ const simpleFade = keyframes`
   }
 `
 
+const simpleFadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`
+
 const pulseAnimation = css`
   animation: 350ms linear ${pulse} infinite;
 `
@@ -305,6 +314,13 @@ const animationFadeIn = (time, delay) => {
   return css`
     animation: ${simpleFade} ${time}ms ease normal;
     animation-delay: ${delay}ms;
+    animation-fill-mode: both;
+  `
+}
+
+const animationFadeOut = (time) => {
+  return css`
+    animation: ${simpleFadeOut} ${time}ms ease normal;
     animation-fill-mode: both;
   `
 }
@@ -557,5 +573,6 @@ export {
   fixedWindow,
   menuTransition,
   navWrapperHorizontal,
-  navStyle
+  navStyle,
+  animationFadeOut
 }

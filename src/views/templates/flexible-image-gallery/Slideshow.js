@@ -1,8 +1,7 @@
 import React from 'react'
-import { Carousel, TextOverlay } from './../../../components'
 import styled from 'styled-components'
 import { returnTextOverlay } from './../../../scripts'
-import { SimpleSlider } from './../../../components'
+import { SimpleSlider, TextOverlay } from './../../../components'
 
 export default (props) =>
   <CarouselWrapper>
@@ -15,16 +14,8 @@ export default (props) =>
       pagination={props.data.pagination}
       captions={props.data.captions}
       transition_time={props.data.transition_time}
-    />
-    {/*<Carousel 
-      slides={props.data.slides}
-      navigation={props.data.controls}
-      pagination={props.data.pagination}
-      captions={props.data.captions}
-      autoplay={props.data.autoplay}
-      transition_time={props.data.transition_time}
       count={props.count}
-    />*/}
+    />
   </CarouselWrapper>
 
 // STYLES

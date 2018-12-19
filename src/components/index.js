@@ -13,10 +13,9 @@ import BackArrow from './utils/BackArrow'
 import Info from './utils/Info'
 import SingleImageModal from './modals/SingleImageModal'
 import VideoModal from './modals/VideoModal'
-import Carousel from './plugins/Carousel'
 import Video from './video/Video'
 import TextOverlay from './TextOverlay'
-import SimpleSlider from './SimpleSlider'
+import SimpleSlider from './slideshow/SimpleSlider'
 
 export {
   pageData,
@@ -33,7 +32,6 @@ export {
   Close,
   BackClose,
   Info,
-  Carousel,
   TextOverlay,
   BackArrow,
   Head,
