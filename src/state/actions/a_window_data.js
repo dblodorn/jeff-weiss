@@ -1,4 +1,5 @@
 import Color from 'color'
+import { makeRandomColor } from './../../scripts'
 
 // RESIZE DATA
 const resizeData = (resize_state) => {
@@ -88,7 +89,7 @@ const setResizeState = () => {
 }
 
 const setRandomColor = () => {
-  const pickColor = `#${Math.random().toString(16).substr(2, 6)}`
+  const pickColor = makeRandomColor()
   const newColorDark = Color(pickColor).darken(0.25).hex()
   const newColorLight = Color(pickColor).lighten(0.25).hex()
   return (dispatch) => {
