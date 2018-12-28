@@ -30,10 +30,3 @@ const VideoSection = styled(Section)`
 const VideoWrapper = styled.div`
   width: 75vw;
 `
-const BackButtonStyle = styled.button`
-  ${buttonInit};
-  color: white;
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-`
