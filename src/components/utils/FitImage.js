@@ -1,36 +1,22 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Spinner from './Spinner'
-import { absoluteCentered, opacityTransition, absoluteTopFull } from './../../styles/mixins'
 import { heights } from './../../styles/theme.json'
 
-class FitImage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loaded: false
-    }
-  }
-
-  handleImageLoaded() {
-    setTimeout(() => {
-      this.setState({
-        loaded: true
-      })
-    }, 150)
-  }
-
-  render() {
-    return (
-      <Wrapper>
-        <ImgWrapper opacity={(this.state.loaded) ? 1 : 0} onClick={this.props.clickFunction} className={(this.props.clickFunction) && 'hover'}>
-          <ImgFit src={this.props.src} onLoad={this.handleImageLoaded.bind(this)} className={this.props.fit || `contain`}/>
-        </ImgWrapper>
-        {(!this.state.loaded) && <Spinner size={'4rem'} color={this.props.color.dark} stroke={1} /> }
-      </Wrapper>
-    )
-  }
+const FitImage = props => {
+  const [loaded, isLoaded] = useState(false)
+  return (
+    <Wrapper>
+      <ImgWrapper alpha={loaded ? 1 : 0} onClick={props.clickFunction} className={(props.clickFunction) && 'hover'}>
+        {(props.srcset)
+          ? <ImgFit width={props.src.size.w} height={props.src.size.h} src={props.src.small} srcSet={`${props.src.small} 300w, ${props.src.medium} 768w, ${props.src.medium} 1280w, ${props.src.large} 3200w`} onLoad={() => isLoaded(true)} fit={props.fit || 'cover'} />
+          : <ImgFit src={props.src} onLoad={() => isLoaded(true)} fit={props.fit || 'cover'} />
+        }
+      </ImgWrapper>
+      {(!loaded) && <Spinner size={'4rem'} color={props.color.dark} stroke={1} />}
+    </Wrapper>
+  )
 }
 
 export default connect(
@@ -39,15 +25,26 @@ export default connect(
   })
 )(FitImage)
 
-// STYLE
+const sharedRules = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`
+
 const Wrapper = styled.div`
-  ${absoluteTopFull};
+  ${sharedRules};
 `
 
 const ImgWrapper = styled.div`
-  ${absoluteTopFull};
-  ${opacityTransition};
-  opacity: ${props => props.opacity};
+  ${sharedRules};
+  opacity: ${props => props.alpha};
+  width: 100%;
+  height: 100%;
+  transition: opacity 250ms ease-in-out;
+  will-change: opacity;
+  overflow: hidden;
   &.hover {
     cursor: pointer;
     &:hover {
@@ -59,17 +56,11 @@ const ImgWrapper = styled.div`
 `
 
 const ImgFit = styled.img`
-  ${absoluteCentered};
-  &.contain {
-    object-fit: contain;
-    max-width: 100%;
-    max-height: 100%;
-  }
-  &.cover {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    padding: ${heights.header};
-  }
+  ${sharedRules};
+  object-fit: ${props => props.fit};
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  overflow: hidden;
+  padding: ${heights.header};
 `
-
