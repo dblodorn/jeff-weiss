@@ -8,12 +8,13 @@ import { meta_defaults } from './../../config.json'
 
 const Logo = props =>
   <LogoButton to={'/'} className={(props.route === '/') && `active`}>
-    <LogoType>{meta_defaults.title}</LogoType>
+    <LogoType font={props.font}>{meta_defaults.title}</LogoType>
   </LogoButton>
 
 export default connect(
   state => ({
     route: state.router.location.pathname,
+    font: state.fonts.project_nav
   })
 )(Logo)
 

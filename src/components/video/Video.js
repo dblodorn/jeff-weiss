@@ -170,7 +170,7 @@ class Video extends Component {
           }}
         />
         <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
-        <VideoInfo>
+        <VideoInfo font={this.props.font}>
           <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
         </VideoInfo>
       </VideoWrapper>
@@ -181,7 +181,8 @@ class Video extends Component {
 export default connect(
   state => ({
     window_width: state.resize_state.window_width,
-    current_video: state.current_video
+    current_video: state.current_video,
+    font: state.fonts.top_menu
   }),
   dispatch => ({
     video_playing: (url) => dispatch(setVideoPlaying(url)),
@@ -247,7 +248,7 @@ const VideoInfo = styled.div`
   * {
     text-align: right;
     color: ${colors.white};
-    font-family: ${fonts.body_copy_font_a};
+    font-family: ${props => props.font};
     font-size: ${fonts.sizes.micro};
   }
 `

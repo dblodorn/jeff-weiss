@@ -48,7 +48,7 @@ const VideoCard = (props) =>
 export default connect(
   state => ({
     video_playing: state.video_playing,
-    video_state: state.video_state
+    video_state: state.video_state,
   })
 )(VideoCard)
 

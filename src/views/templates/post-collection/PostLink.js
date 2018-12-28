@@ -1,16 +1,23 @@
 import React from "react";
+import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { bigType, flexColumn, opacityTransition, media } from "./../../../styles/mixins";
-import { spacing, colors, fonts } from "./../../../styles/theme.json";
+import { bigType, flexColumn, media, colorTransition } from "./../../../styles/mixins";
+import { spacing, colors } from "./../../../styles/theme.json";
 
-export default props => (
+const PostLink = props =>
   <CardWrapper className={`${props.columns} ${props.style}`}>
     <CardLink to={props.cardData.post_type === "page" ? `/${props.cardData.slug}` : `/${props.slug}/${props.cardData.slug}`}>
-      <ProjectTitle dangerouslySetInnerHTML={{ __html: props.cardData.title }}/>
+      <ProjectTitle color={props.color} font={props.font} dangerouslySetInnerHTML={{ __html: props.cardData.title }}/>
     </CardLink>
   </CardWrapper>
-);
+
+export default connect(
+  state => ({
+    font: state.fonts.project_nav,
+    color: state.color.reverse
+  })
+)(PostLink)
 
 // STYLES
 const CardWrapper = styled.li`
@@ -27,18 +34,17 @@ const CardLink = styled(Link)`
 
 const ProjectTitle = styled.h3`
   ${bigType};
-  ${opacityTransition};
+  ${colorTransition};
   color: ${colors.white};
-  font-family: ${fonts.display_font_b};
+  font-family: ${props => props.font};
   text-transform: uppercase;
   padding: ${spacing.double_pad} ${spacing.double_pad} 0;
   display: block;
   width: 100%;
   margin-bottom: 0;
   ${media.desktopNav`
-    opacity: .5;
     &:hover {
-      opacity: 1;
+      color: ${props => props.color};
     }
   `}
 `;

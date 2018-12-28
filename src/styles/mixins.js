@@ -531,6 +531,11 @@ const navStyle = css`
   `}
 `
 
+const colorTransition = css`
+  transition: background-color 1000ms ease-in-out, color 250ms ease-in-out;
+  will-change: background-color, color;
+`
+
 export {
   media,
   maxWidth,
@@ -574,5 +579,6 @@ export {
   menuTransition,
   navWrapperHorizontal,
   navStyle,
-  animationFadeOut
+  animationFadeOut,
+  colorTransition
 }

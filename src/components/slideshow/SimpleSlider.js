@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
+import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
 import mixin from 'lodash/mixin'
 import _ from 'lodash/wrapperLodash'
@@ -7,7 +8,7 @@ import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animati
 import { colors, fonts } from './../../styles/theme.json'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 import TextOverlay from './../TextOverlay'
-import FitImage from './../utils/FitImage'
+import FitImageSimple from './../utils/FitImageSimple'
 
 mixin(_, {
   debounce: debounce
@@ -23,7 +24,7 @@ const Slide = props =>
     </SlideWrapper>
   </SlideWrap>
 
-export default props => {
+const SimpleSlider = props => {
   const [index, setIndex] = useState(0)
   const [active, setActive] = useState(0)
   const slide_length = props.slides.length
@@ -70,11 +71,16 @@ export default props => {
         <img src={props.slides[prevSlide()].image.large}/>
         <img src={props.slides[nextSlide()].image.large}/>
       </Preload>
-      <Pagination>{`${index + 1} / ${slide_length}`}</Pagination>
+      <Pagination font={props.font}>{`${index + 1} / ${slide_length}`}</Pagination>
     </SliderWrapper>
   )
 }
 
+export default connect(
+  state => ({
+    font: state.fonts.top_menu
+  })
+)(SimpleSlider)
 
 // Styles
 const buttonWrap = css`
@@ -129,7 +135,7 @@ const Pagination = styled.div`
   padding: 0 1rem;
   position: fixed;
   color: ${colors.white};
-  font-family: ${fonts.body_copy_font_a};
+  font-family: ${props => props.font};
   font-size: ${fonts.sizes.micro};
 `
 

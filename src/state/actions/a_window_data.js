@@ -1,5 +1,6 @@
 import Color from 'color'
-import { makeRandomColor } from './../../scripts'
+import { makeRandomColor, randomArrItem } from './../../scripts'
+import { fonts } from './../../config.json'
 
 // RESIZE DATA
 const resizeData = (resize_state) => {
@@ -79,6 +80,13 @@ const randomColor = (string) => {
   }
 }
 
+const randomFont = (string) => {
+  return {
+    type: 'RANDOM_FONT',
+    string
+  }
+}
+
 const setResizeState = () => {
   return (dispatch) => {
     dispatch(resizeData({
@@ -90,14 +98,24 @@ const setResizeState = () => {
 
 const setRandomColor = () => {
   const pickColor = makeRandomColor()
-  const newColorDark = Color(pickColor).darken(0.25).hex()
-  const newColorLight = Color(pickColor).lighten(0.25).hex()
   return (dispatch) => {
     dispatch(randomColor({
       bright: pickColor,
       regular: pickColor,
-      dark: newColorDark,
-      light: newColorLight
+      dark: Color(pickColor).darken(0.25).hex(),
+      light: Color(pickColor).lighten(0.25).hex(),
+      reverse: Color(pickColor).rotate(180).hex()
+    }))
+  }
+}
+
+const setRandomFont = () => {
+  return (dispatch) => {
+    dispatch(randomFont({
+      top_menu: randomArrItem(fonts),
+      project_nav: randomArrItem(fonts),
+      body_font: randomArrItem(fonts),
+      header_font: randomArrItem(fonts)
     }))
   }
 }
@@ -114,5 +132,6 @@ export {
   setHeaderStyle,
   setScrollDirection,
   setCurrentPixel,
-  setRandomColor
+  setRandomColor,
+  setRandomFont
 }

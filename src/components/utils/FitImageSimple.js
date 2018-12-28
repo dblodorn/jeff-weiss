@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
+import { absoluteCentered } from './../../styles/mixins'
 
 export default props => {
   const [loaded, isLoaded] = useState(false)
@@ -10,29 +11,20 @@ export default props => {
   )
 }
 
-const sharedRules = css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`
-
 const ImgWrapper = styled.div`
-  ${sharedRules};
+  ${absoluteCentered};
+  transition: opacity 250ms ease-in-out;
   opacity: ${props => props.alpha};
   width: 100%;
   height: 100%;
-  transition: opacity 250ms ease-in-out;
   will-change: opacity;
   overflow: hidden;
 `
 
 const ImgFit = styled.img`
-  ${sharedRules};
-  object-fit: ${props => props.fit};
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  overflow: hidden;
+  ${absoluteCentered};
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 5%;
 `

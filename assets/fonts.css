@@ -14,3 +14,23 @@
   font-family: "Sabon Italic";
   src: url("/assets/fonts/sabon-italic.woff");
 }
+@font-face {
+  font-family: "David";
+  src: url("/assets/fonts/david.otf");
+}
+@font-face {
+  font-family: "Basis";
+  src: url("/assets/fonts/BasisGrotesque-Regular.otf");
+}
+@font-face {
+  font-family: "Nitti";
+  src: url("/assets/fonts/nitti-light.woff");
+}
+@font-face {
+  font-family: "Monosten";
+  src: url("/assets/fonts/Monosten-E.otf");
+}
+@font-face {
+  font-family: "Swiss";
+  src: url("/assets/fonts/SwissBTBolCon.woff");
+}
