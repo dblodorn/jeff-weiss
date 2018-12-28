@@ -89,14 +89,12 @@ const setResizeState = () => {
 
 const setRandomColor = () => {
   const pickColor = `#${Math.random().toString(16).substr(2, 6)}`
-  const desaturateColor = Color(pickColor).desaturate(0.65)
-  const newColor = desaturateColor.hex()
-  const newColorDark = Color(newColor).darken(0.25).hex()
-  const newColorLight = Color(newColor).lighten(0.25).hex()
+  const newColorDark = Color(pickColor).darken(0.25).hex()
+  const newColorLight = Color(pickColor).lighten(0.25).hex()
   return (dispatch) => {
     dispatch(randomColor({
       bright: pickColor,
-      regular: newColor,
+      regular: pickColor,
       dark: newColorDark,
       light: newColorLight
     }))
