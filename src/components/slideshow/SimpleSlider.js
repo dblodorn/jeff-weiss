@@ -4,11 +4,10 @@ import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
 import mixin from 'lodash/mixin'
 import _ from 'lodash/wrapperLodash'
-import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn } from './../../styles/mixins'
+import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn, media } from './../../styles/mixins'
 import { colors, fonts } from './../../styles/theme.json'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 import TextOverlay from './../TextOverlay'
-import FitImageSimple from './../utils/FitImageSimple'
 
 mixin(_, {
   debounce: debounce
@@ -83,24 +82,6 @@ export default connect(
 )(SimpleSlider)
 
 // Styles
-const buttonWrap = css`
-  ${buttonInit};
-  padding: 0;
-  width: 3rem;
-  height: 3rem;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  z-index: 9000;
-`
-
-const ButtonLeft = styled.button`
-  ${buttonWrap};
-  ${flexCenteredAll};
-  left: .5rem;
-`
-
 const Preload = styled.div`
   display: none;
   position: fixed;
@@ -111,15 +92,36 @@ const Preload = styled.div`
   overflow: hidden;
 `
 
+const buttonWrap = css`
+  ${buttonInit};
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  position: fixed;
+  bottom: 3.5rem;
+  margin: auto;
+  z-index: 9000;
+  ${media.desktopNav`
+    top: 0;
+    bottom: 0;
+  `}
+`
+
 const ButtonRight = styled.button`
   ${buttonWrap};
   ${flexCenteredAll};
   right: .5rem;
 `
 
+const ButtonLeft = styled.button`
+  ${buttonWrap};
+  ${flexCenteredAll};
+  left: .5rem;
+`
+
 const SliderWrapper = styled.div`
   ${flexCenteredAll};
-  height: 100%;
+  height: 100vh;
   width: 100vw;
   position: fixed;
   top: 0;
@@ -127,7 +129,7 @@ const SliderWrapper = styled.div`
 `
 
 const Pagination = styled.div`
-  bottom: 1.25rem;
+  bottom: 4rem;
   width: 100%;
   text-align: center;
   pointer-events: none;
@@ -137,12 +139,15 @@ const Pagination = styled.div`
   color: ${colors.white};
   font-family: ${props => props.font};
   font-size: ${fonts.sizes.micro};
+  ${media.desktopNav`
+    bottom: 1.25rem;
+  `}
 `
 
 const InnerSlide = styled.div`
   ${absoluteTopFull};
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   position: relative;
 `
 
@@ -150,7 +155,7 @@ const InnerSlide = styled.div`
 const SlideWrap = styled.div`
   ${absoluteTopFull};
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   z-index: 0;
   &.current {
     ${animationFadeIn(transition, 0)};
@@ -167,7 +172,10 @@ const ImgFit = styled.img`
   object-fit: contain;
   max-width: 100%;
   max-height: 100%;
-  padding: 5%;
+  padding-bottom: 10rem;
+  ${media.desktopNav`
+    padding: 10rem;
+  `}
 `
 
 const SlideWrapper = styled.div`

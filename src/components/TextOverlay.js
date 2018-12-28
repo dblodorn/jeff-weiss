@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { StyledMarkup } from './../styles/components'
-import { flexCenteredAll, opacityTransition } from './../styles/mixins'
+import { flexCenteredAll, opacityTransition, media } from './../styles/mixins'
 import { heights, shared, spacing, colors } from './../styles/theme.json'
 
 const TextOverlay = (props) =>
@@ -43,9 +43,11 @@ const OverlayWrapper = styled.div`
   opacity: 0;
   cursor: pointer;
   padding: ${spacing.double_pad};
-  &:hover {
-    opacity: 1;
-  }
+  ${media.desktopNav`
+    &:hover {
+      opacity: 1;
+    }
+  `}
   .text {
     position: relative;
     display: block;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled, { css } from 'styled-components'
 import ReactPlayer from 'react-player'
 import { setVideoPlaying, setVideoState } from './../../state/actions'
-import { buttonInit, opacityTransition } from './../../styles/mixins'
+import { buttonInit, opacityTransition, media } from './../../styles/mixins'
 import { colors, heights, fonts } from './../../styles/theme.json'
 
 const fmtMSS = (s) => { 
@@ -202,7 +202,10 @@ const VideoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${heights.header};
+  padding-bottom: 10rem;
+  ${media.desktopNav`
+    padding: ${heights.header};
+  `}
   .hero-player {
     display: flex;
     align-items: center;
@@ -222,13 +225,16 @@ const PlayPause = styled.button`
   ${buttonInit};
   ${opacityTransition};
   position: fixed;
-  bottom: 1rem;
   left: 1.25rem;
   width: 2rem;
   height: 2rem;
   background-position: center;
   background-repeat: no-repeat;
   opacity: .5;
+  bottom: 3.5rem;
+  ${media.desktopNav`
+    bottom: 1rem;
+  `}
   &:hover {
     opacity: 1;
   }
@@ -242,9 +248,13 @@ const PlayPause = styled.button`
 
 const VideoInfo = styled.div`
   position: fixed;
-  right: 0;
-  bottom: 1.25rem;
+  right: .5rem;
   padding: 0 1rem;
+  bottom: 3.75rem;
+  ${media.desktopNav`
+    right: 0;
+    bottom: 1.25rem;
+  `}
   * {
     text-align: right;
     color: ${colors.white};
