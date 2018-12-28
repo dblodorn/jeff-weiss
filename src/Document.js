@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled, { createGlobalStyle } from 'styled-components'
-import { animationFadeIn, flexColumn, media } from './styles/mixins'
+import { animationFadeIn, flexColumn, media, colorTransition } from './styles/mixins'
 import { colors, fonts, heights, widths } from './styles/theme.json'
 import { routeName } from './scripts'
 import { Header, Head } from './components'
@@ -12,7 +12,7 @@ const Document = props =>
       <GlobalStyles bgcolor={props.color.regular} barcolor={props.color.bright}/>
       {(props.api_data) 
         ? <Fragment>
-            
+            <Head title={routeName(props.router.location.pathname).routeTitle}/>
             <Header/>
             <Main id={routeName(props.router.location.pathname).routeClass} className={props.header_style}>
               {props.children}
@@ -49,10 +49,10 @@ const Main = styled.main`
 // NORMALIZE CSS
 const GlobalStyles = createGlobalStyle`
   html {
+    ${colorTransition};
     font-size: 58%;
     background-color: ${props => props.bgcolor};
-    transition: background-color 1000ms ease-in-out;
-    will-change: background-color;
+    
   }
   @media screen and (min-width: 960px) {
     html {

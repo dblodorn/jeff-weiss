@@ -10,7 +10,8 @@ import {
   footerState,
   scrollDirectionState,
   currentPixelState,
-  randomColorState
+  randomColorState,
+  randomFontState
 } from './r_window_data'
 
 import { pageState, setVideoState, videoPlayingState } from './r_content-state'
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   scroll_direction: scrollDirectionState,
   current_pixel: currentPixelState,
   color: randomColorState,
+  fonts: randomFontState,
   fonts_loaded: fontState,
   touch_state: touchState,
   modal: modalState,

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { heights, spacing, shared, colors, widths, fonts } from './theme.json'
+import { heights, spacing, shared, colors, widths } from './theme.json'
 import * as _ from './mixins'
+import { randomArrItem } from './../scripts'
+import { fonts } from './../config.json'
 
 // DOM NODES
 const Section = styled.section`
@@ -46,51 +48,51 @@ const ProportionWrapper = styled.div`
 const H1 = styled.h1`
   ${_.bigType};
   padding-bottom: ${spacing.single_pad};
-  color: ${props => props.theme.display_font_color};
-  font-family: ${props => props.theme.display_font};
+  color: ${colors.white};
+  font-family: ${props => props.font || randomArrItem(fonts)};
   text-transform: ${props => props.theme.display_case};
 `
 
 const H2 = styled.h2`
   ${_.mediumType};
-  color: ${props => props.theme.display_font_color};
-  font-family: ${props => props.theme.display_font};
+  color: ${colors.white};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const H3 = styled.h3`
   ${_.bodyType};
   padding-bottom: ${spacing.small_pad};
-  color: ${props => props.theme.display_font_color};
-  font-family: ${props => props.theme.display_font};
+  color: ${colors.white};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const H4 = styled.h4`
   ${_.bodyType};
   padding-bottom: ${spacing.small_pad};
-  color: ${props => props.theme.display_font_color};
-  font-family: ${props => props.theme.display_font};
+  color: ${colors.white};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const H5 = styled.h5`
   ${_.bodyType};
   padding-bottom: ${spacing.small_pad};
-  font-family: ${props => props.theme.display_font};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const H6 = styled.h6`
   ${_.bodyType};
   padding-bottom: ${spacing.small_pad};
-  font-family: ${props => props.theme.display_font};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const P = styled.p`
   ${_.bodyType};
-  font-family: ${props => props.theme.body_copy_font};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const SmallP = styled.p`
   ${_.smallType};
-  font-family: ${props => props.theme.body_copy_font};
+  font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
 const StyledButton = styled.button`
@@ -107,35 +109,35 @@ const StyledMarkup = styled.div`
   }
   h1 {
     ${_.bigType};
-    color: ${props => props.theme.display_font_color};
-    font-family: ${props => props.theme.display_font};
+    color: ${colors.white};
+    font-family: ${props => props.displayFont || randomArrItem(fonts)};
   }
   h2 {
     ${_.mediumType};
-    color: ${props => props.theme.display_font_color};
-    font-family: ${props => props.theme.display_font};
+    color: ${colors.white};
+    font-family: ${props => props.displayFont || randomArrItem(fonts)};
   }
   h3 {
     ${_.bodyType};
-    color: ${props => props.theme.body_copy_color};
-    font-family: ${props => props.theme.display_font};
+    color: ${colors.white};
+    font-family: ${props => props.displayFont || randomArrItem(fonts)};
   }
   h4 {
     ${_.bodyType};
-    color: ${props => props.theme.body_copy_color};
-    font-family: ${props => props.theme.body_copy_font};
+    color: ${colors.white};
+    font-family: ${props => props.font || randomArrItem(fonts)};
   }
   h5 {
     ${_.bodyType};
-    font-family: ${fonts.body_copy_font_a};
+    font-family: ${props => props.font || randomArrItem(fonts)};
   }
   h6 {
     ${_.bodyType};
-    font-family: ${fonts.body_copy_font_a};
+    font-family: ${props => props.font || randomArrItem(fonts)};
   }
   p {
     ${_.bodyType};
-    font-family: ${fonts.body_copy_font_a};
+    font-family: ${props => props.font || randomArrItem(fonts)};
     margin-bottom: ${spacing.single_pad};
     max-width: ${widths.max_medium};
     &:last-child {
@@ -144,8 +146,8 @@ const StyledMarkup = styled.div`
   }
   a {
     ${_.defaultLink};
-    color: ${props => props.theme.display_font_color};
-    font-family: ${props => props.theme.body_copy_font};
+    color: ${colors.white};
+    font-family: ${props => props.font || randomArrItem(fonts)};
   }
 `
 
@@ -211,6 +213,7 @@ const LogoWrapperFixedTopRight = styled.div`
 const LogoType = styled(H2)`
   ${_.smallType};
   text-transform: uppercase;
+  font-family: ${props => props.font || randomArrItem(fonts)}!important;
   letter-spacing: 1px;
   color: ${colors.white}!important;
 `

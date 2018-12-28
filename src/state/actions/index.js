@@ -10,7 +10,8 @@ import {
   setHeaderStyle,
   setCurrentPixel,
   setScrollDirection,
-  setRandomColor
+  setRandomColor,
+  setRandomFont
 } from './a_window_data'
 
 import { 
@@ -34,5 +35,6 @@ export {
   setHeaderStyle,
   setCurrentPixel,
   setScrollDirection,
-  setRandomColor
+  setRandomColor,
+  setRandomFont
 }

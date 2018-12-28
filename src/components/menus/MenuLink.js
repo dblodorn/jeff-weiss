@@ -24,7 +24,7 @@ const Menulink = (props) => {
   return (
     <ThemeProvider theme={themes[props.theme] || themeA}>
       <NavItem className={props.classes}>
-        <NavLink to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()} className={(`/${props.path}` == `${props.route}`) && `active`}>
+        <NavLink font={props.font} to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()} className={(`/${props.path}` == `${props.route}`) && `active`}>
           <span dangerouslySetInnerHTML={{__html: props.page }}/>
         </NavLink>
       </NavItem>
@@ -35,7 +35,8 @@ const Menulink = (props) => {
 export default connect(
   state => ({
     route: state.router.location.pathname,
-    resize_state: state.resize_state
+    resize_state: state.resize_state,
+    font: state.fonts.top_menu
   }),
   dispatch => ({
     menu_toggle: (bool) => dispatch(setMenuState(bool))
@@ -45,4 +46,5 @@ export default connect(
 // STYLES
 const NavLink = styled(StyledLink)`
   ${navStyle};
+  font-family: ${props => props.font}!important;
 `

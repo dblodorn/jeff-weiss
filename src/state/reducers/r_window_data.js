@@ -99,6 +99,15 @@ const randomColorState = (state = `#ffffff`, action) => {
   }
 }
 
+const randomFontState = (state = null, action) => {
+  switch (action.type) {
+    case 'RANDOM_FONT':
+      return action.string;
+    default:
+      return state;
+  }
+}
+
 export {
   resizeState,
   menuState,
@@ -110,5 +119,6 @@ export {
   footerState,
   scrollDirectionState,
   currentPixelState,
-  randomColorState
+  randomColorState,
+  randomFontState
 }
