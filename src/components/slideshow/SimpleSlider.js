@@ -174,7 +174,7 @@ const ImgFit = styled.img`
   max-height: 100%;
   padding-bottom: 10rem;
   ${media.desktopNav`
-    padding: 10rem;
+    padding: 8rem;
   `}
 `
 
