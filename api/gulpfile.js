@@ -5,7 +5,7 @@ var gulp        = require('gulp'),
     watch       = require('gulp-watch'),
     config      = require('./deploy.json');
 
-var watchFolder = './gems-api/**/*';
+var watchFolder = './jeff-weiss-api/**/*';
 
 /* Task Library - API */
 gulp.task('api', function() {

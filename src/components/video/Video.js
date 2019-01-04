@@ -21,7 +21,7 @@ const fmtMSS = (s) => {
 class Video extends Component {
   state = {
     url: null,
-    playing: false,
+    playing: true,
     volume: 0.8,
     muted: false,
     played: 0,
@@ -43,7 +43,7 @@ class Video extends Component {
 
   componentWillUnmount() {
     this.setState({
-      playing: false,
+      playing: true,
       started: false
     })
     this.props.video_playing(null)

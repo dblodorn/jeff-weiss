@@ -144,7 +144,7 @@
       'is_hero' => get_sub_field('is_hero'),
       'media_type' => get_sub_field('media_type'),
       'video_embed' => get_sub_field('video_embed', false, false),
-      'video_file' => $video_file['url'],
+      'video_file' => $video_file,
       'video_cover_image' => return_image($image),
       'caption' => get_sub_field( 'video_caption' ),
       'width' => get_sub_field('width'),
