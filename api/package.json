@@ -18,7 +18,7 @@
   "homepage": "https://github.com/dblodorn/jeff-weiss#readme",
   "devDependencies": {
     "fs": "0.0.1-security",
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "gulp-sftp": "^0.1.5",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.1"
