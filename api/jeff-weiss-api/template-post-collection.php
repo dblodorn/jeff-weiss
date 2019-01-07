@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header(); /* Template Name: Post Collection */ ?>
 
 <?php if ( have_posts() ) {
   while ( have_posts() ) {

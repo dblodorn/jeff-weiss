@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
@@ -57,20 +57,27 @@ const SimpleSlider = props => {
 
   return (
     <SliderWrapper>
-      <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
-      <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
-      <InnerSlide>
-        {(active === 2) && <Slide slideData={props.slides[nextSlide()]} caption={props.caption} class={`next`} />}
-        {(active === 2) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
-        {(active === 1) && <Slide slideData={props.slides[prevSlide()]} caption={props.caption} class={`next`} />}
-        {(active === 1) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
-        {(active === 0) && <Slide slideData={props.slides[index]} caption={props.caption} />}
-      </InnerSlide>
-      <Preload>
-        <img src={props.slides[prevSlide()].image.large}/>
-        <img src={props.slides[nextSlide()].image.large}/>
-      </Preload>
-      <Pagination font={props.font}>{`${index + 1} / ${slide_length}`}</Pagination>
+      {(props.slides.length > 1)
+        ? <Fragment>
+            <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
+            <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
+            <InnerSlide>
+              {(active === 2) && <Slide slideData={props.slides[nextSlide()]} caption={props.caption} class={`next`} />}
+              {(active === 2) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
+              {(active === 1) && <Slide slideData={props.slides[prevSlide()]} caption={props.caption} class={`next`} />}
+              {(active === 1) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
+              {(active === 0) && <Slide slideData={props.slides[index]} caption={props.caption} />}
+            </InnerSlide>
+            <Preload>
+              <img src={props.slides[prevSlide()].image.large}/>
+              <img src={props.slides[nextSlide()].image.large}/>
+            </Preload>
+            <Pagination font={props.font}>{`${index + 1} / ${slide_length}`}</Pagination>
+        </Fragment>
+        : <InnerSlide>
+            <Slide slideData={props.slides[0]} caption={props.caption} class={`current`} />
+          </InnerSlide>
+      }
     </SliderWrapper>
   )
 }

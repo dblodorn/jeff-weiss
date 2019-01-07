@@ -10,10 +10,7 @@ export default (props) =>
     }
     <SimpleSlider 
       slides={props.data.slides}
-      navigation={props.data.controls}
-      pagination={props.data.pagination}
       captions={props.data.captions}
-      transition_time={props.data.transition_time}
       count={props.count}
     />
   </CarouselWrapper>
