@@ -16,8 +16,11 @@ function remove_admin_bar_links() {
 }
 
 add_action( 'wp_before_admin_bar_render', 'remove_admin_bar_links' );
-
 add_action( 'admin_menu', 'my_remove_menu_pages' );
+
+function include_stylesheet() {
+  wp_enqueue_style( 'main', get_template_directory_uri() . '/main.css',false,'1.1','all');
+}
 
 function my_remove_menu_pages() {
   remove_menu_page('edit-comments.php');
@@ -32,18 +35,12 @@ function my_theme_setup() {
 add_action( 'after_setup_theme', 'my_theme_setup' );
 
 // MENUS
-
 function register_my_menu() {
   register_nav_menu('main-menu',__( 'Main Menu' ));
 }
 
 add_action( 'init', 'register_my_menu' );
-
 add_filter( 'template_include', 'phpless_template');
-
-/*-----------------------------------------------------------------------------------*/
-/* ACF Add Options Page
-/*-----------------------------------------------------------------------------------*/
 
 function get_current_template() {
   global $template;
