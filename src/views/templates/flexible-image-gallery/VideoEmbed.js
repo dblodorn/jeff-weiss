@@ -6,18 +6,8 @@ import { returnTextOverlay } from './../../../scripts'
 export default props => {
   return (
     <VideoWrapper>
-      <TextOverlay content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2>${returnTextOverlay(props)}`}/>
-      {props.data.media_type !== "photo"
-        ? props.data.video_file && <Video videoUrl={props.data.video_file} autoplay={true} />
-        : props.data.video_cover_image.large !== null
-        ? props.data.video_cover_image.large && (
-            <FitImage
-              src={props.data.video_cover_image.large}
-              fit={"contain"}
-            />
-          )
-        : null
-      }
+      {/* <TextOverlay content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2>${returnTextOverlay(props)}`}/> */}
+      { props.data.video_file && <Video videoUrl={props.data.video_file} autoplay={true} /> }
     </VideoWrapper>
   );
 };

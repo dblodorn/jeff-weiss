@@ -8,7 +8,6 @@ import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animati
 import { colors, fonts } from './../../styles/theme.json'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 import TextOverlay from './../TextOverlay'
-import FitImage from './../utils/FitImage'
 
 mixin(_, {
   debounce: debounce
@@ -17,13 +16,12 @@ mixin(_, {
 const transition = 1500
 
 const Slide = props => {
+  console.log(props)
   return (
     <SlideWrap className={props.class}>
       {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
       <SlideWrapper>
-        <ImgFit>
-          <FitImage src={props.slideData.image.large} fit={'contain'} />
-        </ImgFit>
+        <ImgFit src={props.slideData.image.large} />
       </SlideWrapper>
     </SlideWrap>
   )
@@ -61,6 +59,8 @@ const SimpleSlider = props => {
   const prevSlide = () => (index === 0) ? slide_length - 1 : index - 1
   const nextSlide = () => (index === (slide_length - 1)) ? 0 : index + 1
 
+  console.log(props)
+
   return (
     <SliderWrapper>
       {(props.slides.length > 1)
@@ -68,7 +68,11 @@ const SimpleSlider = props => {
             <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
             <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
             <InnerSlide>
-              <Slide slideData={props.slides[index]} caption={props.captions} />
+              {(active === 2) && <Slide slideData={props.slides[nextSlide()]} caption={props.caption} class={`next`} />}
+              {(active === 2) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
+              {(active === 1) && <Slide slideData={props.slides[prevSlide()]} caption={props.caption} class={`next`} />}
+              {(active === 1) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
+              {(active === 0) && <Slide slideData={props.slides[index]} caption={props.caption} />}
             </InnerSlide>
             <Preload>
               <img src={props.slides[prevSlide()].image.large}/>
@@ -167,17 +171,18 @@ const SlideWrap = styled.div`
   height: 100vh;
   z-index: 0;
   &.current {
-    ${animationFadeIn(0)};
+    ${animationFadeIn(transition, 0)};
     z-index: 90;
   }
   &.next {
-    ${animationFadeOut(0)};
+    ${animationFadeOut(transition)};
     z-index: 100;
   }
 `
 
-const ImgFit = styled.div`
+const ImgFit = styled.img`
   ${absoluteCentered};
+  object-fit: contain;
   max-width: 100%;
   max-height: 100%;
   padding-bottom: 10rem;

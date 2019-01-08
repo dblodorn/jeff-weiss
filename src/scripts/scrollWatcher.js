@@ -27,6 +27,7 @@ export default () => {
     const diff = newPixel - scrollPixel
     const speed = diff * 1.125
     const docHeight = documentHeight()
+    store.dispatch(setCurrentPixel(scrollPixel))
     if (speed > diff) {
       scrollTime = scrollTime + 1
       if (scrollTime === threshold) {
@@ -47,7 +48,7 @@ export default () => {
       scrollTime = 0
     }
     scrollPixel = newPixel
-    if (scrollPixel === 0 && (store.getState().scroll_direction !== 'at-top')) {
+    /*if (scrollPixel === 0 && (store.getState().scroll_direction !== 'at-top')) {
       if (!top) {
         directionHandler('at-top')
         store.dispatch(setCurrentPixel(scrollPixel))
@@ -61,7 +62,7 @@ export default () => {
         top = false
         bottom = true
       }
-    }
+    }*/
     requestAnimationFrame(looper)
   }
   looper()
