@@ -79,6 +79,8 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${props => props.bgcolor};
     transition: background-color 1000ms ease-in-out;
     will-change: background-color;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
   }
   ::-webkit-scrollbar {
     width: 2px;
@@ -101,5 +103,10 @@ const GlobalStyles = createGlobalStyle`
     color: white;
     font-size: 15vmin;
     ${fonts.sans};
+  }
+  :focus {outline:none!important;}
+  ::-moz-focus-inner {
+    border:0!important;
+    -moz-outline-style: none;
   }
 `

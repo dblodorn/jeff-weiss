@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled, { css } from 'styled-components'
+import Color from 'color'
+import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import { setVideoPlaying, setVideoState } from './../../state/actions'
-import { buttonInit, opacityTransition, media } from './../../styles/mixins'
+import { buttonInit, opacityTransition, flexRowCenteredVert, media } from './../../styles/mixins'
 import { colors, heights, fonts } from './../../styles/theme.json'
 
 const fmtMSS = (s) => { 
@@ -31,7 +32,8 @@ class Video extends Component {
     loop: false,
     started: false,
     buffering: false,
-    progress: false
+    progress: false,
+    seeking: false,
   }
 
   // LIFECYCLE
@@ -128,6 +130,17 @@ class Video extends Component {
     this.props.video_state('buffering')
   }
   
+  onSeekMouseDown = e => {
+    this.setState({ seeking: true })
+  }
+  onSeekChange = e => {
+    this.setState({ played: parseFloat(e.target.value) })
+  }
+  onSeekMouseUp = e => {
+    this.setState({ seeking: false })
+    this.player.seekTo(parseFloat(e.target.value))
+  }
+
   ref = player => {
     this.player = player
   }
@@ -135,40 +148,44 @@ class Video extends Component {
   render () {
     return (
       <VideoWrapper>
-        <ReactPlayer
-          url={this.props.videoUrl}
-          className='hero-player'
-          ref={this.ref}
-          width={'100%'}
-          height={'auto'}
-          playsinline={true}
-          volume={this.state.volume}
-          playing={this.state.playing}
-          onStart={this.onStart}
-          onPlay={this.onPlay}
-          onBuffer={this.onBuffer}
-          onPause={this.onPause}
-          onEnded={this.onEnded}
-          onProgress={this.onProgress}
-          onDuration={this.onDuration}
-          config={{
-            youtube: {
-              playerVars: {
-                showinfo: 0,
-                controls: 1,
-                modestbranding: 1,
-                rel: 0,
-                playsinline: 1
+        <VideoInner>
+          <ReactPlayer
+            url={this.props.videoUrl}
+            className='hero-player'
+            ref={this.ref}
+            width={'100%'}
+            height={'auto'}
+            playsinline={true}
+            volume={this.state.volume}
+            playing={this.state.playing}
+            onStart={this.onStart}
+            onPlay={this.onPlay}
+            onBuffer={this.onBuffer}
+            onPause={this.onPause}
+            onEnded={this.onEnded}
+            onProgress={this.onProgress}
+            onDuration={this.onDuration}
+            config={{
+              file: {
+                attributes: {
+                  controls: false
+                }
               }
-            },
-            vimeo: {
-              playerVars: {
-                showinfo: 0,
-                controls: 1
-              }
-            }
-          }}
-        />
+            }}
+          />
+          <Seek className={`seeker`}>
+            <SeekInput
+              type='range' min={0} max={1} step='any'
+              value={this.state.played}
+              onMouseDown={this.onSeekMouseDown}
+              onChange={this.onSeekChange}
+              onMouseUp={this.onSeekMouseUp}
+              rangebg={this.props.color.dark}
+              thumbbg={Color(this.props.color.light).darken(0.1).hex()}
+              progressbg={this.props.color.light}
+            />
+          </Seek>
+        </VideoInner>
         <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
         <VideoInfo font={this.props.font}>
           <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
@@ -182,7 +199,8 @@ export default connect(
   state => ({
     window_width: state.resize_state.window_width,
     current_video: state.current_video,
-    font: state.fonts.top_menu
+    font: state.fonts.top_menu,
+    color: state.color
   }),
   dispatch => ({
     video_playing: (url) => dispatch(setVideoPlaying(url)),
@@ -191,6 +209,62 @@ export default connect(
 )(Video)
 
 // STYLES
+const Seek = styled.div`
+  ${flexRowCenteredVert};
+  ${opacityTransition};
+  width: 100%;
+  height: 1rem;
+  opacity: 0;
+`
+
+const SeekInput = styled.input`
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  &::-webkit-slider-thumb,
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: .5rem;
+    cursor: pointer;
+    display: block;
+    border: 0;
+    border-radius: 0;
+    background: ${props => props.thumbbg};
+  }
+  &::-moz-focus-inner {
+    border: 0;
+    outline: none;
+    &::-webkit-slider-runnable-track {
+      border: 0;
+      outline: none;
+    }
+  }
+  &:focus {
+    outline: none;
+    border: 0;
+    &::-webkit-slider-runnable-track {
+      border: 0;
+      outline: none;
+    }
+  }
+  &::-webkit-slider-runnable-track,
+  &::-moz-range-track {
+    width: 100%;
+    height: 1rem;
+    cursor: pointer;
+    background: ${props => props.rangebg};
+  }
+  &::-moz-range-progress {
+    background: ${props => props.progressbg};
+    height: 1rem;
+  }
+`
+
+
 const VideoWrapper = styled.div`
   overflow: hidden;
   margin: auto;
@@ -220,6 +294,20 @@ const VideoWrapper = styled.div`
     object-fit: contain;
   }
 `;
+
+const VideoInner = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 96rem;
+  max-height: 70vh;
+  margin: auto;
+  position: relative;
+  &:hover {
+    .seeker {
+      opacity: 1;
+    }
+  }
+`
 
 const PlayPause = styled.button`
   ${buttonInit};

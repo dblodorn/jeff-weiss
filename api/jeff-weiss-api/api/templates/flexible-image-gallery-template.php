@@ -32,22 +32,12 @@
 
   function return_simple_slideshow() {
     $images = get_sub_field( 'images' );
-    $style = get_sub_field('image_style');
-    $time = get_sub_field( 'transition_time' );
     return array (
       'module' => 'simple_slideshow',
-      'is_hero' => get_sub_field( 'is_hero' ),
-      'controls' => get_sub_field( 'controls' ),
       'title' => get_sub_field( 'slideshow_title' ),
       'has_text_overlay' => get_sub_field( 'has_text_overlay'),
       'text_overlay_content' => get_sub_field( 'text_overlay_content'),
-      'text_overlay_postion' => get_sub_field( 'text_overlay_position'),
-      'pagination' => get_sub_field( 'pagination' ),
-      'autoplay' => get_sub_field( 'autoplay' ),
       'captions' => get_sub_field( 'captions' ),
-      'transition_time' => (int)$time,
-      'image_style' => $style,
-      'width' => get_sub_field('width'),
       'slides' => simple_slideshow_gallery($images, $style),
     );
   }
@@ -95,15 +85,8 @@
       'title' => get_sub_field( 'slideshow_title' ),
       'has_text_overlay' => get_sub_field( 'slideshow_text_overlay'),
       'text_overlay_content' => get_sub_field( 'slideshow_text_overlay_content'),
-      'text_overlay_postion' => get_sub_field( 'slideshow_text_overlay_position'),
-      'is_hero' => get_sub_field('is_hero'),
-      'controls' => get_sub_field( 'controls' ),
-      'pagination' => get_sub_field( 'pagination' ),
-      'autoplay' => get_sub_field( 'autoplay' ),
       'captions' => get_sub_field( 'captions' ),
-      'transition_time' => get_sub_field( 'transition_time' ),
       'slides' => full_slideshow(),
-      'width' => get_sub_field('width'),
     );
   }
 
@@ -120,17 +103,6 @@
     );
   }
 
-  function return_details_popup() {
-    return array (
-      'module' => 'details_popup',
-      'thumbnail_proportion' => get_sub_field('popup_grid_proportion'),
-      'columns' => get_sub_field('popup_grid_columns'),
-      'width' => get_sub_field('popup_grid_width'),
-      'image_style' => get_sub_field('image_style'),
-      'images' => details_popup()
-    );
-  }
-
   // SINGLE PHOTO / VIDEO MODULE
   function return_single_video_photo() {
     $video_file = get_sub_field( 'video_file' );
@@ -138,16 +110,7 @@
     return array (
       'module' => 'single_video_photo',
       'title' => get_sub_field('slideshow_title'),
-      'has_text_overlay' => get_sub_field( 'svp_has_text_overlay'),
-      'text_overlay_content' => get_sub_field( 'svp_text_overlay_content'),
-      'text_overlay_postion' => get_sub_field( 'svp_text_overlay_position'),
-      'is_hero' => get_sub_field('is_hero'),
-      'media_type' => get_sub_field('media_type'),
-      'video_embed' => get_sub_field('video_embed', false, false),
       'video_file' => $video_file,
-      'video_cover_image' => return_image($image),
-      'caption' => get_sub_field( 'video_caption' ),
-      'width' => get_sub_field('width'),
     );
   }
 
