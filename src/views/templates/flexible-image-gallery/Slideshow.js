@@ -4,7 +4,6 @@ import { returnTextOverlay } from './../../../scripts'
 import { SimpleSlider, TextOverlay } from './../../../components'
 
 export default (props) => {
-  console.log(props)
   return (
     <CarouselWrapper>
       {(props.data.has_text_overlay && !props.data.captions) &&

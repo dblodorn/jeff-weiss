@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
+import screenfull from 'screenfull'
 import Color from 'color'
 import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import { setVideoPlaying, setVideoState } from './../../state/actions'
-import { buttonInit, opacityTransition, flexRowCenteredVert, media } from './../../styles/mixins'
+import { buttonInit, opacityTransition, flexRowCenteredVert, media, flexRow } from './../../styles/mixins'
 import { colors, heights, fonts } from './../../styles/theme.json'
 
 const fmtMSS = (s) => { 
@@ -20,20 +22,37 @@ const fmtMSS = (s) => {
 }
 
 class Video extends Component {
-  state = {
-    url: null,
-    playing: true,
-    volume: 0.8,
-    muted: false,
-    played: 0,
-    loaded: 0,
-    duration: 0,
-    playbackRate: 1.0,
-    loop: false,
-    started: false,
-    buffering: false,
-    progress: false,
-    seeking: false,
+  constructor(props){
+    super(props)
+    this.state = {
+      url: null,
+      playing: true,
+      volume: 0.8,
+      muted: false,
+      played: 0,
+      loaded: 0,
+      duration: 0,
+      playbackRate: 1.0,
+      loop: false,
+      started: false,
+      buffering: false,
+      progress: false,
+      seeking: false,
+      fullscreen: false,
+    }
+    this.playPause = this.playPause.bind(this);
+    this.stop = this.stop.bind(this);
+    this.onPlay = this.onPlay.bind(this);
+    this.onStart = this.onStart.bind(this);
+    this.onProgress = this.onProgress.bind(this);
+    this.onPause = this.onPause.bind(this);
+    this.onDuration = this.onDuration.bind(this);
+    this.onEnded = this.onEnded.bind(this);
+    this.onBuffer = this.onBuffer.bind(this);
+    this.onFullScreen = this.onFullScreen.bind(this);
+    this.onSeekChange = this.onSeekChange.bind(this);
+    this.onSeekMouseDown = this.onSeekMouseDown.bind(this);
+    this.onSeekMouseUp = this.onSeekMouseUp.bind(this);
   }
 
   // LIFECYCLE
@@ -62,8 +81,10 @@ class Video extends Component {
         buffering: false
       })
       this.player.seekTo(0)
+      this.setState({ fullscreen: false })
     }
   }
+
   // VIDEO CONTROL HANDLERS
   playPause = () => {
     this.setState({
@@ -91,18 +112,15 @@ class Video extends Component {
       this.props.video_state('playing')
     }, 1)
   }
-
   onProgress = state => {
     this.setState({ progress: state })
     if (!this.state.seeking) {
       this.setState(state)
     }
   }
-
   onDuration = (duration) => {
     this.setState({ duration })
   }
-
   onPause = () => {
     this.setState({
       playing: false
@@ -112,7 +130,6 @@ class Video extends Component {
   onEnded = () => {
     this.stop()
   }
-
   onStart = () => {
     this.setState({
       started: true,
@@ -122,14 +139,12 @@ class Video extends Component {
     })
     this.props.video_state('start')
   }
-  
   onBuffer = () => {
     this.setState({
       buffering: true
     })
     this.props.video_state('buffering')
   }
-  
   onSeekMouseDown = e => {
     this.setState({ seeking: true })
   }
@@ -140,11 +155,12 @@ class Video extends Component {
     this.setState({ seeking: false })
     this.player.seekTo(parseFloat(e.target.value))
   }
-
+  onFullScreen = e => {
+    screenfull.request(ReactDOM.findDOMNode(this.player.wrapper.children[0]))
+  }
   ref = player => {
     this.player = player
   }
-  
   render () {
     return (
       <VideoWrapper>
@@ -168,14 +184,17 @@ class Video extends Component {
             config={{
               file: {
                 attributes: {
-                  controls: false
+                  controls: this.state.fullscreen
                 }
               }
             }}
           />
           <Seek className={`seeker`}>
             <SeekInput
-              type='range' min={0} max={1} step='any'
+              type='range' 
+              min={0}
+              max={1}
+              step='any'
               value={this.state.played}
               onMouseDown={this.onSeekMouseDown}
               onChange={this.onSeekChange}
@@ -186,10 +205,15 @@ class Video extends Component {
             />
           </Seek>
         </VideoInner>
-        <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
-        <VideoInfo font={this.props.font}>
-          <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
-        </VideoInfo>
+        <FullScreenButton onClick={() => this.onFullScreen()} font={this.props.font}>
+          <span>Full Screen</span>
+        </FullScreenButton>
+        <VideoFooter font={this.props.font}>
+          <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
+          <VideoInfo>
+            <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
+          </VideoInfo>
+        </VideoFooter>
       </VideoWrapper>
     )
   }
@@ -218,22 +242,32 @@ const Seek = styled.div`
 `
 
 const SeekInput = styled.input`
-  -webkit-appearance: none;
+  -webkit-appearance: none!important;
   width: 100%;
   background: transparent;
   margin: 0;
   padding: 0;
   cursor: pointer;
-  &::-webkit-slider-thumb,
+  background-color: ${props => props.rangebg}!important;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none!important;
+    height: 1rem!important;
+    width: .5rem!important;
+    cursor: pointer!important;
+    display: block!important;
+    border: 0!important;
+    border-radius: 0!important;
+    margin: 0!important;
+    background-color: ${props => props.thumbbg}!important;
+  }
   &::-moz-range-thumb {
-    -webkit-appearance: none;
     height: 1rem;
     width: .5rem;
     cursor: pointer;
     display: block;
     border: 0;
     border-radius: 0;
-    background: ${props => props.thumbbg};
+    background-color: ${props => props.thumbbg};
   }
   &::-moz-focus-inner {
     border: 0;
@@ -253,14 +287,20 @@ const SeekInput = styled.input`
   }
   &::-webkit-slider-runnable-track,
   &::-moz-range-track {
-    width: 100%;
-    height: 1rem;
-    cursor: pointer;
-    background: ${props => props.rangebg};
+    -webkit-appearance: none!important;
+    display: block!important;
+    width: 100%!important;
+    height: 1rem!important;
+    cursor: pointer!important;
+    background-color: ${props => props.rangebg}!important;
   }
-  &::-moz-range-progress {
-    background: ${props => props.progressbg};
-    height: 1rem;
+  &::-moz-range-progress,
+  &::-webkit-progress-value,
+  &::-webkit-progress-bar {
+    -webkit-appearance: none!important;
+    display: block!important;
+    background-color: ${props => props.progressbg}!important;
+    height: 1rem!important;
   }
 `
 
@@ -300,7 +340,7 @@ const VideoInner = styled.div`
   height: 100%;
   max-width: 96rem;
   max-height: 70vh;
-  margin: auto;
+  margin: 0 auto 1rem;
   position: relative;
   &:hover {
     .seeker {
@@ -309,17 +349,53 @@ const VideoInner = styled.div`
   }
 `
 
+const VideoFooter = styled.div`
+  ${flexRow};
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  *,
+  button {
+    color: ${colors.white};
+    font-family: ${props => props.font};
+    font-size: ${fonts.sizes.micro};
+  }
+`
+
+const FullScreenButton = styled.button`
+  ${buttonInit};
+  width: 20rem;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  padding: 2rem;
+  color: ${colors.white};
+  font-family: ${props => props.font};
+  font-size: ${fonts.sizes.micro};
+  z-index: 1000;
+  ${opacityTransition};
+  opacity: .5;
+  text-transform: uppercase;
+  &:hover {
+    opacity: 1;
+  }
+`
+
 const PlayPause = styled.button`
   ${buttonInit};
   ${opacityTransition};
-  position: fixed;
-  left: 1.25rem;
   width: 2rem;
   height: 2rem;
   background-position: center;
   background-repeat: no-repeat;
   opacity: .5;
-  bottom: 3.5rem;
   ${media.desktopNav`
     bottom: 1rem;
   `}
@@ -335,18 +411,13 @@ const PlayPause = styled.button`
 `
 
 const VideoInfo = styled.div`
-  position: fixed;
-  right: .5rem;
-  padding: 0 1rem;
-  bottom: 3.75rem;
-  ${media.desktopNav`
-    right: 0;
-    bottom: 1.25rem;
-  `}
+  ${opacityTransition};
+  opacity: .5;
+  text-transform: uppercase;
+  &:hover {
+    opacity: 1;
+  }  
   * {
     text-align: right;
-    color: ${colors.white};
-    font-family: ${props => props.font};
-    font-size: ${fonts.sizes.micro};
   }
 `

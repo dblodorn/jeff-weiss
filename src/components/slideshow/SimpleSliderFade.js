@@ -16,7 +16,6 @@ mixin(_, {
 const transition = 1500
 
 const Slide = props => {
-  console.log(props)
   return (
     <SlideWrap className={props.class}>
       {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
