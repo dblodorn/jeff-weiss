@@ -3,9 +3,9 @@
   require_once( 'flexible-image-gallery-template.php');
   function return_template($template) {
     $template_name = null;
-    if ($template == 'page-templates/template-post-collection.php') {
+    if ($template == 'template-post-collection.php') {
       $template_name = 'post-collection';
-    } else if ($template == 'page-templates/template-flexible-image-gallery.php') {
+    } else if ($template == 'template-flexible-image-gallery.php') {
       $template_name = 'flexible-image-gallery';
     } else {
       $template_name = 'default';
