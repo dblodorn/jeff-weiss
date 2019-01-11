@@ -164,7 +164,7 @@ class Video extends Component {
   render () {
     return (
       <VideoWrapper>
-        
+        <VideoInner>
           <ReactPlayer
             url={this.props.videoUrl}
             className='hero-player'
@@ -184,40 +184,36 @@ class Video extends Component {
             config={{
               file: {
                 attributes: {
-                  controls: true
+                  controls: this.state.fullscreen
                 }
               }
             }}
           />
-          {/*
-            <Seek className={`seeker`}>
-              <SeekInput
-                type='range' 
-                min={0}
-                max={1}
-                step='any'
-                value={this.state.played}
-                onMouseDown={this.onSeekMouseDown}
-                onChange={this.onSeekChange}
-                onMouseUp={this.onSeekMouseUp}
-                rangebg={this.props.color.dark}
-                thumbbg={Color(this.props.color.light).darken(0.1).hex()}
-                progressbg={this.props.color.light}
-              />
-            </Seek>
-          */}
-        
-        {/*
-          <FullScreenButton onClick={() => this.onFullScreen()} font={this.props.font}>
-            <span>Full Screen</span>
-          </FullScreenButton>
-          <VideoFooter font={this.props.font}>
-            <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
-            <VideoInfo>
-              <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
-            </VideoInfo>
-          </VideoFooter>
-         */}
+          <Seek className={`seeker`}>
+            <SeekInput
+              type='range' 
+              min={0}
+              max={1}
+              step='any'
+              value={this.state.played}
+              onMouseDown={this.onSeekMouseDown}
+              onChange={this.onSeekChange}
+              onMouseUp={this.onSeekMouseUp}
+              rangebg={this.props.color.dark}
+              thumbbg={Color(this.props.color.light).darken(0.1).hex()}
+              progressbg={this.props.color.light}
+            />
+          </Seek>
+        </VideoInner>
+        <FullScreenButton onClick={() => this.onFullScreen()} font={this.props.font}>
+          <span>Full Screen</span>
+        </FullScreenButton>
+        <VideoFooter font={this.props.font}>
+          <PlayPause onClick={() => this.playPause()} className={(this.state.playing) ? `playing` : `paused`}/>
+          <VideoInfo>
+            <p>{fmtMSS(this.state.playedSeconds)} / {fmtMSS(this.state.duration)}</p>
+          </VideoInfo>
+        </VideoFooter>
       </VideoWrapper>
     )
   }
