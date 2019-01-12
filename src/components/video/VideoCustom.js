@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import { setVideoPlaying, setVideoState } from './../../state/actions'
 import { buttonInit, opacityTransition, flexRowCenteredVert, media, flexRow } from './../../styles/mixins'
+import { StyledRangeSlider } from './../../styles/components'
 import { colors, heights, fonts } from './../../styles/theme.json'
 
 const fmtMSS = (s) => { 
@@ -190,7 +191,7 @@ class Video extends Component {
             }}
           />
           <Seek className={`seeker`}>
-            <SeekInput
+            <StyledRangeSlider
               type='range' 
               min={0}
               max={1}
@@ -240,70 +241,6 @@ const Seek = styled.div`
   height: 1rem;
   opacity: 0;
 `
-
-const SeekInput = styled.input`
-  -webkit-appearance: none!important;
-  width: 100%;
-  background: transparent;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  background-color: ${props => props.rangebg}!important;
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none!important;
-    height: 1rem!important;
-    width: .5rem!important;
-    cursor: pointer!important;
-    display: block!important;
-    border: 0!important;
-    border-radius: 0!important;
-    margin: 0!important;
-    background-color: ${props => props.thumbbg}!important;
-  }
-  &::-moz-range-thumb {
-    height: 1rem;
-    width: .5rem;
-    cursor: pointer;
-    display: block;
-    border: 0;
-    border-radius: 0;
-    background-color: ${props => props.thumbbg};
-  }
-  &::-moz-focus-inner {
-    border: 0;
-    outline: none;
-    &::-webkit-slider-runnable-track {
-      border: 0;
-      outline: none;
-    }
-  }
-  &:focus {
-    outline: none;
-    border: 0;
-    &::-webkit-slider-runnable-track {
-      border: 0;
-      outline: none;
-    }
-  }
-  &::-webkit-slider-runnable-track,
-  &::-moz-range-track {
-    -webkit-appearance: none!important;
-    display: block!important;
-    width: 100%!important;
-    height: 1rem!important;
-    cursor: pointer!important;
-    background-color: ${props => props.rangebg}!important;
-  }
-  &::-moz-range-progress,
-  &::-webkit-progress-value,
-  &::-webkit-progress-bar {
-    -webkit-appearance: none!important;
-    display: block!important;
-    background-color: ${props => props.progressbg}!important;
-    height: 1rem!important;
-  }
-`
-
 
 const VideoWrapper = styled.div`
   overflow: hidden;

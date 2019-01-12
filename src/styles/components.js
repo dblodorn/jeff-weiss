@@ -44,6 +44,70 @@ const ProportionWrapper = styled.div`
   `}
 `
 
+const StyledRangeSlider = styled.input`
+  -webkit-appearance: none!important;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: ${props => props.rangebg}!important;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none!important;
+    height: 100%!important;
+    width: .5rem!important;
+    cursor: pointer!important;
+    display: block!important;
+    border: 0!important;
+    border-radius: 0!important;
+    margin: 0!important;
+    background-color: ${props => props.thumbbg}!important;
+  }
+  &::-moz-range-thumb {
+    height: 100%!important;
+    width: .5rem;
+    cursor: pointer;
+    display: block;
+    border: 0;
+    border-radius: 0;
+    background-color: ${props => props.thumbbg};
+  }
+  &::-moz-focus-inner {
+    border: 0;
+    outline: none;
+    &::-webkit-slider-runnable-track {
+      border: 0;
+      outline: none;
+    }
+  }
+  &:focus {
+    outline: none;
+    border: 0;
+    &::-webkit-slider-runnable-track {
+      border: 0;
+      outline: none;
+    }
+  }
+  &::-webkit-slider-runnable-track,
+  &::-moz-range-track {
+    -webkit-appearance: none!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    cursor: pointer!important;
+    background-color: ${props => props.rangebg}!important;
+  }
+  &::-moz-range-progress,
+  &::-webkit-progress-value,
+  &::-webkit-progress-bar {
+    -webkit-appearance: none!important;
+    display: block!important;
+    background-color: ${props => props.progressbg}!important;
+    height: 100%!important;
+  }
+`
+
 // TYPE
 const H1 = styled.h1`
   ${_.bigType};
@@ -331,5 +395,6 @@ export {
   CloseButton,
   CloseWrapper,
   SidebarNav,
-  LogoType
+  LogoType,
+  StyledRangeSlider
 }

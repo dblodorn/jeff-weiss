@@ -1,7 +1,12 @@
 import React,  { Component } from 'react'
 import Cropper from 'react-easy-crop'
+import Color from 'color'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { StyledRangeSlider } from './../../../styles/components'
+import { buttonInit, flexCenteredAll } from '../../../styles/mixins'
+import { colors } from './../../../styles/theme.json'
+import debounce from 'lodash/debounce'
 
 class ZoomImg extends Component {
   constructor(props) {
@@ -14,15 +19,31 @@ class ZoomImg extends Component {
     }
     this.onCropChange = this.onCropChange.bind(this)
     this.onZoomChange = this.onZoomChange.bind(this)
+    this.incrementUp = this.incrementUp.bind(this)
+    this.incrementDown = this.incrementDown.bind(this)
   }
 
   onCropChange = crop => {
     this.setState({ crop })
   }
 
-  onZoomChange = zoom => {
-    this.setState({ zoom })
+  onZoomChange = e => {
+    this.setState({ zoom: e.target.value })
   }
+
+  incrementUp = debounce((e) => {
+    console.log(e, this.state.zoom)
+    if (this.state.zoom < 3) {
+      this.setState({ zoom: this.state.zoom + 0.01 })
+    }
+  }, 50)
+
+  incrementDown = debounce((e) => {
+    console.log(e, this.state.zoom)
+    if (this.state.zoom > 1) {
+      this.setState({ zoom: this.state.zoom - 0.01 })
+    }
+  }, 50)
 
   render() {
     return (
@@ -42,14 +63,25 @@ class ZoomImg extends Component {
           }}
       />
         <Controls>
-          {/*<input
-            type="range"
-            min={1}
-            max={3}
-            value={this.state.zoom}
-            aria-labelledby="Zoom"
-            onChange={(zoom) => this.onZoomChange(zoom)}
-          />*/}
+          <ZoomButton color={this.props.color} className={`left`} onClick={(e) => this.incrementDown(e)}>
+            <span>-</span>
+          </ZoomButton>
+          <div className={`zoom-wrapper`}>
+            <StyledRangeSlider
+              type="range"
+              min={1}
+              max={3}
+              step={0.01}
+              value={this.state.zoom}
+              onChange={this.onZoomChange}
+              rangebg={this.props.color.dark}
+              thumbbg={Color(this.props.color.light).darken(0.1).hex()}
+              progressbg={this.props.color.light}
+            />
+          </div>
+          <ZoomButton color={this.props.color} className={`right`} onClick={(e) => this.incrementUp(e)}>
+            <span>+</span>
+          </ZoomButton>
         </Controls>
       </CropWrapper>
     )
@@ -61,6 +93,8 @@ export default connect(
     color: state.color
   })
 )(ZoomImg)
+
+const zoom_height = `1.5rem`
 
 const CropWrapper = styled.div`
   padding: 8rem;
@@ -77,15 +111,41 @@ const CropWrapper = styled.div`
   }
 `
 
+const ZoomButton = styled.button`
+  ${buttonInit};
+  ${flexCenteredAll};
+  width: ${zoom_height};
+  height: ${zoom_height};
+  background-color: ${props => Color(props.color.dark).darken(0.4).hex()};
+  position: absolute;
+  bottom: 0;
+  span {
+    font-size: 1.125rem;
+    line-height: .8;
+    color: ${colors.white};
+  }
+  &.left {
+    left: 0;
+  }
+  &.right {
+    right: 0;
+  }
+`
+
 const Controls = styled.div`
-  width: 100%;
+  width: 100vw;
   display: block;
-  height: 6rem;
+  height: ${zoom_height};
   position: fixed;
   bottom: 0;
   left: 0;
+  padding: 0;
   z-index: 9000;
-  input {
-    width: 100%;
+  .zoom-wrapper {
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: ${zoom_height};
+    width: calc(100vw - (${zoom_height} * 2));
   }
 `
