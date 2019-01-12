@@ -39,10 +39,13 @@
   }
 
   function return_zoom_image() {
+    $image = get_sub_field('zoom_image');
     return array (
       'module' => 'zoom_image',
       'title' => get_sub_field('zoom_title'),
-      'image' => get_sub_field('zoom_image'),
+      'image' => $image['url'],
+      'width' => $image['width'],
+      'height' => $image['height'],
     );
   }
 

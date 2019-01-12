@@ -10,19 +10,14 @@ class ZoomImg extends Component {
       image: this.props.data.image,
       crop: { x: 0, y: 0 },
       zoom: 1,
-      aspect: 4 / 3,
+      aspect: this.props.data.width / this.props.data.height,
     }
     this.onCropChange = this.onCropChange.bind(this)
-    this.onCropComplete = this.onCropComplete.bind(this)
     this.onZoomChange = this.onZoomChange.bind(this)
   }
 
   onCropChange = crop => {
     this.setState({ crop })
-  }
-
-  onCropComplete = (croppedArea, croppedAreaPixels) => {
-    console.log(croppedArea, croppedAreaPixels)
   }
 
   onZoomChange = zoom => {
@@ -31,14 +26,13 @@ class ZoomImg extends Component {
 
   render() {
     return (
-      <CropWrapper color={this.props.color}>
+      <CropWrapper color={this.props.color} width={this.props.data.width} height={this.props.data.height}>
         <Cropper
           image={this.state.image}
           crop={this.state.crop}
           zoom={this.state.zoom}
           aspect={this.state.aspect}
           onCropChange={this.onCropChange}
-          onCropComplete={this.onCropComplete}
           showGrid={false}
           onZoomChange={this.onZoomChange}
           classes={{
@@ -69,9 +63,17 @@ export default connect(
 )(ZoomImg)
 
 const CropWrapper = styled.div`
+  padding: 8rem;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
   .zoom-crop-area {
     color: ${props => props.color.bright};
     border: 3px solid ${props => props.color.dark};
+    margin: auto;
+    max-width: calc(${props => (props.width / 2) * .1}rem - 1px);
+    max-height: ${props => (props.height / 2) * .1}rem;
+    overflow: hidden;
   }
 `
 
