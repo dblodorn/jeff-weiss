@@ -6,21 +6,25 @@ import { flexRowCenteredVert, buttonInit, navWrapperHorizontal, navStyle, flexCe
 import { Close, Info, BackArrow } from './../../../components'
 import SlideShow from './Slideshow'
 import VideoEmbed from './VideoEmbed'
+import ZoomImg from './ZoomImg'
 import NotFound from './../../NotFound'
 import { spacing, widths, colors, heights } from './../../../styles/theme.json'
 
-const LayoutItem = (props) =>
+const LayoutItem = props =>
   <Fragment>
     {(props.show) &&
       <LayoutSection>
         {(props.item.module === 'simple_slideshow' && props.item.slides)
-        ? <SlideShow data={props.item} page_title={props.title} count={props.count}/> :
-        (props.item.module === 'wysiwig_content')
-        ? <WsyWrapper className={props.item.wysiwig_width}>
-            <StyledMarkup dangerouslySetInnerHTML={{ __html: props.item.wysiwig }} />
-          </WsyWrapper> :
-        (props.item.module === 'single_video_photo')
-        ? <VideoEmbed data={props.item} page_title={props.title}/> : null
+          ? <SlideShow data={props.item} page_title={props.title} count={props.count}/> :
+          (props.item.module === 'wysiwig_content')
+          ? <WsyWrapper className={props.item.wysiwig_width}>
+              <StyledMarkup dangerouslySetInnerHTML={{ __html: props.item.wysiwig }} />
+            </WsyWrapper> :
+          (props.item.module === 'single_video_photo')
+          ? <VideoEmbed data={props.item} page_title={props.title}/> : 
+          (props.item.module === 'zoom_image')
+          ? <ZoomImg data={props.item} /> :
+          null
         }
       </LayoutSection>
     }

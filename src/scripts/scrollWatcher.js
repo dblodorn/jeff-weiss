@@ -27,7 +27,7 @@ export default () => {
     const diff = newPixel - scrollPixel
     const speed = diff * 1.125
     const docHeight = documentHeight()
-    store.dispatch(setCurrentPixel(scrollPixel))
+    
     if (speed > diff) {
       scrollTime = scrollTime + 1
       if (scrollTime === threshold) {
@@ -48,21 +48,24 @@ export default () => {
       scrollTime = 0
     }
     scrollPixel = newPixel
-    /*if (scrollPixel === 0 && (store.getState().scroll_direction !== 'at-top')) {
-      if (!top) {
-        directionHandler('at-top')
-        store.dispatch(setCurrentPixel(scrollPixel))
-        top = true
-        bottom = false
+    if (docHeight > store.getState().resize_state.window_height) {
+      store.dispatch(setCurrentPixel(scrollPixel))
+      if (scrollPixel === 0 && (store.getState().scroll_direction !== 'at-top')) {
+        if (!top) {
+          directionHandler('at-top')
+          store.dispatch(setCurrentPixel(scrollPixel))
+          top = true
+          bottom = false
+        }
+      } else if (scrollPixel === docHeight && (store.getState().scroll_direction !== 'at-bottom')) {
+        if (!bottom) {
+          directionHandler('at-bottom')
+          store.dispatch(setCurrentPixel(scrollPixel))
+          top = false
+          bottom = true
+        }
       }
-    } else if (scrollPixel === docHeight && (store.getState().scroll_direction !== 'at-bottom')) {
-      if (!bottom) {
-        directionHandler('at-bottom')
-        store.dispatch(setCurrentPixel(scrollPixel))
-        top = false
-        bottom = true
-      }
-    }*/
+    }
     requestAnimationFrame(looper)
   }
   looper()
