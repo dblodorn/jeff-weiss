@@ -28,13 +28,15 @@ class ZoomImg extends Component {
   }
 
   onZoomChange = e => {
-    this.setState({ zoom: e.target.value })
+    const val = parseFloat(e.target.value)
+    this.setState({ zoom: val })
   }
 
   incrementUp = debounce((e) => {
     console.log(e, this.state.zoom)
     if (this.state.zoom < 3) {
-      this.setState({ zoom: this.state.zoom + 0.01 })
+      const num = 
+      this.setState({ zoom: (this.state.zoom + 0.01) })
     }
   }, 50)
 
