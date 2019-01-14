@@ -35,5 +35,5 @@ export {
   TextOverlay,
   BackArrow,
   Head,
-  SimpleSlider
+  SimpleSlider,
 }

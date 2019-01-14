@@ -2,6 +2,7 @@
 node_modules/
 dist/*
 !dist/_redirects
+!dist/.htaccess
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -17,3 +18,4 @@ _comps
 deploy.json
 api/deploy.json
 api/node_modules
+.env

@@ -1,18 +1,11 @@
 import React, { useState, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
-import debounce from 'lodash/debounce'
-import mixin from 'lodash/mixin'
-import _ from 'lodash/wrapperLodash'
 import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn, media } from './../../styles/mixins'
 import { colors, fonts } from './../../styles/theme.json'
 import { PrevButton, NextButton } from './../utils/PrevNextButton'
 import TextOverlay from './../TextOverlay'
 import FitImage from './../utils/FitImage'
-
-mixin(_, {
-  debounce: debounce
-})
 
 const transition = 1500
 
