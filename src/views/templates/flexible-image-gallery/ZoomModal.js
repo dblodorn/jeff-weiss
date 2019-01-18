@@ -5,7 +5,6 @@ import { ModalWrapper, ModalContentWrapper, MicroP } from './../../../styles/com
 import { colors } from './../../../styles/theme.json'
 import { Modal, FitImage, Close, TextOverlay } from './../../../components'
 import ZoomImg from './ZoomImg'
-import { returnTextOverlay } from './../../../scripts'
 import { flexCenteredAll, fullWindow } from '../../../styles/mixins'
 
 export default class extends React.Component {
@@ -39,7 +38,7 @@ export default class extends React.Component {
           {this.state.modal && (styles =>
             <Modal>
               <ModalWrapper style={styles}>
-                <Close clickFunction={() => this._ImageEnlarge()} color={`#ffffff`} size={`3rem`} stroke={3} top={`.65rem`}/>
+                <Close clickFunction={() => this._ImageEnlarge()} color={`#ffffff`} size={`1.5rem`} stroke={3} top={`0.275rem`}/>
                 <ModalContentWrapper maxHeight={`100vh`}>
                   <ZoomImg data={this.props.data}/>
                 </ModalContentWrapper>

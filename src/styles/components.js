@@ -57,7 +57,7 @@ const StyledRangeSlider = styled.input`
     -webkit-appearance: none;
     border-radius: 0;
     height: ${props => props.height}!important;;
-    width: 1rem!important;
+    width: .5rem!important;
     cursor: pointer!important;
     display: block!important;
     border: 0!important;
