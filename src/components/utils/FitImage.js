@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled, { css } from 'styled-components'
 import Spinner from './Spinner'
 import { heights } from './../../styles/theme.json'
+import { media } from './../../styles/mixins'
 
 const FitImage = props => {
   const [loaded, isLoaded] = useState(false)
@@ -62,5 +63,8 @@ const ImgFit = styled.img`
   right: 0;
   margin: auto;
   overflow: hidden;
-  padding: ${heights.header};
+  padding: 0;
+  ${media.desktopNav`
+    padding: ${heights.header};
+  `}
 `

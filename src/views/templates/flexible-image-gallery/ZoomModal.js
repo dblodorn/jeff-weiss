@@ -1,11 +1,11 @@
 import React from 'react'
 import { Transition } from 'react-spring'
 import styled from 'styled-components'
-import { ModalWrapper, ModalContentWrapper, MicroP } from './../../../styles/components'
+import { ModalWrapper, ModalContentWrapper } from './../../../styles/components'
 import { colors } from './../../../styles/theme.json'
 import { Modal, FitImage, Close, TextOverlay } from './../../../components'
 import ZoomImg from './ZoomImg'
-import { flexCenteredAll, fullWindow } from '../../../styles/mixins'
+import { flexCenteredAll, fullWindow, media } from '../../../styles/mixins'
 
 export default class extends React.Component {
   constructor(props) {
@@ -62,6 +62,10 @@ const ZoomDiv = styled.div`
     text-transform: uppercase;
     color: ${colors.white};
   }
+  padding-bottom: 8rem;
+  ${media.desktopNav`
+    padding-bottom: 0;
+  `}
 `
 
 const ZoomImgWrapper = styled.div`
@@ -72,6 +76,9 @@ const ZoomImgWrapper = styled.div`
   max-width: calc(${props => (props.width / 2) * .1}rem - 1px);
   max-height: ${props => (props.height / 2) * .1}rem;
   img {
-    padding: 1rem;
+    padding: 0;
+    ${media.desktopNav`
+      padding: 1rem;
+    `}
   }
 `

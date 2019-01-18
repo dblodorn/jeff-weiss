@@ -237,78 +237,6 @@ export default connect(
 )(Video)
 
 // STYLES
-const Seek = styled.div`
-  ${flexRowCenteredVert};
-  ${opacityTransition};
-  width: 100%;
-  height: 1rem;
-  opacity: 0;
-`
-
-const SeekInput = styled.input`
-  -webkit-appearance: none!important;
-  width: 100%;
-  background: transparent;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  background-color: ${props => props.rangebg}!important;
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none!important;
-    height: 1rem!important;
-    width: .5rem!important;
-    cursor: pointer!important;
-    display: block!important;
-    border: 0!important;
-    border-radius: 0!important;
-    margin: 0!important;
-    background-color: ${props => props.thumbbg}!important;
-  }
-  &::-moz-range-thumb {
-    height: 1rem;
-    width: .5rem;
-    cursor: pointer;
-    display: block;
-    border: 0;
-    border-radius: 0;
-    background-color: ${props => props.thumbbg};
-  }
-  &::-moz-focus-inner {
-    border: 0;
-    outline: none;
-    &::-webkit-slider-runnable-track {
-      border: 0;
-      outline: none;
-    }
-  }
-  &:focus {
-    outline: none;
-    border: 0;
-    &::-webkit-slider-runnable-track {
-      border: 0;
-      outline: none;
-    }
-  }
-  &::-webkit-slider-runnable-track,
-  &::-moz-range-track {
-    -webkit-appearance: none!important;
-    display: block!important;
-    width: 100%!important;
-    height: 1rem!important;
-    cursor: pointer!important;
-    background-color: ${props => props.rangebg}!important;
-  }
-  &::-moz-range-progress,
-  &::-webkit-progress-value,
-  &::-webkit-progress-bar {
-    -webkit-appearance: none!important;
-    display: block!important;
-    background-color: ${props => props.progressbg}!important;
-    height: 1rem!important;
-  }
-`
-
-
 const VideoWrapper = styled.div`
   overflow: hidden;
   margin: auto;
@@ -320,7 +248,7 @@ const VideoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 10rem;
+  padding-bottom: 8rem;
   ${media.desktopNav`
     padding: ${heights.header};
   `}

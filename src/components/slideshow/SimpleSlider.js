@@ -123,11 +123,16 @@ const ButtonLeft = styled.button`
 
 const SliderWrapper = styled.div`
   ${flexCenteredAll};
-  height: 100vh;
+  height: calc(100vh - 7rem);
+  overflow: hidden;
   width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
+  ${media.desktopNav`
+    top: 0;
+    height: 100vh;
+  `}
 `
 
 const Pagination = styled.div`

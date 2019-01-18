@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
 import { StyledRangeSlider } from './../../../styles/components'
 import { buttonInit, flexCenteredAll, absoluteCentered } from '../../../styles/mixins'
-import { colors } from './../../../styles/theme.json'
 import debounce from 'lodash/debounce'
 
 const zoom_height = `2rem`

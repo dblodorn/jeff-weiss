@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import { themeA, themes } from './../../styles/theme'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { StyledLink, NavItem } from './../../styles/components'
 import { navStyle } from './../../styles/mixins'
@@ -22,13 +21,11 @@ const Menulink = (props) => {
     }
   }
   return (
-    <ThemeProvider theme={themes[props.theme] || themeA}>
-      <NavItem className={props.classes}>
-        <NavLink font={props.font} to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()} className={(`/${props.path}` == `${props.route}`) && `active`}>
-          <span dangerouslySetInnerHTML={{__html: props.page }}/>
-        </NavLink>
-      </NavItem>
-    </ThemeProvider>
+    <NavItem className={props.classes}>
+      <NavLink font={props.font} to={returnLink(props.path, props.sub_route)} onClick={() => menuToggle()} className={(`/${props.path}` == `${props.route}`) && `active`}>
+        <span dangerouslySetInnerHTML={{__html: props.page }}/>
+      </NavLink>
+    </NavItem>
   )
 }
 

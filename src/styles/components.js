@@ -239,9 +239,23 @@ const NavItem = styled.li`
       padding-right: 0;
     }
   `}
-  &.active {
+  a.active {
     pointer-events: none!important;
-    text-decoration: underline;
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      border-bottom: 1px solid ${colors.whiter};
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    ${_.media.desktopNav`
+      &:after {
+        display: none;
+      }
+    `}
   }
   &.sidebar {
     ${_.media.desktopNav`
@@ -256,7 +270,6 @@ const NavItem = styled.li`
       }
     `}
   }
-  &.top-horizontal {}
 `
 
 const SocialLink = styled.a`
