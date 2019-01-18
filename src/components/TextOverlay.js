@@ -25,9 +25,9 @@ const TextOverlay = (props) => {
       mobile={
         <Hammer onTap={handleTap}>
           <OverlayMobile alpha={tapped ? 1 : 0}>
-            <OverlayWrapper bgcolor={props.color.dark} className={tapped && 'tapped'}>
+            <OverlayWrapper bgcolor={props.color.regular} className={tapped && 'tapped'}>
               <StyledMarkup className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
-              {props.zoom && <ZoomCta onClick={props.clickFunction}><MicroP>Click to Zoom</MicroP></ZoomCta>}
+              {props.zoom && <ZoomCta><MicroP>Pinch to Zoom</MicroP></ZoomCta>}
             </OverlayWrapper>
           </OverlayMobile>
         </Hammer>
@@ -72,10 +72,12 @@ const Overlay = styled.div`
 
 const OverlayMobile = styled.div`
   width: 100vw;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 12rem);
   transition: opacity 250ms ease-in-out;
   opacity: ${props => props.alpha};
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 100;
   ${flexCenteredAll};
   * {
@@ -91,11 +93,11 @@ const OverlayWrapper = styled.div`
   width: 100%;
   max-width: ${shared.max_width};
   min-height: 50vh;
-  max-height: calc(80vh - ${heights.header});
   cursor: pointer;
   padding: ${spacing.double_pad};
   ${media.desktopNav`
     opacity: 0;
+    max-height: calc(80vh - ${heights.header});
     &:hover {
       opacity: 1;
     }
@@ -117,5 +119,9 @@ const OverlayWrapper = styled.div`
     display: block;
     z-index: 100;
     pointer-events: none;
+    height: calc(100vh - 12rem);
+    ${media.desktopNav`
+      height: 100vh;
+    `}
   }
 `
