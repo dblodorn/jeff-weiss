@@ -16,14 +16,10 @@ const LayoutItem = props =>
       <LayoutSection>
         {(props.item.module === 'simple_slideshow' && props.item.slides)
           ? <SlideShow data={props.item} page_title={props.title} count={props.count}/> :
-          (props.item.module === 'wysiwig_content')
-          ? <WsyWrapper className={props.item.wysiwig_width}>
-              <StyledMarkup dangerouslySetInnerHTML={{ __html: props.item.wysiwig }} />
-            </WsyWrapper> :
           (props.item.module === 'single_video_photo')
           ? <VideoEmbed data={props.item} page_title={props.title}/> : 
           (props.item.module === 'zoom_image')
-          ? <ZoomModal data={props.item} /> :
+            ? <ZoomModal data={props.item} page_title={props.title}/> :
           null
         }
       </LayoutSection>

@@ -8,6 +8,7 @@ import { buttonInit, flexCenteredAll } from '../../../styles/mixins'
 import { colors } from './../../../styles/theme.json'
 import debounce from 'lodash/debounce'
 
+const zoom_height = `2rem`
 class ZoomImg extends Component {
   constructor(props) {
     super(props)
@@ -79,6 +80,7 @@ class ZoomImg extends Component {
               rangebg={this.props.color.dark}
               thumbbg={Color(this.props.color.light).darken(0.5).hex()}
               progressbg={this.props.color.light}
+              height={zoom_height}
             />
           </div>
           <ZoomButton color={this.props.color} className={`right`} onClick={(e) => this.incrementUp(e)}>
@@ -95,8 +97,6 @@ export default connect(
     color: state.color
   })
 )(ZoomImg)
-
-const zoom_height = `2rem`
 
 const CropWrapper = styled.div`
   width: 100vw;

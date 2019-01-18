@@ -54,15 +54,17 @@ const StyledRangeSlider = styled.input`
   cursor: pointer;
   background-color: ${props => props.rangebg}!important;
   &::-webkit-slider-thumb {
-    -webkit-appearance: none!important;
-    height: 100%!important;
-    width: .5rem!important;
+    -webkit-appearance: none;
+    border-radius: 0;
+    height: ${props => props.height}!important;;
+    width: 1rem!important;
     cursor: pointer!important;
     display: block!important;
     border: 0!important;
     border-radius: 0!important;
     margin: 0!important;
-    background-color: ${props => props.thumbbg}!important;
+    background-color: white;
+    color: white;
   }
   &::-moz-range-thumb {
     height: 100%!important;
@@ -160,7 +162,7 @@ const SmallP = styled.p`
 `
 
 const MicroP = styled.p`
-  font-size: .9rem;
+  font-size: 1rem;
   font-family: ${props => props.font || randomArrItem(fonts)};
 `
 

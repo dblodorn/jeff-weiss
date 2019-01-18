@@ -43,20 +43,10 @@
     return array (
       'module' => 'zoom_image',
       'title' => get_sub_field('zoom_title'),
+      'text_overlay_content' => get_sub_field( 'text_overlay_content'),
       'image' => $image['url'],
       'width' => $image['width'],
       'height' => $image['height'],
-    );
-  }
-
-  // WYSIWIG MODULE
-  function return_wysiwig_content() {
-    return array (
-      'module' => 'wysiwig_content',
-      'title' => get_sub_field('slideshow_title'),
-      'wysiwig' => get_sub_field('wysiwig'),
-      'wysiwig_width' => get_sub_field('wysiwig_width'),
-      'wysiwig_position' => get_sub_field('wysiwig_position'),
     );
   }
 
@@ -69,8 +59,6 @@
           $data = return_simple_slideshow();
         elseif(get_row_layout() == 'single_video_photo'):
           $data = return_single_video_photo();
-        elseif(get_row_layout() == 'wysiwig_content'):
-          $data = return_wysiwig_content();
         elseif(get_row_layout() == 'zoom_image'):
           $data = return_zoom_image();
         endif;

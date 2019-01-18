@@ -3,8 +3,9 @@ import { Transition } from 'react-spring'
 import styled from 'styled-components'
 import { ModalWrapper, ModalContentWrapper, MicroP } from './../../../styles/components'
 import { colors } from './../../../styles/theme.json'
-import { Modal, FitImage, Close } from './../../../components'
+import { Modal, FitImage, Close, TextOverlay } from './../../../components'
 import ZoomImg from './ZoomImg'
+import { returnTextOverlay } from './../../../scripts'
 import { flexCenteredAll, fullWindow } from '../../../styles/mixins'
 
 export default class extends React.Component {
@@ -28,9 +29,11 @@ export default class extends React.Component {
       <React.Fragment>
         <ZoomDiv>
           <ZoomImgWrapper width={this.props.data.width} height={this.props.data.height}>
-            <FitImage clickFunction={() => this._ImageEnlarge()} src={this.props.data.image} fit={'contain'} />
+            {!this.state.modal && 
+              <TextOverlay clickFunction={() => this._ImageEnlarge()} zoom={true} content={`<h2>${(this.props.data.title !== '') ? this.props.data.title : this.props.page_title}</h2><br/>${this.props.data.text_overlay_content}`} />
+            }
+            <FitImage src={this.props.data.image} fit={'contain'} />
           </ZoomImgWrapper>
-          {!this.state.modal && <MicroP>Click Image to Zoom</MicroP>}
         </ZoomDiv>
         <Transition from={{ opacity: 0 }} enter={{ opacity: 1 }} leave={{ opacity: 0, pointerEvents: 'none' }}>
           {this.state.modal && (styles =>
