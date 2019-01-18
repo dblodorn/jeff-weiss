@@ -159,6 +159,11 @@ const SmallP = styled.p`
   font-family: ${props => props.font || randomArrItem(fonts)};
 `
 
+const MicroP = styled.p`
+  font-size: .9rem;
+  font-family: ${props => props.font || randomArrItem(fonts)};
+`
+
 const StyledButton = styled.button`
   ${_.buttonStyle};
 `
@@ -296,18 +301,12 @@ const ModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${props => props.theme.popup_bg_color || colors.black};
-  padding: calc(${heights.header} / 2) 0;
-  ${_.media.desktopNav`
-    padding: calc(${heights.header} / 2);
-  `}
 `
 
 const ModalContentWrapper = styled.div`
   ${_.flexCenteredAll};
-  max-height: ${props => props.maxHeight};
   width: 100%;
   height: 100%;
-  max-width: 100rem;
   position: relative;
 `
 
@@ -396,5 +395,6 @@ export {
   CloseWrapper,
   SidebarNav,
   LogoType,
-  StyledRangeSlider
+  StyledRangeSlider,
+  MicroP
 }

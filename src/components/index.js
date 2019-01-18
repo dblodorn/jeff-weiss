@@ -16,6 +16,7 @@ import VideoModal from './modals/VideoModal'
 import Video from './video/Video'
 import TextOverlay from './TextOverlay'
 import SimpleSlider from './slideshow/SimpleSlider'
+import Modal from './modals/Modal'
 
 export {
   pageData,
@@ -36,4 +37,5 @@ export {
   BackArrow,
   Head,
   SimpleSlider,
+  Modal,
 }

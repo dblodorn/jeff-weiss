@@ -77,7 +77,7 @@ class ZoomImg extends Component {
               value={this.state.zoom}
               onChange={this.onZoomChange}
               rangebg={this.props.color.dark}
-              thumbbg={Color(this.props.color.light).darken(0.1).hex()}
+              thumbbg={Color(this.props.color.light).darken(0.5).hex()}
               progressbg={this.props.color.light}
             />
           </div>
@@ -96,19 +96,18 @@ export default connect(
   })
 )(ZoomImg)
 
-const zoom_height = `1.5rem`
+const zoom_height = `2rem`
 
 const CropWrapper = styled.div`
-  padding: 8rem;
   width: 100vw;
   height: 100vh;
   position: relative;
   .zoom-crop-area {
     color: ${props => props.color.bright};
-    border: 3px solid ${props => props.color.dark};
+    border: 1px solid ${props => props.color.dark};
     margin: auto;
-    max-width: calc(${props => (props.width / 2) * .1}rem - 1px);
-    max-height: ${props => (props.height / 2) * .1}rem;
+    max-width: calc(${props => (props.width / 1.25) * .1}rem - 1px);
+    max-height: ${props => (props.height / 1.25) * .1}rem;
     overflow: hidden;
   }
 `
@@ -122,8 +121,8 @@ const ZoomButton = styled.button`
   position: absolute;
   bottom: 0;
   span {
-    font-size: 1.125rem;
-    line-height: .8;
+    font-size: 1.25rem;
+    line-height: 1;
     color: ${colors.white};
   }
   &.left {
@@ -148,6 +147,6 @@ const Controls = styled.div`
     position: absolute;
     bottom: 0;
     left: ${zoom_height};
-    width: calc(100vw - (${zoom_height} * 2));
+    width: calc(100% - (${zoom_height} * 2));
   }
 `

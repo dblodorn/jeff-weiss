@@ -6,7 +6,7 @@ import { flexRowCenteredVert, buttonInit, navWrapperHorizontal, navStyle, flexCe
 import { Close, Info, BackArrow } from './../../../components'
 import SlideShow from './Slideshow'
 import VideoEmbed from './VideoEmbed'
-import ZoomImg from './ZoomImg'
+import ZoomModal from './ZoomModal'
 import NotFound from './../../NotFound'
 import { spacing, widths, colors, heights } from './../../../styles/theme.json'
 
@@ -23,7 +23,7 @@ const LayoutItem = props =>
           (props.item.module === 'single_video_photo')
           ? <VideoEmbed data={props.item} page_title={props.title}/> : 
           (props.item.module === 'zoom_image')
-          ? <ZoomImg data={props.item} /> :
+          ? <ZoomModal data={props.item} /> :
           null
         }
       </LayoutSection>
