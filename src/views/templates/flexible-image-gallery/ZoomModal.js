@@ -14,7 +14,6 @@ export default class extends React.Component {
       modal: false
     }
     this._ImageEnlarge = this._ImageEnlarge.bind(this)
-    console.log(this.props.data)
   }
 
   _ImageEnlarge() {
@@ -38,9 +37,8 @@ export default class extends React.Component {
           {this.state.modal && (styles =>
             <Modal>
               <ModalWrapper style={styles}>
-                <Close clickFunction={() => this._ImageEnlarge()} color={`#ffffff`} size={`1.5rem`} stroke={3} top={`0.275rem`}/>
                 <ModalContentWrapper maxHeight={`100vh`}>
-                  <ZoomImg data={this.props.data}/>
+                  <ZoomImg data={this.props.data} clickFunction={() => this._ImageEnlarge()}/>
                 </ModalContentWrapper>
               </ModalWrapper>
             </Modal>

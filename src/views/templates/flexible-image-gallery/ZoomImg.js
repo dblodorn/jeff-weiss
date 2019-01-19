@@ -1,4 +1,4 @@
-import React,  { Component } from 'react'
+import React from 'react'
 import Cropper from 'react-easy-crop'
 import Color from 'color'
 import styled, { css } from 'styled-components'
@@ -6,9 +6,10 @@ import { connect } from 'react-redux'
 import { StyledRangeSlider } from './../../../styles/components'
 import { buttonInit, flexCenteredAll, absoluteCentered } from '../../../styles/mixins'
 import debounce from 'lodash/debounce'
+import { Close } from './../../../components'
 
 const zoom_height = `2rem`
-class ZoomImg extends Component {
+class ZoomImg extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,15 +34,12 @@ class ZoomImg extends Component {
   }
 
   incrementUp = debounce((e) => {
-    console.log(e, this.state.zoom)
     if (this.state.zoom < 3) {
-      const num = 
       this.setState({ zoom: (this.state.zoom + 0.01) })
     }
   }, 50)
 
   incrementDown = debounce((e) => {
-    console.log(e, this.state.zoom)
     if (this.state.zoom > 1) {
       this.setState({ zoom: this.state.zoom - 0.01 })
     }
@@ -83,6 +81,7 @@ class ZoomImg extends Component {
             </div>
             <ZoomButton color={this.props.color} className={`right`} onClick={(e) => this.incrementUp(e)}/>
           </div>
+          <Close clickFunction={this.props.clickFunction} color={`#ffffff`} size={`1.5rem`} stroke={3} top={`0.275rem`} position={`absolute`}/>
         </Controls>
       </CropWrapper>
     )
@@ -116,7 +115,7 @@ const Controls = styled.div`
   height: calc(${zoom_height} + 1px);
   display: block;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   padding: 0;
   z-index: 9000;
