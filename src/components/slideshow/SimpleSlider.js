@@ -12,7 +12,7 @@ const transition = 1500
 const Slide = props => {
   return (
     <SlideWrap className={props.class}>
-      {(props.caption) && <TextOverlay slideshow={true} content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
+      {(props.caption) && <TextOverlay slideshow={`multi-slideshow`} content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
       <SlideWrapper>
         <ImgFit>
           <FitImage src={props.slideData.image.large} fit={'contain'} />
@@ -179,10 +179,7 @@ const ImgFit = styled.div`
   ${absoluteCentered};
   max-width: 100%;
   max-height: 100%;
-  padding-bottom: 10rem;
-  ${media.desktopNav`
-    padding: 8rem;
-  `}
+  padding-bottom: 8rem;
 `
 
 const SlideWrapper = styled.div`

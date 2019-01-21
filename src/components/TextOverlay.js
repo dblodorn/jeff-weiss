@@ -31,7 +31,7 @@ const TextOverlay = (props) => {
               {props.zoom && <ZoomCta><MicroP>Pinch to Zoom</MicroP></ZoomCta>}
             </OverlayWrapper>
           </OverlayMobile>
-          <InfoButton className={props.slideshow && `slideshow`}>
+          <InfoButton className={props.slideshow}>
             {!tapped
               ? <Info clickFunction={() => handleTap()} position={`relative`} size={`100%`} top={'0'}/>
               : <Close clickFunction={() => handleTap()} position={`relative`} size={`2.25rem`} top={'0'} color={`#ffffff`} stroke={3}/>
@@ -60,7 +60,12 @@ const InfoButton = styled.div`
   right: 1rem;
   margin: auto;
   z-index: 9000;
-  &.slideshow {
+  &.multi-slideshow{
+    left: 0;
+    right: 0;
+    bottom: 7rem;
+  }
+  &.single-slideshow {
     left: 0;
     right: 0;
     bottom: 8rem;

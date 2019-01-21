@@ -12,6 +12,5 @@ export default (props) =>
 const LoadingWrapper = styled.div`
   ${fullWindow};
   ${flexCenteredAll};
-  background-color: ${props => props.bgcolor};
   overflow: hidden;
 `

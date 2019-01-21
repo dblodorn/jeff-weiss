@@ -31,7 +31,10 @@ const sharedRules = css`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 4rem);
+  ${media.desktopNav`
+    height: 100%;
+  `}
 `
 
 const Wrapper = styled.div`
@@ -63,7 +66,7 @@ const ImgFit = styled.img`
   right: 0;
   margin: auto;
   overflow: hidden;
-  padding: 0;
+  padding: 7.5rem 0 4rem;
   ${media.desktopNav`
     padding: ${heights.header};
   `}

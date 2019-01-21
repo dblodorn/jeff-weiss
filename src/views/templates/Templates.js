@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { pageData } from './../../components'
 import PostCollectionTemplate from './post-collection/PostCollection'
 import FlexibleImageGallery from './flexible-image-gallery/FlexibleImageGallery'
@@ -6,7 +6,7 @@ import NotFound from './../NotFound'
 
 export default pageData(props => {
   return (
-    <Fragment>
+    <React.Fragment>
       {props.project.template === "flexible-image-gallery" ? (
         <FlexibleImageGallery data={props.project} style={props.style} />
       ) : (props.project.template === "default") ? (
@@ -18,7 +18,7 @@ export default pageData(props => {
       ) : (
         <NotFound/>
       )}
-    </Fragment>
+    </React.Fragment>
   )
 })
 

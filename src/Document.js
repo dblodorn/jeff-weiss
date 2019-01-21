@@ -68,9 +68,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     font-style: normal;
     text-decoration: none;
-    background-color: ${props => props.bgcolor};
-    transition: background-color 1000ms ease-in-out;
-    will-change: background-color;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
   }
