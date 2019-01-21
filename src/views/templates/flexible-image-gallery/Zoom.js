@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { PinchView, ReactPinchZoomPan } from 'react-pinch-zoom-pan'
+import { ReactPinchZoomPan } from 'react-pinch-zoom-pan'
 import { ResponsiveWrapper, TextOverlay } from './../../../components'
 import { ZoomImgWrapper, ZoomDiv } from './../../../styles/components'
 import ZoomModal from './ZoomModal'
 
 const ZoomMobile = props => {
-  console.log(props.data)
-  
+
   const getContainerStyle = ratio => {
     return {
       paddingTop: `${ratio.toFixed(2)}%`,
@@ -33,16 +32,16 @@ const ZoomMobile = props => {
   return (
     <ZoomDiv>
       <ZoomImgWrapper width={props.data.width} height={props.data.height}>
-        {/*<TextOverlay zoom={true} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2><br/>${props.data.text_overlay_content}`} />*/}
+        <TextOverlay zoom={true} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2><br/>${props.data.text_overlay_content}`} />
         <div className={`pinch-wrapper`}>
-          <ReactPinchZoomPan maxScale={2} render={obj => {
+          <ReactPinchZoomPan maxScale={4} render={obj => {
             return (
               <div style={getContainerStyle(ratio)}>
                 <div style={getInnerStyle()}>
                   <img 
                     src={props.data.image}
                     style={({
-                      width: '100%', 
+                      width: '100%',
                       height: 'auto', 
                       transform: `scale(${obj.scale}) translateY(${obj.y}px) translateX(${obj.x}px)`,
                       transition: '.3s ease'

@@ -40,9 +40,8 @@ export default connect(
 
 // STYLES
 const MenuWrapper = styled.menu`
-  height: 100%;
-  padding-bottom: .5rem;
   ${media.desktopNav`
+    height: 100%;
     margin-left: auto;
     padding-bottom: 0;
   `}

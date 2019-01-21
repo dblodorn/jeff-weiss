@@ -37,13 +37,6 @@ const Main = styled.main`
   ${flexColumn};
   width: 100vw;
   position: relative;
-  min-height: 100vh;
-  &.sidebar {
-    ${media.desktopNav`
-      padding-left: ${widths.sidebar_desktop};
-      padding-bottom: ${heights.footer};
-    `}
-  }
 `
 
 // NORMALIZE CSS

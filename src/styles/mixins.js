@@ -346,10 +346,13 @@ const fullBg = css`
 const fullWindow = css`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: calc(100% - 8rem);
   position: absolute;
   top: 0;
   left: 0;
+  ${media.desktopNav`
+    height: 100vh;
+  `};
 `
 
 const absoluteTopFull = css`
@@ -487,25 +490,6 @@ const fixedWindow = css`
   }
 `
 
-const halfFixed = css`
-  &.fixed_left {
-    ${fixedWindow};
-    left: 0;
-    border-right: ${shared.border_thin};   
-    &.sidebar {
-      width: calc(50vw - (${widths.sidebar_desktop} / 2));
-      left: ${widths.sidebar_desktop};
-    } 
-  }
-  &.fixed_right {
-    ${fixedWindow};
-    right: 0;
-    &.sidebar {
-      width: calc(50vw - (${widths.sidebar_desktop} / 2));
-    }    
-  }
-`
-
 const navWrapperHorizontal = css`
   width: 100vw;
   ${flexRowCenteredVert};
@@ -574,7 +558,6 @@ export {
   buttonStyle,
   textShadow,
   fixedHero,
-  halfFixed,
   fixedWindow,
   menuTransition,
   navWrapperHorizontal,

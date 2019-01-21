@@ -257,19 +257,6 @@ const NavItem = styled.li`
       }
     `}
   }
-  &.sidebar {
-    ${_.media.desktopNav`
-      padding-bottom: ${spacing.double_pad};
-      padding-right: 0;
-      &.footer {
-        padding-bottom: 0;
-        padding-right: ${spacing.double_pad};
-        &:last-child {
-          padding-right: 0;
-        }
-      }
-    `}
-  }
 `
 
 const SocialLink = styled.a`
@@ -393,19 +380,17 @@ const ZoomDiv = styled.div`
     text-transform: uppercase;
     color: ${colors.white};
   }
-  padding-bottom: 8rem;
-  ${_.media.desktopNav`
-    padding-bottom: 0;
-  `}
 `
 
 const ZoomImgWrapper = styled.div`
   width: 100vw;
-  height: 100vh;
   position: relative;
   display: block;
   max-width: calc(${props => (props.width / 2) * .1}rem - 1px);
   max-height: ${props => (props.height / 2) * .1}rem;
+  ${_.media.desktopNav`
+    height: 100vh;
+  `}
   img {
     padding: 0;
     ${_.media.desktopNav`

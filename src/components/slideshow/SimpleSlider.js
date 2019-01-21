@@ -12,7 +12,7 @@ const transition = 1500
 const Slide = props => {
   return (
     <SlideWrap className={props.class}>
-      {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
+      {(props.caption) && <TextOverlay slideshow={true} content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
       <SlideWrapper>
         <ImgFit>
           <FitImage src={props.slideData.image.large} fit={'contain'} />
@@ -67,7 +67,7 @@ const SimpleSlider = props => {
               <img src={props.slides[prevSlide()].image.large}/>
               <img src={props.slides[nextSlide()].image.large}/>
             </Preload>
-            <Pagination font={props.font}>{`${index + 1} / ${slide_length}`}</Pagination>
+            <Pagination font={props.font}><span>{`${index + 1} / ${slide_length}`}</span></Pagination>
         </Fragment>
         : <InnerSlide>
             <Slide slideData={props.slides[0]} caption={props.caption} class={`current`} />
@@ -139,6 +139,7 @@ const Pagination = styled.div`
   bottom: 4rem;
   width: 100%;
   text-align: center;
+  ${flexCenteredAll};
   pointer-events: none;
   left: 0;
   padding: 0 1rem;
