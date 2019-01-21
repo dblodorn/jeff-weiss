@@ -45,7 +45,6 @@ const GlobalStyles = createGlobalStyle`
     ${colorTransition};
     font-size: 58%;
     background-color: ${props => props.bgcolor};
-    
   }
   @media screen and (min-width: 960px) {
     html {
@@ -54,12 +53,12 @@ const GlobalStyles = createGlobalStyle`
   }
   @media screen and (min-width: 1550px) {
     html {
-      font-size: 72.5%;
+      font-size: 70.5%;
     }
   }
   @media screen and (min-width: 1750px) {
     html {
-      font-size: 78.5%;
+      font-size: 72.5%;
     }
   }
   body {

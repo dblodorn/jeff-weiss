@@ -6,9 +6,11 @@ import { connect } from 'react-redux'
 import { StyledRangeSlider } from './../../../styles/components'
 import { buttonInit, flexCenteredAll, absoluteCentered } from '../../../styles/mixins'
 import debounce from 'lodash/debounce'
-import { Close } from './../../../components'
+import { colors } from './../../../styles/theme.json'
+// import { Close } from './../../../components'
 
-const zoom_height = `2rem`
+const zoom_height = `2.5rem`
+const close_width = `10rem`
 class ZoomImg extends React.Component {
   constructor(props) {
     super(props)
@@ -81,7 +83,7 @@ class ZoomImg extends React.Component {
             </div>
             <ZoomButton color={this.props.color} className={`right`} onClick={(e) => this.incrementUp(e)}/>
           </div>
-          <Close clickFunction={this.props.clickFunction} color={`#ffffff`} size={`1.5rem`} stroke={3} top={`0.275rem`} position={`absolute`}/>
+          <CloseButton onClick={() => this.props.clickFunction()} font={this.props.font} color={this.props.color}><span>CLOSE ZOOM</span></CloseButton>
         </Controls>
       </CropWrapper>
     )
@@ -90,9 +92,37 @@ class ZoomImg extends React.Component {
 
 export default connect(
   state => ({
-    color: state.color
+    color: state.color,
+    font: state.fonts.project_nav,
   })
 )(ZoomImg)
+
+const CloseButton = styled.button`
+  ${buttonInit};
+  ${flexCenteredAll};
+  position: fixed;
+  height: calc(${zoom_height} + 1px);
+  bottom: 0;
+  right: 0;
+  width: ${close_width};
+  color: ${colors.white};
+  text-align: center;
+  background-color: ${props => Color(props.color.dark).darken(0.3).hex()};
+  transition: background-color 250ms ease;
+  will-change: background-color;
+  span {
+    font-family: ${props => props.font}!important;
+    display: block;
+    line-height: 2.5;
+    width: 100%;
+  }
+  &:hover {
+    background-color: ${props => Color(props.color.dark).darken(0.1).hex()};
+    span {
+      text-decoration: underline;
+    }
+  }
+`
 
 const CropWrapper = styled.div`
   width: 100vw;
@@ -120,7 +150,7 @@ const Controls = styled.div`
   padding: 0;
   z-index: 9000;
   .zoom-controls {
-    width: calc(100vw - ${zoom_height});
+    width: calc(100vw - ${close_width});
     border-right: 1px solid ${props => props.color.dark};
     height: ${zoom_height};
     position: absolute;
@@ -152,8 +182,13 @@ const ZoomButton = styled.button`
   width: ${zoom_height};
   height: ${zoom_height};
   background-color: ${props => Color(props.color.dark).darken(0.3).hex()};
+  transition: background-color 250ms ease;
+  will-change: background-color;
   position: absolute;
   top: 0;
+  &:hover {
+    background-color: ${props => Color(props.color.dark).darken(0.1).hex()};
+  }
   &.left {
     left: 0;
     &:after {
