@@ -33,7 +33,7 @@ const ZoomMobile = props => {
   return (
     <ZoomDiv>
       <ZoomImgWrapper width={props.data.width} height={props.data.height}>
-        <TextOverlay zoom={true} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2><br/>${props.data.text_overlay_content}`} />
+        {/*<TextOverlay zoom={true} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2><br/>${props.data.text_overlay_content}`} />*/}
         <div className={`pinch-wrapper`}>
           <ReactPinchZoomPan maxScale={2} render={obj => {
             return (
