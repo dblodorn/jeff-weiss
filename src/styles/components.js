@@ -382,6 +382,47 @@ const SidebarNav = styled.button`
   }
 `
 
+const ZoomDiv = styled.div`
+  ${_.fullWindow};
+  ${_.flexCenteredAll};
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  * {
+    text-transform: uppercase;
+    color: ${colors.white};
+  }
+  padding-bottom: 8rem;
+  ${_.media.desktopNav`
+    padding-bottom: 0;
+  `}
+`
+
+const ZoomImgWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: block;
+  max-width: calc(${props => (props.width / 2) * .1}rem - 1px);
+  max-height: ${props => (props.height / 2) * .1}rem;
+  img {
+    padding: 0;
+    ${_.media.desktopNav`
+      padding: 1rem;
+    `}
+  }
+  .pinch-wrapper {
+    ${_.flexCenteredAll};
+    height: 100%;
+    width: 100%;
+    position: relative;
+    div {
+      width: 100%;
+    }
+  }
+`
+
 export {
   Section,
   Article,
@@ -411,5 +452,7 @@ export {
   SidebarNav,
   LogoType,
   StyledRangeSlider,
-  MicroP
+  MicroP,
+  ZoomDiv,
+  ZoomImgWrapper,
 }

@@ -1,11 +1,8 @@
 import React from 'react'
 import { Transition } from 'react-spring'
-import styled from 'styled-components'
-import { ModalWrapper, ModalContentWrapper } from './../../../styles/components'
-import { colors } from './../../../styles/theme.json'
-import { Modal, FitImage, Close, TextOverlay } from './../../../components'
+import { ModalWrapper, ModalContentWrapper, ZoomImgWrapper, ZoomDiv } from './../../../styles/components'
+import { Modal, FitImage, TextOverlay } from './../../../components'
 import ZoomImg from './ZoomImg'
-import { flexCenteredAll, fullWindow, media } from '../../../styles/mixins'
 
 export default class extends React.Component {
   constructor(props) {
@@ -48,35 +45,3 @@ export default class extends React.Component {
     )
   }
 }
-
-const ZoomDiv = styled.div`
-  ${fullWindow};
-  ${flexCenteredAll};
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  * {
-    text-transform: uppercase;
-    color: ${colors.white};
-  }
-  padding-bottom: 8rem;
-  ${media.desktopNav`
-    padding-bottom: 0;
-  `}
-`
-
-const ZoomImgWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  display: block;
-  max-width: calc(${props => (props.width / 2) * .1}rem - 1px);
-  max-height: ${props => (props.height / 2) * .1}rem;
-  img {
-    padding: 0;
-    ${media.desktopNav`
-      padding: 1rem;
-    `}
-  }
-`

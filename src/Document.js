@@ -5,7 +5,7 @@ import { animationFadeIn, flexColumn, media, colorTransition } from './styles/mi
 import { colors, fonts, heights, widths } from './styles/theme.json'
 import { routeName } from './scripts'
 import { Header, Head } from './components'
-import { LoadingPage } from './views'
+import LoadingPage from './views/LoadingPage'
 
 const Document = props =>
     <Fragment>

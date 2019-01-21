@@ -43,6 +43,7 @@
     "react-helmet": "^5.2.0",
     "react-id-swiper": "^1.6.8",
     "react-lazyload": "^2.3.0",
+    "react-pinch-zoom-pan": "^1.4.5",
     "react-player": "^1.6.6",
     "react-pose": "^4.0.4",
     "react-redux": "^5.0.7",
