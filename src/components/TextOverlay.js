@@ -17,10 +17,11 @@ const TextOverlay = (props) => {
     <ResponsiveWrapper
       desktop={
         <Overlay>
-          <OverlayWrapper bgcolor={props.color.dark}>
+          <OverlayWrapper bgcolor={props.color.dark} onMouseEnter={() => handleTap()} onMouseLeave={() => handleTap()} className={tapped && `show`}>
             <StyledMarkup className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
             {props.zoom && <ZoomCta onClick={props.clickFunction}><MicroP>Click to Zoom</MicroP></ZoomCta>}
           </OverlayWrapper>
+          <OverlayBg className={tapped && `show`} bgcolor={props.color.dark}/>
         </Overlay>
       }
       mobile={
@@ -119,6 +120,26 @@ const OverlayMobile = styled.div`
   }
 `
 
+const OverlayBg = styled.div`
+  background-color: ${props => props.bgcolor};
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  display: block;
+  z-index: 100;
+  pointer-events: none;
+  height: calc(100vh - 12rem);
+  ${media.desktopNav`
+    height: 100vh;
+  `}
+  &.show {
+    opacity: .9;
+    pointer-events: default;
+  }
+`
+
 const OverlayWrapper = styled.div`
   ${opacityTransition};
   position: relative;
@@ -127,35 +148,20 @@ const OverlayWrapper = styled.div`
   width: 100%;
   max-width: ${shared.max_width};
   min-height: 50vh;
+  z-index: 9000;
   cursor: pointer;
   padding: ${spacing.double_pad};
   ${media.desktopNav`
     opacity: 0;
     max-height: calc(80vh - ${heights.header});
-    &:hover {
-      opacity: 1;
-    }
   `}
   .text {
     position: relative;
     display: block;
     z-index: 1000;
   }
-  &:after {
-    background-color: ${props => props.bgcolor};
-    content: '';
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: .9;
-    display: block;
-    z-index: 100;
-    pointer-events: none;
-    height: calc(100vh - 12rem);
-    ${media.desktopNav`
-      height: 100vh;
-    `}
+  &.show {
+    opacity: 1!important;
+    pointer-events: default;
   }
 `
