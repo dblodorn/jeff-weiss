@@ -347,11 +347,11 @@ const SidebarNav = styled.button`
   ${_.opacityTransition};
   ${_.menuTransition};
   position: fixed;
-  top: .25rem;
+  top: 1rem;
   right: 0;
-  width: 4.25rem;
-  height: 5rem;
-  opacity: .9;
+  width: 4.5rem;
+  height: 4rem;
+  opacity: 1;
   cursor: pointer;
   z-index: 8000;
   ${_.media.desktopNav`

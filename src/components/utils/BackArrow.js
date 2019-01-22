@@ -30,7 +30,7 @@ const BackButton = styled.button`
   width: ${props => props.size};
   height: ${props => props.size};
   position: fixed;
-  top: 1.25rem;
+  top: 1.55rem;
   left: 1.25rem;
   padding: 0;
   z-index: 11000;

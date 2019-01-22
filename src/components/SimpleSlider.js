@@ -42,7 +42,7 @@ class Slide extends React.Component {
   render() {
     return (
       <SlideWrap className={this.props.class}>
-        {(this.props.caption) && <TextOverlay slideshow={(this.props.slides.length > 1) && `multi-slideshow`} content={`<h2>${this.props.slideData.image.description.title}</h2><br><p>${this.props.slideData.image.description.caption}</p>`} /> }
+        {(this.props.caption) && <TextOverlay slideshow={(this.props.slides > 1) && `multi-slideshow`} content={`<h2>${this.props.slideData.image.description.title}</h2><br><p>${this.props.slideData.image.description.caption}</p>`} /> }
         {(this.mounted && this.state.updating) &&
           <SlideWrapper>
             <FitImage src={this.props.slideData.image} fit={'contain'} srcset />  
@@ -92,7 +92,7 @@ class SimpleSlider extends React.Component {
               <Pagination font={this.props.font}><span>{`${this.state.index + 1} / ${this.props.slides.length}`}</span></Pagination>
             </React.Fragment>
           : <InnerSlide>
-              <Slide slideData={this.props.slides[0]} caption={this.props.caption} class={`current`} />
+            <Slide slideData={this.props.slides[0]} caption={this.props.caption} class={`current`} slides={this.props.slides.length}/>
             </InnerSlide>
         }
       </SliderWrapper>
