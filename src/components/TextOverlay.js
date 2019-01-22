@@ -18,7 +18,7 @@ const TextOverlay = (props) => {
       desktop={
         <Overlay>
           <OverlayWrapper bgcolor={props.color.dark} onMouseEnter={() => handleTap()} onMouseLeave={() => handleTap()} className={tapped && `show`}>
-            <StyledMarkup className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
+            <StyledMarkup displayFont={props.fonts.header_font} font={props.fonts.body_font} className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
             {props.zoom && <ZoomCta onClick={props.clickFunction}><MicroP>Click to Zoom</MicroP></ZoomCta>}
           </OverlayWrapper>
           <OverlayBg className={tapped && `show`} bgcolor={props.color.dark}/>
@@ -28,7 +28,7 @@ const TextOverlay = (props) => {
         <React.Fragment>
           <OverlayMobile className={tapped && `show`} wh={props.wh}>
             <OverlayWrapper bgcolor={props.color.regular} className={tapped && 'tapped'}>
-              <StyledMarkup className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
+              <StyledMarkup displayFont={props.fonts.header_font} font={props.fonts.body_font} className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
               {props.zoom && <ZoomCta><MicroP>Pinch to Zoom</MicroP></ZoomCta>}
             </OverlayWrapper>
           </OverlayMobile>
@@ -48,7 +48,8 @@ const TextOverlay = (props) => {
 export default connect(
   state => ({
     color: state.color,
-    wh: state.resize_state.window_height
+    wh: state.resize_state.window_height,
+    fonts: state.fonts,
   })
 )(TextOverlay)
 

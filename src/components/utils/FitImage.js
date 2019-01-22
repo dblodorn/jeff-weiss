@@ -26,19 +26,16 @@ export default connect(
   })
 )(FitImage)
 
-const sharedRules = css`
+const Wrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
   ${media.desktopNav`
     height: 100%;
   `}
-`
-
-const Wrapper = styled.div`
-  ${sharedRules};
 `
 
 const ImgWrapper = styled.div`

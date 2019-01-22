@@ -30,7 +30,7 @@ const ZoomMobile = props => {
   const ratio = (props.data.height / props.data.width) * 100
 
   return (
-    <ZoomDiv>
+    <ZoomDiv height={props.height}>
       <ZoomImgWrapper width={props.data.width} height={props.data.height}>
         <TextOverlay zoom={true} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2><br/>${props.data.text_overlay_content}`} />
         <div className={`pinch-wrapper`}>
@@ -62,12 +62,13 @@ const Zoom = props =>
       <ZoomModal data={props.data} page_title={props.title}/>
     }
     mobile={
-      <ZoomMobile data={props.data} color={props.color} page_title={props.title}/>
+      <ZoomMobile data={props.data} color={props.color} page_title={props.title} height={props.wh}/>
     }
   />
 
 export default connect(
   state => ({
-    color: state.color
+    color: state.color,
+    wh: state.resize_state.window_height,
   })
 )(Zoom)

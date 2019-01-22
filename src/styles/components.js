@@ -370,12 +370,15 @@ const SidebarNav = styled.button`
 `
 
 const ZoomDiv = styled.div`
-  ${_.fullWindow};
   ${_.flexCenteredAll};
-  flex-direction: column;
+  height: ${props => props.height}px;
+  width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
+  ${_.media.desktopNav`
+    height: 100vh;
+  `}
   * {
     text-transform: uppercase;
     color: ${colors.white};

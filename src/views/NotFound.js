@@ -15,7 +15,7 @@ class NotFound extends Component {
     return (
       <NotFoundSection>
         <NFWrapper>
-          <StyledMarkup className={'text'} dangerouslySetInnerHTML={{ __html:
+          <StyledMarkup displayFont={props.fonts.header_font} font={props.fonts.body_font} className={'text'} dangerouslySetInnerHTML={{ __html:
             `<p>Sorry this content cannot be found.</p>`
           }}/>
           <Link to={'/'}><span>Return Home.</span></Link>
@@ -26,7 +26,9 @@ class NotFound extends Component {
 }
 
 export default connect(
-  state => ({}),
+  state => ({
+    fonts: state.fonts,
+  }),
   dispatch => ({
     menu_toggle: (bool) => dispatch(setHeaderState(bool))
   })
