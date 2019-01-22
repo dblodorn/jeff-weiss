@@ -3,15 +3,18 @@
     $id = $image['ID'];
     $post = get_post($id);
     $formatImg = array(
+      'xlarge' => $image['url'],
       'large' => $image['url'],
       'medium' => $image['sizes']['large'],
       'small' => $image['sizes']['medium'],
       'id' => $image['ID'],
+      'size' => array(
+        'w' => $image['height'],
+        'h' => $image['width']
+      ),
       'description' => array(
-        'alt' => get_post_meta($id)['_wp_attachment_image_alt'][0],
         'title' =>  $post->post_title,
         'caption' => $post->post_excerpt,
-        'description' => $post->post_content,
       )
     );
     return $formatImg;

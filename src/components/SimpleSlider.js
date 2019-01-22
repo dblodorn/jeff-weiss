@@ -1,67 +1,103 @@
-import React, { useState, Fragment } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
-import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn, media } from './../styles/mixins'
+import { absoluteTopFull, flexCenteredAll, buttonInit, animationFadeIn, media } from './../styles/mixins'
 import { colors, fonts } from './../styles/theme.json'
 import { PrevButton, NextButton } from './utils/PrevNextButton'
 import TextOverlay from './TextOverlay'
 import FitImage from './utils/FitImage'
 
-const Slide = props => {
-  return (
-    <SlideWrap className={props.class}>
-      {(props.caption) && <TextOverlay slideshow={(props.slides.length > 1) && `multi-slideshow`} content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
-      <SlideWrapper>
-        <FitImage src={props.slideData.image.large} fit={'contain'} />
-      </SlideWrapper>
-    </SlideWrap>
-  )
+class Slide extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      updating: true
+    }
+    this.timer = this.timer.bind(this)
+  }
+
+  componentDidMount = () => {
+    this.mounted = true;
+    this.timeout = this.timer();
+  }
+  
+  componentWillUpdate(nextProps) {
+    if (this.props !== nextProps) {
+      this.setState({updating: false})
+      if (this.mounted) {
+        this.timer()
+      }
+    }
+  }
+
+  timer = () =>
+    setTimeout(() => {
+      this.setState({ updating: true })
+    }, 1);
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  render() {
+    return (
+      <SlideWrap className={this.props.class}>
+        {(this.props.caption) && <TextOverlay slideshow={(this.props.slides.length > 1) && `multi-slideshow`} content={`<h2>${this.props.slideData.image.description.title}</h2><br><p>${this.props.slideData.image.description.caption}</p>`} /> }
+        {(this.mounted && this.state.updating) &&
+          <SlideWrapper>
+            <FitImage src={this.props.slideData.image} fit={'contain'} srcset />  
+          </SlideWrapper>
+        }
+      </SlideWrap>
+    )
+  }
 }
 
-const SimpleSlider = props => {
-  const [index, setIndex] = useState(0)
-  const slide_length = props.slides.length
-  
-  const nextHandler = () => {
-    if (index === (slide_length - 1)) {
-      setIndex(0)
+class SimpleSlider extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      index: 0
+    }
+    this.nextHandler = this.nextHandler.bind(this);
+    this.prevHandler = this.prevHandler.bind(this);
+  }
+
+  nextHandler = () => {
+    if (this.state.index === (this.props.slides.length - 1)) {
+      this.setState({ index: 0})
     } else {
-      setIndex(index + 1)
+      this.setState({ index: this.state.index + 1 })
     }
   }
 
-  const prevHandler = () => {
-    if (index === 0) {
-      setIndex(slide_length - 1)
+  prevHandler = () => {
+    if (this.state.index === 0) {
+      this.setState({ index: this.props.slides.length - 1 })
     } else {
-      setIndex(index - 1)
+      this.setState({ index: this.state.index - 1 })
     }
   }
 
-  const prevSlide = () => (index === 0) ? slide_length - 1 : index - 1
-  const nextSlide = () => (index === (slide_length - 1)) ? 0 : index + 1
-
-  return (
-    <SliderWrapper wh={props.wh}>
-      {(props.slides.length > 1)
-        ? <Fragment>
-            <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
-            <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
-            <InnerSlide>
-            <Slide slideData={props.slides[index]} caption={props.captions} slides={props.slides.length}/>
+  render() {
+    return (
+      <SliderWrapper wh={this.props.wh}>
+        {(this.props.slides.length > 1)
+          ? <React.Fragment>
+              <InnerSlide>
+                <Slide slideData={this.props.slides[this.state.index]} caption={this.props.captions} slides={this.props.slides.length}/>
+              </InnerSlide>
+              <ButtonLeft onClick={() => this.prevHandler()}><PrevButton /></ButtonLeft>
+              <ButtonRight onClick={() => this.nextHandler()}><NextButton /></ButtonRight>
+              <Pagination font={this.props.font}><span>{`${this.state.index + 1} / ${this.props.slides.length}`}</span></Pagination>
+            </React.Fragment>
+          : <InnerSlide>
+              <Slide slideData={this.props.slides[0]} caption={this.props.caption} class={`current`} />
             </InnerSlide>
-            <Preload>
-              <img src={props.slides[prevSlide()].image.large}/>
-              <img src={props.slides[nextSlide()].image.large}/>
-            </Preload>
-            <Pagination font={props.font}><span>{`${index + 1} / ${slide_length}`}</span></Pagination>
-          </Fragment>
-        : <InnerSlide>
-            <Slide slideData={props.slides[0]} caption={props.caption} class={`current`} />
-          </InnerSlide>
-      }
-    </SliderWrapper>
-  )
+        }
+      </SliderWrapper>
+    )
+  }
 }
 
 export default connect(
@@ -70,17 +106,6 @@ export default connect(
     wh: state.resize_state.window_height
   })
 )(SimpleSlider)
-
-// Styles
-const Preload = styled.div`
-  display: none;
-  position: fixed;
-  top: -500;
-  left: -500;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-`
 
 const buttonWrap = css`
   ${buttonInit};
@@ -110,6 +135,7 @@ const ButtonLeft = styled.button`
 `
 
 const SliderWrapper = styled.div`
+  ${animationFadeIn(250, 50)};
   ${flexCenteredAll};
   top: 0;
   left: 0;
@@ -123,7 +149,7 @@ const SliderWrapper = styled.div`
 `
 
 const Pagination = styled.div`
-  bottom: 3rem;
+  bottom: 2.75rem;
   width: 100%;
   text-align: center;
   ${flexCenteredAll};
@@ -150,8 +176,7 @@ const SlideWrap = styled.div`
   ${absoluteTopFull};
   width: 100vw;
   height: 100%;
-  padding-bottom: 8rem;
-  z-index: 0;
+  z-index: 0!important;
   &.current {
     z-index: 90;
   }
@@ -163,6 +188,7 @@ const SlideWrap = styled.div`
 const SlideWrapper = styled.div`
   ${absoluteTopFull};
   ${flexCenteredAll};
-  z-index: 50;
+  ${animationFadeIn(350, 50)};
+  z-index: 0!important;
   pointer-events: none;
 `

@@ -66,7 +66,7 @@ const InfoButton = styled.div`
   margin: auto;
   z-index: 9000;
   &.multi-slideshow {
-    bottom: 6.75rem;
+    bottom: 6.25rem;
   }
 `
 
@@ -128,14 +128,14 @@ const OverlayBg = styled.div`
   left: 0;
   opacity: 0;
   display: block;
-  z-index: 8999;
   pointer-events: none;
+  z-index: 8999;
   ${media.desktopNav`
     height: 100vh;
   `}
   &.show {
     opacity: .9;
-    pointer-events: default;
+    pointer-events: initial;
   }
 `
 
@@ -160,6 +160,6 @@ const OverlayWrapper = styled.div`
   }
   &.show {
     opacity: 1!important;
-    pointer-events: default;
+    pointer-events: initial;
   }
 `

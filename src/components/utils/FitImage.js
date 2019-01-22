@@ -11,7 +11,7 @@ const FitImage = props => {
     <Wrapper>
       <ImgWrapper alpha={loaded ? 1 : 0} onClick={props.clickFunction} className={(props.clickFunction) && 'hover'}>
         {(props.srcset)
-          ? <ImgFit width={props.src.size.w} height={props.src.size.h} src={props.src.small} srcSet={`${props.src.small} 300w, ${props.src.medium} 768w, ${props.src.medium} 1280w, ${props.src.large} 3200w`} onLoad={() => isLoaded(true)} fit={props.fit || 'cover'} />
+          ? <ImgFit width={props.src.size.w} height={props.src.size.h} src={props.src.small} srcSet={`${props.src.small} 475w, ${props.src.medium} 750w, ${props.src.medium} 1280w, ${props.src.large} 3200w`} onLoad={() => isLoaded(true)} fit={props.fit || 'contain'} />
           : <ImgFit src={props.src} onLoad={() => isLoaded(true)} fit={props.fit || 'contain'} />
         }
       </ImgWrapper>
@@ -58,7 +58,7 @@ const ImgFit = styled.img`
   left: 0;
   margin: auto;
   overflow: hidden;
-  padding: 6rem 0 10rem;
+  padding: 6rem 0 11rem;
   ${media.desktopNav`
     padding: calc(${heights.header} + 1.5%);
   `}
