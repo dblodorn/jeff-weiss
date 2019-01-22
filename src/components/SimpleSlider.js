@@ -1,26 +1,18 @@
 import React, { useState, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
-import debounce from 'lodash/debounce'
-import mixin from 'lodash/mixin'
-import _ from 'lodash/wrapperLodash'
-import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn, media } from './../../styles/mixins'
-import { colors, fonts } from './../../styles/theme.json'
-import { PrevButton, NextButton } from './../utils/PrevNextButton'
-import TextOverlay from './../TextOverlay'
-
-mixin(_, {
-  debounce: debounce
-})
-
-const transition = 1500
+import { absoluteTopFull, absoluteCentered, flexCenteredAll, buttonInit, animationFadeOut, animationFadeIn, media } from './../styles/mixins'
+import { colors, fonts } from './../styles/theme.json'
+import { PrevButton, NextButton } from './utils/PrevNextButton'
+import TextOverlay from './TextOverlay'
+import FitImage from './utils/FitImage'
 
 const Slide = props => {
   return (
     <SlideWrap className={props.class}>
-      {(props.caption) && <TextOverlay content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
+      {(props.caption) && <TextOverlay slideshow={(props.slides.length > 1) && `multi-slideshow`} content={`<h2>${props.slideData.image.description.title}</h2><br><p>${props.slideData.image.description.caption}</p>`} /> }
       <SlideWrapper>
-        <ImgFit src={props.slideData.image.large} />
+        <FitImage src={props.slideData.image.large} fit={'contain'} />
       </SlideWrapper>
     </SlideWrap>
   )
@@ -28,14 +20,9 @@ const Slide = props => {
 
 const SimpleSlider = props => {
   const [index, setIndex] = useState(0)
-  const [active, setActive] = useState(0)
   const slide_length = props.slides.length
   
   const nextHandler = () => {
-    setActive(1)
-    setTimeout(() => {
-      setActive(0)
-    }, transition)
     if (index === (slide_length - 1)) {
       setIndex(0)
     } else {
@@ -44,10 +31,6 @@ const SimpleSlider = props => {
   }
 
   const prevHandler = () => {
-    setActive(2)
-    setTimeout(() => {
-      setActive(0)
-    }, transition)
     if (index === 0) {
       setIndex(slide_length - 1)
     } else {
@@ -58,27 +41,21 @@ const SimpleSlider = props => {
   const prevSlide = () => (index === 0) ? slide_length - 1 : index - 1
   const nextSlide = () => (index === (slide_length - 1)) ? 0 : index + 1
 
-  console.log(props)
-
   return (
-    <SliderWrapper>
+    <SliderWrapper wh={props.wh}>
       {(props.slides.length > 1)
         ? <Fragment>
             <ButtonLeft onClick={() => prevHandler()}><PrevButton/></ButtonLeft>
             <ButtonRight onClick={() => nextHandler()}><NextButton/></ButtonRight>
             <InnerSlide>
-              {(active === 2) && <Slide slideData={props.slides[nextSlide()]} caption={props.caption} class={`next`} />}
-              {(active === 2) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
-              {(active === 1) && <Slide slideData={props.slides[prevSlide()]} caption={props.caption} class={`next`} />}
-              {(active === 1) && <Slide slideData={props.slides[index]} caption={props.caption} class={`current`} />}
-              {(active === 0) && <Slide slideData={props.slides[index]} caption={props.caption} />}
+            <Slide slideData={props.slides[index]} caption={props.captions} slides={props.slides.length}/>
             </InnerSlide>
             <Preload>
               <img src={props.slides[prevSlide()].image.large}/>
               <img src={props.slides[nextSlide()].image.large}/>
             </Preload>
-            <Pagination font={props.font}>{`${index + 1} / ${slide_length}`}</Pagination>
-        </Fragment>
+            <Pagination font={props.font}><span>{`${index + 1} / ${slide_length}`}</span></Pagination>
+          </Fragment>
         : <InnerSlide>
             <Slide slideData={props.slides[0]} caption={props.caption} class={`current`} />
           </InnerSlide>
@@ -89,7 +66,8 @@ const SimpleSlider = props => {
 
 export default connect(
   state => ({
-    font: state.fonts.top_menu
+    font: state.fonts.top_menu,
+    wh: state.resize_state.window_height
   })
 )(SimpleSlider)
 
@@ -110,7 +88,7 @@ const buttonWrap = css`
   width: 3rem;
   height: 3rem;
   position: fixed;
-  bottom: 3.5rem;
+  bottom: 2rem;
   margin: auto;
   z-index: 9000;
   ${media.desktopNav`
@@ -133,17 +111,22 @@ const ButtonLeft = styled.button`
 
 const SliderWrapper = styled.div`
   ${flexCenteredAll};
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
   top: 0;
   left: 0;
+  position: fixed;
+  height: ${props => props.wh}px;
+  width: 100vw;
+  overflow: hidden;
+  ${media.desktopNav`
+    height: 100vh;
+  `}
 `
 
 const Pagination = styled.div`
-  bottom: 4rem;
+  bottom: 3rem;
   width: 100%;
   text-align: center;
+  ${flexCenteredAll};
   pointer-events: none;
   left: 0;
   padding: 0 1rem;
@@ -159,35 +142,22 @@ const Pagination = styled.div`
 const InnerSlide = styled.div`
   ${absoluteTopFull};
   width: 100vw;
-  height: 100vh;
-  position: relative;
+  height: 100%;
 `
 
 // SLIDE
 const SlideWrap = styled.div`
   ${absoluteTopFull};
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  padding-bottom: 8rem;
   z-index: 0;
   &.current {
-    ${animationFadeIn(transition, 0)};
     z-index: 90;
   }
   &.next {
-    ${animationFadeOut(transition)};
     z-index: 100;
   }
-`
-
-const ImgFit = styled.img`
-  ${absoluteCentered};
-  object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
-  padding-bottom: 10rem;
-  ${media.desktopNav`
-    padding: 8rem;
-  `}
 `
 
 const SlideWrapper = styled.div`

@@ -26,7 +26,7 @@ const TextOverlay = (props) => {
       }
       mobile={
         <React.Fragment>
-          <OverlayMobile className={tapped && `show`}>
+          <OverlayMobile className={tapped && `show`} wh={props.wh}>
             <OverlayWrapper bgcolor={props.color.regular} className={tapped && 'tapped'}>
               <StyledMarkup className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
               {props.zoom && <ZoomCta><MicroP>Pinch to Zoom</MicroP></ZoomCta>}
@@ -38,7 +38,7 @@ const TextOverlay = (props) => {
               : <Close clickFunction={() => handleTap()} position={`relative`} size={`2.25rem`} top={'0'} color={`#ffffff`} stroke={3}/>
             }
           </InfoButton>
-          <OverlayBg className={tapped && `show`} bgcolor={props.color.dark} />
+          <OverlayBg className={tapped && `show`} bgcolor={props.color.dark} wh={props.wh}/>
         </React.Fragment>
       }
     />
@@ -47,7 +47,8 @@ const TextOverlay = (props) => {
 
 export default connect(
   state => ({
-    color: state.color
+    color: state.color,
+    wh: state.resize_state.window_height
   })
 )(TextOverlay)
 
@@ -59,18 +60,12 @@ const InfoButton = styled.div`
   height: 2.25rem;
   position: fixed;
   bottom: 3.85rem;
-  right: 1rem;
+  left: 0;
+  right: 0;
   margin: auto;
   z-index: 9000;
-  &.multi-slideshow{
-    left: 0;
-    right: 0;
-    bottom: 7rem;
-  }
-  &.single-slideshow {
-    left: 0;
-    right: 0;
-    bottom: 8rem;
+  &.multi-slideshow {
+    bottom: 6.75rem;
   }
 `
 
@@ -89,13 +84,14 @@ const ZoomCta = styled.button`
 `
 
 const Overlay = styled.div`
+  ${flexCenteredAll};
   width: calc(100vw - (${heights.header} * 2));
   height: calc(100vh - (${heights.header} * 2));
-  ${flexCenteredAll};
   top: ${heights.header};
   left: ${heights.header};
   position: fixed;
   z-index: 12000;
+  cursor: pointer;
   * {
     color: ${colors.white};
   }
@@ -103,13 +99,13 @@ const Overlay = styled.div`
 
 const OverlayMobile = styled.div`
   width: 100vw;
-  height: calc(100vh - 12rem);
+  height: ${props => props.wh}px;
   transition: opacity 250ms ease-in-out;
   opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 9000;
   pointer-events: none;
   &.show {
     opacity: 1;
@@ -122,16 +118,17 @@ const OverlayMobile = styled.div`
 `
 
 const OverlayBg = styled.div`
+  ${opacityTransition};
   background-color: ${props => props.bgcolor};
+  height: ${props => props.wh}px;
   width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
   opacity: 0;
   display: block;
-  z-index: 50;
+  z-index: 8999;
   pointer-events: none;
-  height: 100vh;
   ${media.desktopNav`
     height: 100vh;
   `}
@@ -150,7 +147,6 @@ const OverlayWrapper = styled.div`
   max-width: ${shared.max_width};
   min-height: 50vh;
   z-index: 9000;
-  cursor: pointer;
   padding: ${spacing.double_pad};
   ${media.desktopNav`
     opacity: 0;

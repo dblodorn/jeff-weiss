@@ -31,7 +31,7 @@ const sharedRules = css`
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh - 8rem);
+  height: 100%;
   ${media.desktopNav`
     height: 100%;
   `}
@@ -42,32 +42,27 @@ const Wrapper = styled.div`
 `
 
 const ImgWrapper = styled.div`
-  ${sharedRules};
+  position: relative;
   opacity: ${props => props.alpha};
   width: 100%;
   height: 100%;
   transition: opacity 250ms ease-in-out;
   will-change: opacity;
   overflow: hidden;
-  &.hover {
-    cursor: pointer;
-    &:hover {
-      img {
-        opacity: .75;
-      }
-    }
-  }
 `
 
 const ImgFit = styled.img`
-  ${sharedRules};
   object-fit: ${props => props.fit};
+  width: 100%;
+  height: 100%;
   bottom: 0;
   right: 0;
+  top: 0;
+  left: 0;
   margin: auto;
   overflow: hidden;
-  padding: 9.5rem 0 1.5rem;
+  padding: 6rem 0 10rem;
   ${media.desktopNav`
-    padding: ${heights.header};
+    padding: calc(${heights.header} + 1.5%);
   `}
 `

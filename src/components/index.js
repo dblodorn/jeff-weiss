@@ -11,7 +11,7 @@ import BackArrow from './utils/BackArrow'
 import Info from './utils/Info'
 import Video from './video/Video'
 import TextOverlay from './TextOverlay'
-import SimpleSlider from './slideshow/SimpleSlider'
+import SimpleSlider from './SimpleSlider'
 import Modal from './Modal'
 import ResponsiveWrapper from './ResponsiveWrapper'
 

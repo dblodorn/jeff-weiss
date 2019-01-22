@@ -5,13 +5,17 @@ import { colors } from './../../styles/theme.json'
 
 const Button = styled.div`
   ${buttonInit};
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   &:hover {
     svg {
       opacity: 1;
     }
   }
+  ${media.desktopNav`
+    width: 2.75rem;
+    height: 2.75rem;
+  `}
   svg {
     ${opacityTransition};
     opacity: 1;
@@ -20,7 +24,7 @@ const Button = styled.div`
     object-fit: contain;
     fill: ${colors.white};
     ${media.desktopNav`
-      opacity: .75;
+      opacity: .95;
     `}
   }
 `

@@ -6,7 +6,7 @@ import { SimpleSlider, TextOverlay } from './../../../components'
 export default props =>
   <CarouselWrapper>
     {(props.data.has_text_overlay && !props.data.captions) &&
-      <TextOverlay slideshow={`single-slideshow`} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2>${returnTextOverlay(props)}`}/>
+      <TextOverlay slideshow={(props.data.slides.length > 1) && `multi-slideshow`} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2>${returnTextOverlay(props)}`}/>
     }
     <SimpleSlider 
       slides={props.data.slides}
