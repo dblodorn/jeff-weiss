@@ -12,7 +12,7 @@ const FitImage = props => {
       <ImgWrapper alpha={loaded ? 1 : 0} onClick={props.clickFunction} className={(props.clickFunction) && 'hover'}>
         {(props.srcset)
           ? <ImgFit width={props.src.size.w} height={props.src.size.h} src={props.src.small} srcSet={`${props.src.small} 300w, ${props.src.medium} 768w, ${props.src.medium} 1280w, ${props.src.large} 3200w`} onLoad={() => isLoaded(true)} fit={props.fit || 'cover'} />
-          : <ImgFit src={props.src} onLoad={() => isLoaded(true)} fit={props.fit || 'cover'} />
+          : <ImgFit src={props.src} onLoad={() => isLoaded(true)} fit={props.fit || 'contain'} />
         }
       </ImgWrapper>
       {(!loaded) && <Spinner size={'4rem'} color={props.color.dark} stroke={1} />}
@@ -31,7 +31,7 @@ const sharedRules = css`
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 4rem);
+  height: calc(100vh - 8rem);
   ${media.desktopNav`
     height: 100%;
   `}
@@ -66,7 +66,7 @@ const ImgFit = styled.img`
   right: 0;
   margin: auto;
   overflow: hidden;
-  padding: 7.5rem 0 4rem;
+  padding: 9.5rem 0 1.5rem;
   ${media.desktopNav`
     padding: ${heights.header};
   `}

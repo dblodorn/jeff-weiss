@@ -62,8 +62,7 @@ const GlobalStyles = createGlobalStyle`
     }
   }
   body {
-    font-family: arial;
-    color: ${colors.black};
+    color: ${colors.white};
     font-family: ${fonts.sans};
     font-weight: 300;
     font-style: normal;

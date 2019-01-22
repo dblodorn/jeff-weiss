@@ -38,6 +38,7 @@ const TextOverlay = (props) => {
               : <Close clickFunction={() => handleTap()} position={`relative`} size={`2.25rem`} top={'0'} color={`#ffffff`} stroke={3}/>
             }
           </InfoButton>
+          <OverlayBg className={tapped && `show`} bgcolor={props.color.dark} />
         </React.Fragment>
       }
     />
@@ -128,9 +129,9 @@ const OverlayBg = styled.div`
   left: 0;
   opacity: 0;
   display: block;
-  z-index: 100;
+  z-index: 50;
   pointer-events: none;
-  height: calc(100vh - 12rem);
+  height: 100vh;
   ${media.desktopNav`
     height: 100vh;
   `}

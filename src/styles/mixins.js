@@ -346,7 +346,7 @@ const fullBg = css`
 const fullWindow = css`
   display: flex;
   width: 100vw;
-  height: calc(100% - 8rem);
+  height: calc(100vh - 8rem);
   position: absolute;
   top: 0;
   left: 0;

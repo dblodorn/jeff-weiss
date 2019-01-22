@@ -100,7 +100,7 @@ const buttonWrap = css`
   width: 3rem;
   height: 3rem;
   position: fixed;
-  bottom: 3.5rem;
+  bottom: 2.5rem;
   margin: auto;
   z-index: 9000;
   ${media.desktopNav`
@@ -123,7 +123,7 @@ const ButtonLeft = styled.button`
 
 const SliderWrapper = styled.div`
   ${flexCenteredAll};
-  height: calc(100vh - 7rem);
+  height: calc(100vh - 8rem);
   overflow: hidden;
   width: 100vw;
   position: fixed;
@@ -136,7 +136,7 @@ const SliderWrapper = styled.div`
 `
 
 const Pagination = styled.div`
-  bottom: 4rem;
+  bottom: 3rem;
   width: 100%;
   text-align: center;
   ${flexCenteredAll};
