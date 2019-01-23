@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
 import { absoluteTopFull, flexCenteredAll, buttonInit, animationFadeIn, media } from './../styles/mixins'
+import { setRandomColor } from './../state/actions'
 import { colors, fonts } from './../styles/theme.json'
 import { PrevButton, NextButton } from './utils/PrevNextButton'
 import TextOverlay from './TextOverlay'
@@ -64,6 +65,7 @@ class SimpleSlider extends React.Component {
   }
 
   nextHandler = () => {
+    this.props.color()
     if (this.state.index === (this.props.slides.length - 1)) {
       this.setState({ index: 0})
     } else {
@@ -72,6 +74,7 @@ class SimpleSlider extends React.Component {
   }
 
   prevHandler = () => {
+    this.props.color()
     if (this.state.index === 0) {
       this.setState({ index: this.props.slides.length - 1 })
     } else {
@@ -104,6 +107,9 @@ export default connect(
   state => ({
     font: state.fonts.top_menu,
     wh: state.resize_state.window_height
+  }),
+  dispatch => ({
+    color: () => dispatch(setRandomColor()),
   })
 )(SimpleSlider)
 

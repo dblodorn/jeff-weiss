@@ -1,7 +1,7 @@
 import React,  { Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { setHeaderState } from './../../state/actions'
+import { setHeaderState, setRandomColor } from './../../state/actions'
 import { flexRow, navWrapperHorizontal } from '../../styles/mixins'
 import { CloseWrapper } from '../../styles/components'
 import { heights, colors } from './../../styles/theme.json'
@@ -11,22 +11,29 @@ import Menu from '../menus/Menu'
 import Logo from './Logo'
 import Close from './../utils/Close'
 
-const HeaderHorizontal = (props) =>
-  <Fragment>
-    <HeaderWrapper className={[
-        !props.header_state ? `hide` : ``,
-        (props.direction === 'down') ? `scrolling` : ``
-      ].join(' ')} bgcolor={props.color.dark}>
-      <Logo theme={'a'} title={meta_defaults.title}/>
-      <RightArea>
-        <Menu location={0} navLocation={'header'}/>
-        <CloseWrapper>
-          <Close clickFunction={() => props.menu_toggle(false)} color={colors.white} size={`2.5rem`} stroke={3} top={`auto`} position={`relative`}/>
-        </CloseWrapper>
-      </RightArea>
-    </HeaderWrapper>
-    <SidebarDesktop/>
-  </Fragment>
+const HeaderHorizontal = (props) => {
+  const clickHandler = () => {
+    props.header_toggle(false)
+    props.change_color()
+  }
+  return (
+    <Fragment>
+      <HeaderWrapper className={[
+          !props.header_state ? `hide` : ``,
+          (props.direction === 'down') ? `scrolling` : ``
+        ].join(' ')} bgcolor={props.color.dark}>
+        <Logo theme={'a'} title={meta_defaults.title}/>
+        <RightArea>
+          <Menu location={0} navLocation={'header'}/>
+          <CloseWrapper>
+            <Close clickFunction={() => clickHandler()} color={colors.white} size={`2.5rem`} stroke={3} top={`auto`} position={`relative`}/>
+          </CloseWrapper>
+        </RightArea>
+      </HeaderWrapper>
+      <SidebarDesktop/>
+    </Fragment>
+  )
+}
 
 export default connect(
   state => ({
@@ -36,7 +43,8 @@ export default connect(
     color: state.color
   }),
   dispatch => ({
-    menu_toggle: (bool) => dispatch(setHeaderState(bool))
+    change_color: () => dispatch(setRandomColor()),
+    header_toggle: (bool) => dispatch(setHeaderState(bool))
   })
 )(HeaderHorizontal)
 

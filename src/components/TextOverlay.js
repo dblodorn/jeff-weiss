@@ -10,14 +10,11 @@ import Close from './utils/Close'
 
 const TextOverlay = (props) => {
   const [tapped, isTapped] = React.useState(false)
-  const handleTap = () => {
-    isTapped(!tapped)
-  }
   return (
     <ResponsiveWrapper
       desktop={
         <Overlay>
-          <OverlayWrapper bgcolor={props.color.dark} onMouseEnter={() => handleTap()} onMouseLeave={() => handleTap()} className={tapped && `show`}>
+          <OverlayWrapper bgcolor={props.color.dark} onMouseEnter={() => isTapped(true)} onMouseLeave={() => isTapped(false)} className={tapped && `show`}>
             <StyledMarkup displayFont={props.fonts.header_font} font={props.fonts.body_font} className={'text'} dangerouslySetInnerHTML={{ __html: props.content }} />
             {props.zoom && <ZoomCta onClick={props.clickFunction}><MicroP>Click to Zoom</MicroP></ZoomCta>}
           </OverlayWrapper>
@@ -34,8 +31,8 @@ const TextOverlay = (props) => {
           </OverlayMobile>
           <InfoButton className={props.slideshow}>
             {!tapped
-              ? <Info clickFunction={() => handleTap()} position={`relative`} size={`100%`} top={'0'}/>
-              : <Close clickFunction={() => handleTap()} position={`relative`} size={`2.25rem`} top={'0'} color={`#ffffff`} stroke={3}/>
+              ? <Info clickFunction={() => isTapped(true)} position={`relative`} size={`100%`} top={'0'}/>
+              : <Close clickFunction={() => isTapped(false)} position={`relative`} size={`2.25rem`} top={'0'} color={`#ffffff`} stroke={3}/>
             }
           </InfoButton>
           <OverlayBg className={tapped && `show`} bgcolor={props.color.dark} wh={props.wh}/>
