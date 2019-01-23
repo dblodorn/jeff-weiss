@@ -27,7 +27,7 @@ class PostCollection extends Component {
           }`}
         >
         {this.props.data.content.insert_type === 'curated'
-          ? this.props.data.content.post_collection.map((item, i) => (
+          ? _.shuffle(this.props.data.content.post_collection).map((item, i) => (
               <PostLink
                 theme={this.props.data.theme}
                 style={this.props.data.content.style}
