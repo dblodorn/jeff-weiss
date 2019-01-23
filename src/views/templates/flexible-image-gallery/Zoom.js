@@ -59,10 +59,10 @@ const ZoomMobile = props => {
 const Zoom = props =>
   <ResponsiveWrapper
     desktop={
-      <ZoomModal data={props.data} page_title={props.title}/>
+      <ZoomModal data={props.data} page_title={props.page_title}/>
     }
     mobile={
-      <ZoomMobile data={props.data} color={props.color} page_title={props.title} height={props.wh}/>
+      <ZoomMobile data={props.data} color={props.color} page_title={props.page_title} height={props.wh}/>
     }
   />
 

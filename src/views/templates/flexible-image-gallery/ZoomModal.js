@@ -11,6 +11,7 @@ export default class extends React.Component {
       modal: false
     }
     this._ImageEnlarge = this._ImageEnlarge.bind(this)
+    console.log(this.props)
   }
 
   _ImageEnlarge() {

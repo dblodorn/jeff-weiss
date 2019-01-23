@@ -164,7 +164,6 @@ class Video extends Component {
   render () {
     return (
       <VideoWrapper>
-        
           <ReactPlayer
             url={this.props.videoUrl}
             className='hero-player'

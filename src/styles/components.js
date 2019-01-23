@@ -302,7 +302,6 @@ const ModalWrapper = styled.div`
   z-index: 12000;
   width: 100vw;
   height: 100vh;
-  background-color: ${props => props.theme.popup_bg_color || colors.black};
 `
 
 const ModalContentWrapper = styled.div`
@@ -394,12 +393,6 @@ const ZoomImgWrapper = styled.div`
   ${_.media.desktopNav`
     height: 100vh;
   `}
-  img {
-    padding: 0;
-    ${_.media.desktopNav`
-      padding: 1rem;
-    `}
-  }
   .pinch-wrapper {
     ${_.flexCenteredAll};
     height: 100%;

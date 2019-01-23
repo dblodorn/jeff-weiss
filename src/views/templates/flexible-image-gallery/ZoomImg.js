@@ -11,6 +11,7 @@ import { colors } from './../../../styles/theme.json'
 
 const zoom_height = `2.5rem`
 const close_width = `10rem`
+const max = 10
 class ZoomImg extends React.Component {
   constructor(props) {
     super(props)
@@ -36,7 +37,7 @@ class ZoomImg extends React.Component {
   }
 
   incrementUp = debounce((e) => {
-    if (this.state.zoom < 3) {
+    if (this.state.zoom < max) {
       this.setState({ zoom: (this.state.zoom + 0.01) })
     }
   }, 50)
@@ -54,7 +55,7 @@ class ZoomImg extends React.Component {
           image={this.state.image}
           crop={this.state.crop}
           zoom={this.state.zoom}
-          aspect={this.state.aspect}
+          aspect={this.props.ww / this.props.wh}
           onCropChange={this.onCropChange}
           showGrid={false}
           onZoomChange={this.onZoomChange}
@@ -71,7 +72,7 @@ class ZoomImg extends React.Component {
               <StyledRangeSlider
                 type="range"
                 min={1}
-                max={3}
+                max={max}
                 step={0.01}
                 value={this.state.zoom}
                 onChange={this.onZoomChange}
@@ -94,6 +95,8 @@ export default connect(
   state => ({
     color: state.color,
     font: state.fonts.project_nav,
+    ww: state.resize_state.window_width,
+    wh: state.resize_state.window_height
   })
 )(ZoomImg)
 
@@ -128,18 +131,17 @@ const CropWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
+  background-color: ${props => Color(props.color.regular).darken(0.1).hex()};
   .zoom-crop-area {
-    border: 1px solid ${props => props.color.dark};
-    color: ${props => props.color.bright};
+    border: 0;
+    color: rgba(0,0,0,0);
     margin: auto;
-    max-width: calc(${props => (props.width / 1.25) * .1}rem - 1px);
-    max-height: ${props => (props.height / 1.25) * .1}rem;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
   }
 `
 
 const Controls = styled.div`
-  background-color: ${props => Color(props.color.dark).darken(0.3).hex()};
   background-color: ${props => Color(props.color.dark).darken(0.3).hex()};
   width: 100vw;
   height: calc(${zoom_height} + 1px);
