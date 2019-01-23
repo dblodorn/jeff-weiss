@@ -1,20 +1,22 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Transition } from 'react-spring'
 import { ModalWrapper, ModalContentWrapper, ZoomImgWrapper, ZoomDiv } from './../../../styles/components'
 import { Modal, FitImage, TextOverlay } from './../../../components'
 import ZoomImg from './ZoomImg'
+import { setRandomColor } from './../../../state/actions'
 
-export default class extends React.Component {
+class ZoomModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false
     }
     this._ImageEnlarge = this._ImageEnlarge.bind(this)
-    console.log(this.props)
   }
 
   _ImageEnlarge() {
+    this.props.color()
     this.setState({
       modal: !this.state.modal
     })
@@ -46,3 +48,10 @@ export default class extends React.Component {
     )
   }
 }
+
+export default connect(
+  state => ({}),
+  dispatch => ({
+    color: () => dispatch(setRandomColor())
+  })
+)(ZoomModal)

@@ -7,7 +7,6 @@ import { StyledRangeSlider } from './../../../styles/components'
 import { buttonInit, flexCenteredAll, absoluteCentered } from '../../../styles/mixins'
 import debounce from 'lodash/debounce'
 import { colors } from './../../../styles/theme.json'
-// import { Close } from './../../../components'
 
 const zoom_height = `2.5rem`
 const close_width = `10rem`
@@ -113,11 +112,13 @@ const CloseButton = styled.button`
   background-color: ${props => Color(props.color.dark).darken(0.3).hex()};
   transition: background-color 250ms ease;
   will-change: background-color;
+  padding: 1.5rem 0;
   span {
     font-family: ${props => props.font}!important;
     display: block;
-    line-height: 2.5;
+    line-height: 1.25;
     width: 100%;
+    padding-top: 3px;
   }
   &:hover {
     background-color: ${props => Color(props.color.dark).darken(0.1).hex()};
