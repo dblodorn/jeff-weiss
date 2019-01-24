@@ -112,13 +112,12 @@ const CloseButton = styled.button`
   background-color: ${props => Color(props.color.dark).darken(0.3).hex()};
   transition: background-color 250ms ease;
   will-change: background-color;
-  padding: 1.5rem 0;
+  padding-top: 3px;
   span {
     font-family: ${props => props.font}!important;
     display: block;
     line-height: 1.25;
     width: 100%;
-    padding-top: 3px;
   }
   &:hover {
     background-color: ${props => Color(props.color.dark).darken(0.1).hex()};
@@ -152,6 +151,7 @@ const Controls = styled.div`
   left: 0;
   padding: 0;
   z-index: 9000;
+  overflow: hidden;
   .zoom-controls {
     width: calc(100vw - ${close_width});
     border-right: 1px solid ${props => props.color.dark};

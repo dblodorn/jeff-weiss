@@ -75,7 +75,7 @@ const ZoomCta = styled.button`
   left: 0;
   z-index: 9000;
   text-align: left;
-  padding: ${spacing.double_pad} ${spacing.double_pad} 0;
+  padding: ${spacing.double_pad};
   &:hover {
     text-decoration: underline;
   }
