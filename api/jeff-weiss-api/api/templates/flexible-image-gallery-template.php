@@ -43,6 +43,8 @@
     return array (
       'module' => 'zoom_image',
       'title' => get_sub_field('zoom_title'),
+      'zoom_max' => (int)get_sub_field('zoom_max'),
+      'zoom_start' => (int)get_sub_field('zoom_start'),
       'text_overlay_content' => get_sub_field( 'text_overlay_content'),
       'image' => $image['url'],
       'width' => $image['width'],

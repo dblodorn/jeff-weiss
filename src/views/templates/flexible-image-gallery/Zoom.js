@@ -34,7 +34,7 @@ const ZoomMobile = props => {
       <ZoomImgWrapper width={props.data.width} height={props.data.height}>
         <TextOverlay zoom={true} content={`<h2>${(props.data.title !== '') ? props.data.title : props.page_title}</h2><br/>${props.data.text_overlay_content}`} />
         <div className={`pinch-wrapper`}>
-          <ReactPinchZoomPan maxScale={4} render={obj => {
+          <ReactPinchZoomPan maxScale={props.data.zoom_max || 4} render={obj => {
             return (
               <div style={getContainerStyle(ratio)}>
                 <div style={getInnerStyle()}>

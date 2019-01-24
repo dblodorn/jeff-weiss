@@ -10,20 +10,20 @@ import { colors } from './../../../styles/theme.json'
 
 const zoom_height = `2.5rem`
 const close_width = `10rem`
-const max = 10
 class ZoomImg extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       image: this.props.data.image,
       crop: { x: 0, y: 0 },
-      zoom: 1,
+      zoom: this.props.data.zoom_start || 1,
       aspect: this.props.data.width / this.props.data.height,
     }
     this.onCropChange = this.onCropChange.bind(this)
     this.onZoomChange = this.onZoomChange.bind(this)
     this.incrementUp = this.incrementUp.bind(this)
     this.incrementDown = this.incrementDown.bind(this)
+    console.log(this.props)
   }
 
   onCropChange = crop => {
@@ -71,7 +71,7 @@ class ZoomImg extends React.Component {
               <StyledRangeSlider
                 type="range"
                 min={1}
-                max={max}
+                max={this.props.data.zoom_max || 10}
                 step={0.01}
                 value={this.state.zoom}
                 onChange={this.onZoomChange}
