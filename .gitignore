@@ -18,3 +18,4 @@ _comps
 api/deploy.json
 api/node_modules
 .env
+deploy.json
